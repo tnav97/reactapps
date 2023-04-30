@@ -1,0 +1,13 @@
+version: '3'
+
+volumes:
+  react-apps-redis-volume:
+    external: true
+
+services:
+  redis-cache-server:
+    image: redis:4
+    volumes:
+      - react-apps-redis-volume:/var/lib/redis/data
+    ports:
+      - '6379:6379'

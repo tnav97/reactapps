@@ -1,0 +1,21 @@
+parameters:
+  - name: nodeVersion
+  - name: variableGroup
+  - name: appName
+  - name: baseUrl
+
+stages:
+  - stage: runCypressTests
+    displayName: Run Cypress Tests
+    jobs:
+      - job: runCypressTest
+        displayName: Cypress Tests
+        variables:
+          - group: ${{parameters.variableGroup}}
+        steps:
+          - checkout: self
+          - template: ../steps/RunUatCypressTest.yaml
+            parameters:
+              nodeVersion: ${{parameters.nodeVersion}}
+              baseUrl: ${{parameters.baseUrl}}
+              appName: ${{parameters.appName}}

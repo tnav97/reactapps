@@ -1,0 +1,18 @@
+parameters:
+  - name: nodeVersion
+  - name: variableGroup
+  - name: delayForMinutes
+  - name: appName
+  - name: baseUrl
+
+stages:
+  - template: ./stages/DelayRunStage.yaml
+    parameters:
+      delayForMinutes: ${{parameters.delayForMinutes}}
+
+  - template: ./stages/RunSingleCypressTest.yaml
+    parameters:
+      variableGroup: ${{parameters.variableGroup}}
+      nodeVersion: ${{parameters.nodeVersion}}
+      baseUrl: ${{parameters.baseUrl}}
+      appName: ${{parameters.appName}}

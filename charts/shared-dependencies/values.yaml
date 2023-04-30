@@ -1,0 +1,3 @@
+# Placeholder values file, this is filled by helmfile during deployment
+# If you fill values here, it can be used to deploy this chart directly using helm
+container:

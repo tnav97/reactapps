@@ -1,0 +1,22 @@
+{
+  "username": "Username",
+  "email": "Email",
+  "password": "Password",
+  "header": "Account details",
+  "subHeader": "This information is used to log in to your account",
+  "modal": {
+    "passwordChecks": {
+      "minLength": "At least 10 characters",
+      "upperAndLower": "Both lower (a-z) and upper case letters (A-Z)",
+      "number": "At least 1 number (0-9)",
+      "specialCharacter": "At least 1 symbol (@ # $ % ^ & etc.)"
+    },
+    "newPassword": "New password",
+    "passwordChecksHeader": "Passwords must contain:",
+    "confrimNewPassword": "Confirm new password",
+    "cancel": "Cancel",
+    "update": "Update",
+    "updating": "Updating",
+    "passwordsNotMaching": "The passwords you entered do not match."
+  }
+}

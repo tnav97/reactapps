@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.external.appsConfigName}}
+  namespace: {{ .Release.Namespace }}
+data:
+  SELF_SIGNUP_WEB_HOST: {{ get .Values.hosts "self-signup" | default "" | printf "https://%s" | quote}}
+  SAFETY_INTELLIGENCE_WEB_HOST: {{ get .Values.hosts "safety-intelligence" | default "" | printf "https://%s" | quote }}
+  FIELD_ID_WEB_HOST: {{ get .Values.hosts "fieldid" | default "" | quote }}
+  SAFE_SUPPLIER_WEB_HOST: {{ get .Values.hosts "safe-supplier" | default "" | quote }}
+  SAFE_CONTRACTOR_WEB_HOST: {{ get .Values.hosts "safe-contractor" | default "" | quote }}
+  ALCUMUS_PORTAL_WEB_HOST: {{ get .Values.hosts "alcumus-portal" | default "" | printf "https://%s" | quote }}
+  EPERMITS_WEB_HOST: {{ get .Values.hosts "epermits" | default "" | quote }}
+  CONTRACTOR_CHECK_WEB_HOST: {{ get .Values.hosts "contractor-check" | default "" | quote }}
+  ECOMPLIANCE_WEB_HOST: {{ get .Values.hosts "ecompliance" | default "" | quote }}
+  ISOQAR_WEB_HOST: {{ get .Values.hosts "isoqar" | default "" | quote }}
+  PSM_WEB_HOST: {{ get .Values.hosts "psm" | default "" | quote }}
+  SUPPLY_CHAIN_COMPLIANCE_WEB_HOST: {{ get .Values.hosts "supply-chain-compliance" | default "" | quote }}
+  SYPOL_WEB_HOST: {{ get .Values.hosts "sypol" | default "" | quote }}
+  MANGO_WEB_HOST: {{ get .Values.hosts "mango" | default "" | quote }}
+  ESG_WEB_HOST: {{ get .Values.hosts "esg" | default "" | quote }}
+  AUTH_CONSUMER_CALLBACKS_WHITELIST: {{ get .Values.callbackUrls "authConsumerCallbacksWhitelist" | quote }}
+  ALCUMUS_PORTAL_ACCESS_CONTROL_ALLOW_ORIGIN_URL_LIST: {{ get .Values.accessControlAllowOriginUrl "accessControlAllowOriginUrl" | quote }}
+  NODE_ENV: {{ get .Values.env "nodeEnv" | quote }}
+

@@ -1,0 +1,78 @@
+namespace: "react-apps-local"
+
+replicaCount: 1
+# Set of common variables used across charts AND helmfile
+common:
+  image:
+    pullPolicy: "IfNotPresent"
+    repository: "alcumus"
+    # Ideally, each chart has an independent image tag, but, for now we're using identical image tags for all releases
+    tag: latest
+
+  networkIngress: kong
+
+  external:
+    servicesConfigName: services-configmap
+    servicesSecretName: services-secret
+    redisConfigName: redis-configmap
+    redisSecretName: redis-secret
+    appsConfigName: apps-configmap
+
+  # This dictionary is used to pass values to ingresses
+  hosts:
+    services-host: https://services.dev.ecompliance.dev
+    self-signup: signup.internal
+    safety-intelligence: safety-intelligence.internal
+    alcumus-portal: portal.internal
+    billing-portal: billing.internal
+    fieldid: fiddev.com
+    safe-supplier: https://safesupplier-client-main.alcumusdev.net
+    safe-contractor: https://test2.theatworknetwork.com
+    epermits: https://www.alcumus.com/en-gb/epermits
+    contractor-check: https://www.alcumus.com/en-ca/contractor-accreditation/contractorcheck
+    ecompliance: https://my.ecompliance.com
+    isoqar: https://www.alcumus.com/en-gb/certification
+    psm: https://www.alcumus.com/en-ca/advisory/health-and-safety-compliance
+    supply-chain-compliance: https://test2.theatworknetwork.com/api/auth/login/session
+    sypol: https://www.alcumus.com/en-gb/coshh/
+    mango: https://www.mangolive.com/
+    esg: https://www.alcumus.com/en-ca/environmental-social-governance/
+
+  env:
+    nodeEnv: 'development'
+
+  callbackUrls:
+    authConsumerCallbacksWhitelist: '["https://safety-intelligence.internal/api/auth/session","https://*.fidstage.com/fieldid/","https://*.fiddev.com/fieldid/session","https://*.theatworknetwork.com/api/login/auth/session"]'
+
+  accessControlAllowOriginUrl:
+    accessControlAllowOriginUrl: '["https://uk-portal-dev.alcdev.net/"]'  
+
+# All charts that should be deployed in this environment,
+# with a list of environment variables to resolve and pass
+deployReleases:
+  - chartName: shared-dependencies
+  - chartName: alcumus-portal
+    overrides:
+      container:
+        FEATURE_TOGGLE_DISABLE_DIRECT_PORTAL_LOGIN: 'false'
+        FEATURE_TOGGLE_USE_AZURE_AD: 'true'
+        ALCUMUS_PORTAL_ALLOW_LOCAL_REDIRECT: 'true'
+        FEATURE_TOGGLE_SHOW_UPDATE_PASSWORD_BUTTON_FOR_SAFETY_INTELLIGENCE: 'true'
+  - chartName: self-signup
+  - chartName: safety-intelligence
+    overrides:
+      container:
+        FEATURE_TOGGLE_SHOW_UPDATE_PASSWORD_BUTTON_FOR_SAFETY_INTELLIGENCE: 'true'
+  - chartName: billing-portal
+
+scaling:
+  enabled: false
+
+resources:
+  enabled: false
+  requests:
+    cpu: "250m"
+    memory: "512Mi"
+  limits:
+    cpu: "500m"
+    memory: "1024Mi"

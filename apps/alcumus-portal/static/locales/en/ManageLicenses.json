@@ -1,0 +1,17 @@
+{
+  "manageSubscription": "Manage subscription licenses",
+  "subscriptionPeriod": "Subscription period",
+  "totalLicenses": "Total licenses",
+  "usedLicenses": "Used licenses",
+  "availableLicenses": "Available licenses",
+  "addLicenses": "Add",
+  "removeLicenses": "Remove",
+  "save": "Save",
+  "updating": "Updating...",
+  "cancel": "Cancel",
+  "licenses": "Licenses",
+  "removeLicenseAlert": "You must first unsubscribe {{license}} users to complete this action.",
+  "addLicenseAlert": "{{license}} licenses will be added to your subscription.",
+  "manageSubscriptionSeatsSuccessToastMessage": "Subscription updated successfully.",
+  "manageSubscriptionSeatsErrorToastMessage": "We were unable to process your request. Please try again."
+}

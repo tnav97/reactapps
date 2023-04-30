@@ -1,0 +1,97 @@
+parameters:
+  - name: nodeVersion
+    default: '16.x'
+  - name: applicationName
+  - name: containerRegistry
+  - name: k8sEnvironment
+  - name: k8sNamespace
+  - name: azureSubscription
+  - name: aksResourceGroup
+  - name: aksClusterName
+  - name: variableGroup
+  - name: isDevopsPipeline
+    type: boolean
+    default: false
+  - name: deploymentAgentPool
+  - name: dockerImageMatrix
+    type: object
+
+variables:
+  appVersion: '$(Build.BuildNumber)'
+  helmfileUrl: 'https://github.com/roboll/helmfile/releases/download/v0.139.8/helmfile_linux_amd64'
+  sourceVersion: '$(Build.SourceVersion)'
+
+stages:
+  - stage: buildAndTest
+    displayName: Build And Test ${{parameters.applicationName}}
+    jobs:
+      # Lint Helmfile
+      - template: ./jobs/DryRunHelmChart.yml
+        parameters:
+          environment: ${{parameters.k8sEnvironment}}
+          appVersion: $(appVersion)
+          applicationName: ${{parameters.applicationName}}
+          namespace: ${{parameters.k8sNamespace}}
+          helmfileUrl: $(helmfileUrl)
+
+      - job: buildFromHarshConditions
+        displayName: Build From Harsh Conditions
+        steps:
+          - template: ./steps/HarshBuild.yml
+            parameters:
+              nodeVersion: ${{parameters.nodeVersion}}
+
+      - job: buildAndTestApp
+        displayName: Build And Test
+        variables:
+          - name: npm_config_cache
+            value: $(Pipeline.Workspace)/.npm
+          # Used by Nx to figure out what changed
+          # https://nx.dev/ci/monorepo-ci-azure
+          - name: NX_BRANCH
+            ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+              value: $(System.PullRequest.PullRequestNumber)
+            ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
+              value: $(Build.SourceBranchName)
+        steps:
+          - checkout: self
+            fetchDepth: 0
+            clean: true
+          - template: ./steps/BuildAndTest.yml
+            parameters:
+              nodeVersion: ${{parameters.nodeVersion}}
+              appVersion: $(appVersion)
+              sourceVersion: $(sourceVersion)
+
+  - stage: prepareDeployment
+    displayName: Build Docker Images
+    jobs:
+      - job: buildAndPushDocker
+        displayName: Build Docker Images
+        strategy:
+          matrix: ${{parameters.dockerImageMatrix}}
+        steps:
+          - checkout: self
+          - template: ./steps/BuildAndPushImage.yml
+            parameters:
+              containerRegistry: ${{parameters.containerRegistry}}
+              appVersion: $(appVersion)
+              appName: $(appName)
+              sourceVersion: $(sourceVersion)
+
+  - stage: deployToKubernetes
+    displayName: Deploy to Kubernetes
+    dependsOn: prepareDeployment
+    jobs:
+      - template: ./jobs/DeployToK8s.yml
+        parameters:
+          environment: ${{parameters.k8sEnvironment}}
+          appVersion: $(appVersion)
+          applicationName: ${{parameters.applicationName}}
+          namespace: ${{parameters.k8sNamespace}}
+          azureSubscription: ${{parameters.azureSubscription}}
+          aksResourceGroup: ${{parameters.aksResourceGroup}}
+          aksClusterName: ${{parameters.aksClusterName}}
+          helmfileUrl: $(helmfileUrl)
+          variableGroup: ${{parameters.variableGroup}}
+          agentPool: ${{parameters.deploymentAgentPool}}

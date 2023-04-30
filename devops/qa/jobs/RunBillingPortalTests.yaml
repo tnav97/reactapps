@@ -1,0 +1,21 @@
+jobs:
+  - job: runPlaywrightUserAcceptanceTests
+    displayName: billing-portal UAT tests
+    variables:
+      - group: ${{parameters.variableGroup}}
+    steps:
+      - checkout: self
+      - template: ../steps/RunUatPlaywrightTest.yaml
+        parameters:
+          nodeVersion: ${{parameters.nodeVersion}}
+          appName: billing-portal
+          environmentVariables:
+            ECMS_API: $(ECMS_API)
+            ECMS_WEB: $(ECMS_WEB)
+            ECMS_CS_DEFAULT_SITE_ID: $(ECMS_CS_DEFAULT_SITE_ID)
+            ECMS_CS_EMAIL: $(ECMS_CS_EMAIL)
+            ECMS_CS_PASSWORD: $(ECMS_CS_PASSWORD)
+            BILLING_SERVICE_API: $(BILLING_SERVICE_API)
+            BILLING_SERVICE_KEY: $(BILLING_SERVICE_KEY)
+            MAILHOG_URL: $(MAILHOG_URL)
+            MAILHOG_AUTH: $(MAILHOG_AUTH)

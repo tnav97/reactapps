@@ -1,0 +1,32 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "lib": ["ES2017", "DOM"],
+    "jsx": "react",
+    "outDir": "./build",
+    "rootDir": "./src",
+    "strict": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["node_modules/@types", "./typings"],
+    "types": ["node", "jest", "@types/jest", "@testing-library/jest-dom"]
+  },
+  "include": ["./src", "./tests", "./src/utils"],
+  "exclude": [
+    "node_modules",
+    "build",
+    "build-static",
+    "test.ts",
+    "test.tsx",
+    "./src/**/*.test.tsx",
+    "./src/setupTests.ts",
+    "./tests"
+  ]
+}

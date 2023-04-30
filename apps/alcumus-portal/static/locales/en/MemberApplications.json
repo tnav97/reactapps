@@ -1,0 +1,10 @@
+{
+  "appSubscriptions": "App subscriptions",
+  "status": {
+    "pendingInvite": "Pending invite",
+    "active": "Active",
+    "inactive": "Inactive",
+    "invited": "Invited"
+  },
+  "notAvailable": "Not available"
+}

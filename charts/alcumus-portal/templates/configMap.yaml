@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+  namespace: {{ .Release.Namespace }}
+data:
+  ALCUMUS_PORTAL_WEB_PORT: {{ .Values.service.containerPort | quote }}
+  FEATURE_TOGGLE_DISABLE_DIRECT_PORTAL_LOGIN: {{ .Values.container.FEATURE_TOGGLE_DISABLE_DIRECT_PORTAL_LOGIN | quote }}
+  ALCUMUS_PORTAL_ALLOW_LOCAL_REDIRECT: {{ .Values.container.ALCUMUS_PORTAL_ALLOW_LOCAL_REDIRECT | quote }}
+  FEATURE_TOGGLE_USE_AZURE_AD: {{ .Values.container.FEATURE_TOGGLE_USE_AZURE_AD | quote }}
+  ALCUMUS_PORTAL_SUPPORTED_APPLICATION_LOOKUP_KEYS: {{ .Values.container.ALCUMUS_PORTAL_SUPPORTED_APPLICATION_LOOKUP_KEYS | quote }}

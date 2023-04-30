@@ -1,0 +1,84 @@
+{
+  "subheading": "Tell us about yourself...",
+  "startTrialButton": "Start free trial",
+  "noneOfTheAbove": "None of the above? Please specify below",
+  "submitting": "Please wait...",
+  "questions": {
+    "role": "I am a <1></1>",
+    "industry": ", and I work in the <1></1> industry.",
+    "teamSize": "There are <1></1> employees at my company.",
+    "purpose": "I want to use Alcumus to <1></1>"
+  },
+  "fullQuestions": {
+    "role": "What is your current job title?",
+    "industry": "What industry do you work in?",
+    "teamSize": "How many employees work at your company?",
+    "purpose": "Why are you interested in Alcumus? I want to..."
+  },
+  "options": {
+    "role": [
+      "Safety Director",
+      "HSE Specialist",
+      "Operational Manager",
+      "Safety Administrator",
+      "Business Executive"
+    ],
+    "industry": [
+      "Construction",
+      "Manufacturing",
+      "Utilities",
+      "Energy - Oil & Gas",
+      "Natural Resources",
+      "Public Administration"
+    ],
+    "teamSize": ["1 - 20", "21 - 50", "51 - 150", "Greater than 150"],
+    "purpose": [
+      "Digitalize my Safety Management Program",
+      "Maintain compliance with EHS Standards",
+      "Reduce injuries and incidents",
+      "Enhance safety learning",
+      "Empower my frontline workers"
+    ]
+  },
+  "optionsForSteps": {
+    "role": [
+      { "value": "Safety Director" },
+      { "value": "HSE Specialist" },
+      { "value": "Operational Manager" },
+      { "value": "Safety Administrator" },
+      { "value": "Business Executive" }
+    ],
+    "industry": [
+      { "value": "Construction", "illustration": "construction.svg" },
+      { "value": "Manufacturing", "illustration": "manufacturing.svg" },
+      { "value": "Utilities", "illustration": "utilities.svg" },
+      { "value": "Energy - Oil & Gas", "illustration": "oil-gas.svg" },
+      { "value": "Natural Resources", "illustration": "natural-resources.svg" },
+      { "value": "Public Administration", "illustration": "public-admin.svg" }
+    ],
+    "teamSize": [
+      { "value": "1 - 20", "illustration": "1-20.svg" },
+      { "value": "21 - 50", "illustration": "21-50.svg" },
+      { "value": "51 - 150", "illustration": "51-150.svg" },
+      { "value": "Greater than 150", "illustration": "greater-than-150.svg" }
+    ],
+    "purpose": [
+      {
+        "value": "Digitalize my Safety Management Program",
+        "illustration": "digitize.svg"
+      },
+      {
+        "value": "Maintain compliance with EHS Standards",
+        "illustration": "compliance.svg"
+      },
+      {
+        "value": "Reduce injuries and incidents",
+        "illustration": "injuries.svg"
+      },
+      { "value": "Enhance safety learning", "illustration": "learning.svg" },
+      { "value": "Empower my frontline workers", "illustration": "empower.svg" }
+    ]
+  },
+  "previous": "Previous",
+  "next": "Next"
+}

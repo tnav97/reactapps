@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.external.servicesConfigName}}
+  namespace: {{ .Release.Namespace }}
+data:
+  SERVICES_HOST: {{ get .Values.hosts "services-host" }}

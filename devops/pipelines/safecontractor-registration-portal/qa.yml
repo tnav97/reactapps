@@ -1,0 +1,43 @@
+parameters:
+  - name: nodeVersion
+    default: '16.x'
+  - name: containerRegistry
+    default: screg-portal-dev-uk-registry
+  - name: k8sEnvironment
+    default: qa
+  - name: k8sNamespace
+    default: qa
+  - name: azureSubscription
+    default: sc-reg-portal-dev-uk-subscription-connection
+  - name: aksResourceGroup
+    default: alc-screg-dev-uks-rg-01
+  - name: aksClusterName
+    default: screg-dev-uks-aks-01
+  - name: variableGroup
+    default: sc-reg-portal-qa
+  - name: deploymentAgentPool
+    default: SC Reg Dev UK
+
+trigger: none
+
+pr: none
+
+pool:
+  vmImage: ubuntu-latest
+
+extends:
+  template: ../../templates/ci-pipeline-template.yml
+  parameters:
+    nodeVersion: ${{parameters.nodeVersion}}
+    applicationName: safecontractor-registration-portal
+    containerRegistry: ${{parameters.containerRegistry}}
+    k8sEnvironment: ${{ parameters.k8sEnvironment }}
+    k8sNamespace: ${{parameters.k8sNamespace}}
+    azureSubscription: ${{parameters.azureSubscription}}
+    aksResourceGroup: ${{parameters.aksResourceGroup}}
+    aksClusterName: ${{parameters.aksClusterName}}
+    variableGroup: ${{parameters.variableGroup}}
+    deploymentAgentPool: ${{parameters.deploymentAgentPool}}
+    dockerImageMatrix:
+      safecontractor-registration-portal:
+        appName: safecontractor-registration-portal

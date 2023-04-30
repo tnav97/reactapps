@@ -1,0 +1,93 @@
+{
+  "subheading": "Parlez-nous de vous...",
+  "startTrialButton": "Commencer un essai gratuit",
+  "noneOfTheAbove": "Aucune de ces réponses ? Veuillez préciser ci-dessous",
+  "submitting": "Veuillez patienter...",
+  "questions": {
+    "role": "Je suis un <1></1>",
+    "industry": ", et je travaille dans le <1></1> industrie.",
+    "teamSize": "Il y a <1></1> employés dans mon entreprise.",
+    "purpose": "Je veux utiliser Alcumus pour <1></1>"
+  },
+  "fullQuestions": {
+    "role": "Quel est le titre de votre poste actuel ?",
+    "industry": "Dans quel secteur d'activité travaillez-vous ?",
+    "teamSize": "Combien d'employés travaillent chez votre entreprise?",
+    "purpose": "Pourquoi êtes-vous intéressé par Alcuumus?Je veux..."
+  },
+  "options": {
+    "role": [
+      "Directeur de la sécurité",
+      "Spécialiste HSE",
+      "Directeur opérationnel",
+      "Administrateur de sécurité",
+      "Dirigeant d'entreprise"
+    ],
+    "industry": [
+      "Construction",
+      "Fabrication",
+      "Utilitaires",
+      "Énergie - pétrole et gaz",
+      "Ressources naturelles",
+      "Administration publique"
+    ],
+    "teamSize": ["1 - 20", "21 - 50", "51 - 150", "Greater than 150"],
+    "purpose": [
+      "Numériser mon programme de gestion de la sécurité",
+      "Maintenir la conformité avec les normes EHS",
+      "Réduire les blessures et les incidents",
+      "Améliorer l'apprentissage de la sécurité",
+      "Responsabiliser mes travailleurs de première ligne"
+    ]
+  },
+  "optionsForSteps": {
+    "role": [
+      { "value": "Directeur de la sécurité" },
+      { "value": "Spécialiste HSE" },
+      { "value": "Directeur opérationnel" },
+      { "value": "Administrateur de sécurité" },
+      { "value": "Dirigeant d'entreprise" }
+    ],
+    "industry": [
+      { "value": "construction", "illustration": "construction.svg" },
+      { "value": "Fabrication", "illustration": "manufacturing.svg" },
+      { "value": "Utilitaires", "illustration": "utilities.svg" },
+      { "value": "Énergie - pétrole et gaz", "illustration": "oil-gas.svg" },
+      {
+        "value": "Ressources naturelles",
+        "illustration": "natural-resources.svg"
+      },
+      { "value": "Administration publique", "illustration": "public-admin.svg" }
+    ],
+    "teamSize": [
+      { "value": "1 - 20", "illustration": "1-20.svg" },
+      { "value": "21 - 50", "illustration": "21-50.svg" },
+      { "value": "51 - 150", "illustration": "51-200.svg" },
+      { "value": "Greater than 150", "illustration": "greater-than-150.svg" }
+    ],
+    "purpose": [
+      {
+        "value": "Numériser mon programme de gestion de la sécurité",
+        "illustration": "digitize.svg"
+      },
+      {
+        "value": "Maintenir le respect des normes EHS",
+        "illustration": "compliance.svg"
+      },
+      {
+        "value": "Réduire les blessures et les incidents",
+        "illustration": "injuries.svg"
+      },
+      {
+        "value": "Améliorer l'apprentissage de la sécurité",
+        "illustration": "learning.svg"
+      },
+      {
+        "value": "Habiliter mes ouvriers de première ligne",
+        "illustration": "empower.svg"
+      }
+    ]
+  },
+  "previous": "Précédente",
+  "next": "Prochaine"
+}

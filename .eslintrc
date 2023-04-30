@@ -1,0 +1,37 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "cypress", "import"],
+  "extends": [
+    "standard",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "semi": "off",
+    "space-before-function-paren": [0],
+    "comma-dangle": [0],
+    "no-tabs": "off",
+    "indent": "off",
+    "no-use-before-define": "off",
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": ["@alcumus/*/build/*"]
+      }
+    ]
+  },
+  "env": {
+    "jest": true
+  }
+}

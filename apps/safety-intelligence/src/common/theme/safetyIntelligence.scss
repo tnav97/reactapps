@@ -1,0 +1,52 @@
+html {
+  font-size: 1rem !important;
+}
+body {
+  background-color: '#E9E9EB';
+}
+
+#safety-intelligence-v2 {
+  height: 97vh;
+
+  .popular-indicator {
+    background: #d2d3d4;
+    height: 13px;
+    width: 3px;
+    float: left;
+    margin-left: 2px;
+  }
+}
+
+.ant-form-item-label
+  > label.ant-form-item-required:not(
+    .ant-form-item-required-mark-optional
+  )::before {
+  content: '' !important;
+}
+
+.ant-notification-notice-success {
+  background-color: #edffee !important;
+  border-radius: 6px !important;
+  border: 1px solid #cccccc;
+  font-size: 16px;
+  font-weight: 400;
+  border-left: 8px solid #3f8627;
+  width: 450px !important;
+  .ant-notification-notice-icon {
+    color: #3f8627;
+  }
+}
+
+.ant-select-dropdown {
+  z-index: 1500 !important;
+  border-radius: 8px !important;
+}
+
+.ant-select-selector {
+  border-radius: 4px 8px 8px 4px !important;
+  height: 40px !important;
+}
+
+.ant-select-selection-placeholder {
+  align-self: center !important;
+}

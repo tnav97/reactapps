@@ -1,0 +1,51 @@
+parameters:
+  - name: nodeVersion
+    default: '16.x'
+  - name: containerRegistry
+    default: core-services-dev-uk-registry
+  - name: k8sEnvironment
+    default: core-services-develop
+  - name: k8sNamespace
+    default: dev
+  - name: azureSubscription
+    default: core-services-dev-uk-subscription-connection
+  - name: aksResourceGroup
+    default: alc-core-dev-uks-rg-01
+  - name: aksClusterName
+    default: core-dev-uks-aks-01
+  - name: variableGroup
+    default: react-apps-dev-uk
+  - name: deploymentAgentPool
+    default: Core Dev UK
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - develop
+      - feature/node-version-update
+  paths:
+    include:
+      - apps/alcumus-portal/**
+
+pr: none
+
+pool:
+  vmImage: ubuntu-latest
+
+extends:
+  template: ../../templates/ci-pipeline-template.yml
+  parameters:
+    nodeVersion: ${{parameters.nodeVersion}}
+    applicationName: alcumus-portal
+    containerRegistry: ${{parameters.containerRegistry}}
+    k8sEnvironment: ${{ parameters.k8sEnvironment }}
+    k8sNamespace: ${{parameters.k8sNamespace}}
+    azureSubscription: ${{parameters.azureSubscription}}
+    aksResourceGroup: ${{parameters.aksResourceGroup}}
+    aksClusterName: ${{parameters.aksClusterName}}
+    variableGroup: ${{parameters.variableGroup}}
+    deploymentAgentPool: ${{parameters.deploymentAgentPool}}
+    dockerImageMatrix:
+      alcumus-portal:
+        appName: alcumus-portal

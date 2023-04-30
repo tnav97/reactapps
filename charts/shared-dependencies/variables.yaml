@@ -1,0 +1,8 @@
+# This file defines the environment variables that this chart supports to be loaded under .Values.container
+optional:
+  - REDIS_PASSWORD
+  - REDIS_SECURE_CONNECTION
+required:
+  - REDIS_HOST
+  - REDIS_PORT
+  - SERVICES_API_KEY

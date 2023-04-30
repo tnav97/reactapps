@@ -1,0 +1,14 @@
+parameters:
+  - name: nodeVersion
+  - name: variableGroup
+  - name: delayForMinutes
+
+stages:
+  - template: ./stages/DelayRunStage.yaml
+    parameters:
+      delayForMinutes: ${{parameters.delayForMinutes}}
+
+  - template: ./stages/RunPlaywrightTests.yaml
+    parameters:
+      nodeVersion: ${{parameters.nodeVersion}}
+      variableGroup: ${{parameters.variableGroup}}

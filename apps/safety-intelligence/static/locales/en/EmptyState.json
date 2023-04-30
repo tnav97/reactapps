@@ -1,0 +1,10 @@
+{
+  "recentDashboardText": "You haven't viewed any dashboards yet.",
+  "recentLookText": "You haven't viewed any looks yet.",
+  "popularDashboardText": "There aren't any popular dashboards at your organization yet.",
+  "popularLookText": "There aren't any popular looks at your organization yet.",
+  "favoriteDashboardText": "You haven't favorited any dashboards yet.",
+  "favoriteLookText": "You haven't favorited any looks yet.",
+  "emptyStateDefaultBody": "There is no content to display.",
+  "emptyLookText": "A ‘Look’ is a single table or visualization saved as its own individual report. \n Looks can be added to dashboards, scheduled, shared, and made public. \n Any changes made to a Look will be reflected in any dashboards that contain it."
+}

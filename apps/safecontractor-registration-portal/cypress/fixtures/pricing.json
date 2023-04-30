@@ -1,0 +1,24 @@
+{
+  "pricingbandC1": {
+    "Standard": 699,
+    "Express": 814,
+    "Assisted": 814,
+    "Premier": 844
+  },
+  "pricingbandF": {
+    "Standard": 1449,
+    "Express": 1279,
+    "Assisted": 1279.0,
+    "Premier": 1309.0
+  },
+  "pricingbandI": {
+    "Standard": 2049,
+    "Express": 1799,
+    "Assisted": 1799,
+    "Premier": 1829
+  },
+  "pricingbandGroup": {
+    "Premier": 2049,
+    "Subsidairies": 329
+  }
+}

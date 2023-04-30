@@ -1,0 +1,27 @@
+parameters:
+  - name: nodeVersion
+  - name: variableGroup
+
+jobs:
+  - job: runCypressUserAcceptanceTests
+    variables:
+      - group: ${{parameters.variableGroup}}
+    displayName: Run User Acceptance Tests
+    strategy:
+      matrix:
+        # self-signup:
+        #   appName: self-signup
+        #   baseUrl: $(selfSignupHost)
+        alcumus-portal:
+          appName: alcumus-portal
+          baseUrl: $(alcumusPortalHost)
+        # safety-intelligence:
+        #   appName: safety-intelligence
+        #   baseUrl: $(safetyIntelligenceHost)
+    steps:
+      - checkout: self
+      - template: ../steps/RunUatCypressTest.yaml
+        parameters:
+          nodeVersion: ${{parameters.nodeVersion}}
+          baseUrl: $(baseUrl)
+          appName: $(appName)

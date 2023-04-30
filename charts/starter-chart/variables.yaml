@@ -1,0 +1,22 @@
+# This file defines the environment variables that this chart supports to be loaded under .Values.container
+
+# Optional: helmfile will not error if these are missing
+# Required: helmfile will error if these are missing
+
+# These are normal env variables and are loaded to .Values.container
+optional:
+  - OPTIONAL_ENV_VAR_1
+  - OPTIONAL_ENV_VAR_2
+required:
+  - REQUIRED_ENV_VAR_1
+  - REQUIRED_ENV_VAR_2
+  
+secrets:
+  # These env variables are loaded to .Values.secrets, 
+  # and will be treated as secrets (currently they are obscured by using base64)
+  optional:
+    - OPTIONAL_SECRET_ENV_VAR_1
+    - OPTIONAL_SECRET_ENV_VAR_2
+  required:
+    - REQUIRED_SECRET_ENV_VAR_1
+    - REQUIRED_SECRET_ENV_VAR_2

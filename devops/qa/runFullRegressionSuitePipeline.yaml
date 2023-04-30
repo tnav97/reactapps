@@ -1,0 +1,21 @@
+parameters:
+  - name: nodeVersion
+  - name: variableGroup
+  - name: delayForMinutes
+
+stages:
+  - template: ./stages/DelayRunStage.yaml
+    parameters:
+      delayForMinutes: '${{parameters.delayForMinutes}}'
+
+  - stage: runUserAcceptanceTests
+    displayName: Run UAT Cypress Tests
+    jobs:
+      - template: ./jobs/RunCypressUatTests.yaml
+        parameters:
+          variableGroup: ${{parameters.variableGroup}}
+          nodeVersion: ${{parameters.nodeVersion}}
+      - template: ./jobs/RunBillingPortalTests.yaml
+        parameters:
+          variableGroup: ${{parameters.variableGroup}}
+          nodeVersion: ${{parameters.nodeVersion}}

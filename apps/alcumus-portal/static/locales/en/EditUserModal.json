@@ -1,0 +1,16 @@
+{
+  "labels": {
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "phoneNumber": "Phone number",
+    "role": "Role"
+  },
+  "cancel": "Cancel",
+  "save": "Save",
+  "updating": "Updating...",
+  "title": "Edit user",
+  "rolehelperText": "User permission level",
+  "invalidPhoneNumber": "A valid phone number is required.",
+  "invalidEmail": "A valid email address is required."
+}

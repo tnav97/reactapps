@@ -1,0 +1,29 @@
+{
+  "status": {
+    "pendingInvite": "Pending invite",
+    "active": "Active",
+    "inactive": "Inactive",
+    "invited": "Invited"
+  },
+  "memberName": "{{firstName}} {{lastName}}",
+  "notAvailable": "Not available",
+  "all": "All",
+  "labels": {
+    "status": "Status",
+    "search": "Search",
+    "permissionLevel": "Role"
+  },
+  "userManagement": "User management",
+  "results": "{{count}} results",
+  "loadingResults": "Loading results",
+  "inviteUsers": "Invite",
+  "addUser": "Add",
+  "headers": {
+    "name": "Name",
+    "contact": "Contact",
+    "role": "Role",
+    "status": "Status"
+  },
+  "searchByNameEmail": "Search by name, email...",
+  "fetchOrganizationMembersError": "Could not get organization users."
+}

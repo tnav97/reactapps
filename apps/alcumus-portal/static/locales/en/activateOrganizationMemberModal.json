@@ -1,0 +1,16 @@
+{
+  "activateUser": "Activate user",
+  "confirmMemberActivation": {
+    "activateMemberWithName": "Are you sure you want to activate {{firstName}} {{lastName}}?",
+    "activateMemberWithEmailAddress": "Are you sure you want to activate {{emailAddress}}?"
+  },
+  "memberActivationError": {
+    "couldNotActivateMemberWithName": "Could not activate user {{firstName}} {{lastName}}",
+    "couldNotActiveMemberWithEmailAddress": "Could not activate user {{emailAddress}}"
+  },
+  "immediateEffect": "This change will take effect immediately.",
+  "memberActivationSuccess": {
+    "memberWithNameHasBeenActivated": "{{firstName}} {{lastName}} has been activated.",
+    "memberWithEmailAddressHasBeenActivated": "{{emailAddress}} has been activated."
+  }
+}

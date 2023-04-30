@@ -1,0 +1,15 @@
+{
+  "organizationSubscriptions": {
+    "header": "Subscriptions",
+    "description": "Manage your Alcumus subscriptions, user licenses, payment details and more.",
+    "resultCount": "{{count}} results",
+    "loading": "Loading...",
+    "subscription": "Subscription",
+    "users": "Users",
+    "subscriptionStatus": "Subscription status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "manage": "Manage"
+  },
+  "addSubscription": "Add subscription"
+}

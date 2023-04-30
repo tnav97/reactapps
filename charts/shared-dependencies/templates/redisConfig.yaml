@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.external.redisConfigName}}
+  namespace: {{ .Release.Namespace }}
+data:
+  REDIS_HOST: {{ .Values.container.REDIS_HOST | quote }}
+  REDIS_PORT: {{ .Values.container.REDIS_PORT | quote }}
+  REDIS_SECURE_CONNECTION: {{ .Values.container.REDIS_SECURE_CONNECTION | default "false" | quote }}

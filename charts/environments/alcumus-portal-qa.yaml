@@ -1,0 +1,78 @@
+namespace: "qa"
+
+replicaCount: 2
+# Set of common variables used across charts AND helmfile
+common:
+  image:
+    pullPolicy: "Always"
+    repository: "alccoredevacruks.azurecr.io/react-apps"
+    # Ideally, each chart has an independent image tag, but, for now we're using identical image tags for all releases
+    # This value has to be changed during deployment
+    tag: 0.0.1
+
+  networkIngress: nginx
+
+  external:
+    servicesConfigName: services-configmap
+    servicesSecretName: services-secret
+    redisConfigName: redis-configmap
+    redisSecretName: redis-secret
+    appsConfigName: apps-configmap
+
+  # This key is used to pass values to ingresses as well
+  hosts:
+    services-host: https://uk-services-qa.alcdev.net
+    alcumus-portal: uk-portal-qa.alcdev.net
+    # all the external apps
+    fieldid: fiddev.com
+    safe-supplier: https://safesupplier-client-main.alcumusdev.net
+    safe-contractor: https://test2.theatworknetwork.com
+    epermits: https://www.alcumus.com/en-gb/epermits
+    contractor-check: https://www.alcumus.com/en-ca/contractor-accreditation/contractorcheck
+    ecompliance: https://my.ecompliance.com
+    isoqar: https://www.alcumus.com/en-gb/certification
+    psm: https://www.alcumus.com/en-ca/advisory/health-and-safety-compliance
+    supply-chain-compliance: https://test2.theatworknetwork.com/api/auth/login/session
+    sypol: https://www.alcumus.com/en-gb/coshh/
+    mango: https://www.mangolive.com/
+    esg: https://www.alcumus.com/en-ca/environmental-social-governance/
+    
+  tlsSecretName: alcdev-net-tls
+
+  env:
+    nodeEnv: 'production'
+
+  callbackUrls:
+    authConsumerCallbacksWhitelist: '["https://*.fiddev.com/fieldid/","https://*.fidstage.com/fieldid/","https://*.fieldid.com/auth/session","https://*.theatworknetwork.com/api/auth/login/session", "https://*.theatworknetwork.com/"]'
+  
+  accessControlAllowOriginUrl:
+    accessControlAllowOriginUrl: '["https://uk-portal-qa.alcdev.net/"]'
+
+# All charts that should be deployed in this environment,
+# with a list of environment variables to resolve and pass
+
+# IMPORTANT: The values in this file DO NOT have to reflect prod, as the DEV environment
+# is intended to allow for cutting-edge trunk-based development, where user flows can
+# be disrupted as long as there are feature toggles in place that deactivate disruptive
+# changes in higher environments like QA, Staging, and Prod.
+deployReleases:
+  - chartName: shared-dependencies
+  - chartName: alcumus-portal
+    overrides:
+      container:
+        FEATURE_TOGGLE_DISABLE_DIRECT_PORTAL_LOGIN: 'false'
+        FEATURE_TOGGLE_USE_AZURE_AD: 'true'
+        ALCUMUS_PORTAL_ALLOW_LOCAL_REDIRECT: 'false'
+        ALCUMUS_PORTAL_SUPPORTED_APPLICATION_LOOKUP_KEYS: 'safeContractor,sypol,isoQar,psm,supplyChainCompliance'
+
+scaling:
+  enabled: false
+
+resources:
+  enabled: false
+  requests:
+    cpu: "250m"
+    memory: "512Mi"
+  limits:
+    cpu: "500m"
+    memory: "1024Mi"

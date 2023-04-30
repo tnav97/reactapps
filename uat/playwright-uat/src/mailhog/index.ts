@@ -1,0 +1,1 @@
+export { MailhogApi } from './MailhogApi';

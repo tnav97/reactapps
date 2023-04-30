@@ -1,0 +1,15 @@
+{
+  "failedPayment": {
+    "heading": "Oups.... il semble que le statut de votre paiement soit 'en retard'.",
+    "body": "Cela peut être dû à une carte expirée ou à une transaction qui a échoué. Pour en savoir plus, cliquez sur le bouton ci-dessous.",
+    "illustrationAlt": "Problème de paiement",
+    "button": "Voir mes paiements"
+  },
+  "upgrade": {
+    "heading": "Vous ne profitez pas de toute la puissance d'Alcumus eCompliance.",
+    "body": "Vous utilisez actuellement un compte gratuit dont les fonctionnalités sont limitées. Pour profiter pleinement de la puissance d'Alcumus eCompliance, nous vous encourageons à explorer nos plans tarifaires et à mettre votre compte à niveau.",
+    "illustrationAlt": "Mise à niveau",
+    "dismissButton": "Rejeter",
+    "explorePlansButton": "Explorez nos plans"
+  }
+}

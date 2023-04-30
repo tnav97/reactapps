@@ -1,0 +1,50 @@
+{
+  "congratulations": "Congratulations {{accountHolderName}}, ",
+  "welcomeToYour": "welcome to your ",
+  "plan": "{{planName}} plan",
+  "planFeatures": {
+    "starter": [
+      "Employee Management",
+      "Inspections",
+      "Incidents",
+      "Meetings",
+      "Action Items",
+      "Basic charts & reports"
+    ],
+    "standard": [
+      "Employee Management",
+      "Inspections",
+      "Incidents",
+      "Meetings",
+      "Action Items",
+      "Basic charts & reports",
+      "Documents",
+      "Training Management",
+      "Access to our technical support desk during business hours",
+      "Access to our monthly product knowledge sharing sessions"
+    ],
+    "premium": [
+      "Employee Management",
+      "Inspections",
+      "Incidents",
+      "Meetings",
+      "Action Items",
+      "Basic charts & reports",
+      "Documents",
+      "Training Management",
+      "Access to our technical support desk during business hours",
+      "Access to our monthly product knowledge sharing sessions",
+      "Hazard assessment",
+      "Programs (ISO, COR, OSHA)",
+      "Asset Management"
+    ]
+  },
+  "features": "Features",
+  "billing": "Billing",
+  "manage": "Manage",
+  "userLicense": "User license",
+  "inviteUsers": "Invite users",
+  "active": "active",
+  "available": "available",
+  "welcomeToPaidPlan": "Welcome to paid plan"
+}

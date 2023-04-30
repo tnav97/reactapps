@@ -1,0 +1,16 @@
+{
+  "baseUrl": "https://safety-intelligence.qa.ecompliance.dev",
+  "viewportWidth": 1600,
+  "viewportHeight": 900,
+  "video": true,
+  "videoUploadOnPasses": false,
+  "integrationFolder": "cypress/integration",
+  "videosFolder": "../../videos/safety-intelligence",
+  "screenshotsFolder": "../../screenshots/safety-intelligence",
+  "chromeWebSecurity": false,
+  "defaultCommandTimeout": 15000,
+  "supportFile": "cypress/support/index.js",
+  "retries": {
+    "runMode": 2
+  }
+}

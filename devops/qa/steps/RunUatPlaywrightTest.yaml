@@ -1,0 +1,39 @@
+parameters:
+  - name: nodeVersion
+  - name: appName
+  - name: environmentVariables
+    type: object
+    default: {}
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: ${{parameters.nodeVersion}}
+    displayName: 'Setup Node v.${{parameters.nodeVersion}}'
+
+    # TODO INVOKE WITH LERNA INSTEAD
+  - script: |
+      cd uat/playwright-uat
+      npm ci
+      npx playwright install
+    displayName: 'Install dependencies'
+
+  - script: |
+      cd uat/playwright-uat
+      CI=1 npx playwright test --project=${{parameters.appName}}
+    displayName: 'Run Playwright UAT tests'
+    env: ${{ parameters.environmentVariables }}
+
+  - task: PublishTestResults@2
+    condition: always()
+    inputs:
+      testResultsFormat: 'JUnit'
+      testRunTitle: '${{parameters.appName}} Tests'
+      testResultsFiles: '**/results.xml'
+
+  - task: PublishPipelineArtifact@1
+    condition: always()
+    displayName: 'Upload Videos'
+    inputs:
+      targetPath: './uat/playwright-uat/output/videos'
+      artifactName: '${{parameters.appName}} Test Results (Videos)'

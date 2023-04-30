@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /images
+Disallow: /icons
+Disallow: /locales
+Sitemap:  https://localhost:3006/

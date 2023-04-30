@@ -1,0 +1,31 @@
+{
+  "name": "@alcumus/components",
+  "version": "2.13.0",
+  "description": "A library of React components for Alcumus frontend projects",
+  "keywords": [
+    "alcumus",
+    "react",
+    "components"
+  ],
+  "main": "build/cjs/index.js",
+  "module": "build/esm/index.js",
+  "types": "build/esm/index.d.ts",
+  "private": true,
+  "devDependencies": {
+    "@storybook/react": "^6.5.15",
+    "@types/jest": "^29.5.1",
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "eslint-plugin-react": "7.32.2",
+    "react-router-dom": "^6.10.0"
+  },
+  "peerDependencies": {
+    "@loadable/component": "^5.15.3",
+    "@mui/icons-material": "5.11.6",
+    "@mui/material": "5.12.1",
+    "clsx": "^1.2.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.10.0"
+  }
+}

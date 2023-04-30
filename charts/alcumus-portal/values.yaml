@@ -1,0 +1,30 @@
+# Placeholder values file, this is filled by helmfile during deployment
+# If you fill values here, it can be used to deploy this chart directly using helm.
+image:
+  name: alcumus-portal
+
+service:
+  type: ClusterIP
+  port: 80
+  containerPort: 3001
+
+network:
+
+external:
+
+container:
+  ALCUMUS_PORTAL_ALLOW_LOCAL_REDIRECT: false
+
+scaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 75
+
+resources:
+  requests:
+    cpu: "250m"
+    memory: "512Mi"
+  limits: 
+    cpu: "500m"
+    memory: "1024Mi"

@@ -1,0 +1,46 @@
+{
+  "recommended": "Recommended",
+  "planFeatures": {
+    "starter": [
+      "Employee management",
+      "Inspections",
+      "Incidents",
+      "Meetings",
+      "Action Items",
+      "Basic charts & reports"
+    ],
+    "standard": [
+      "All the 'Starter' perks",
+      "Documents",
+      "Training management",
+      "Access to our technical support desk during business hours",
+      "Access to our monthly product knowledge sharing sessions"
+    ],
+    "premium": [
+      "All the 'Standard' perks",
+      "Hazzard assessments",
+      "Programs (ISO,COR,OSHA)",
+      "Asset management"
+    ]
+  },
+  "stepper": ["Select plan", "Review", "Payment"],
+  "saveLabel": "Save 20%",
+  "switchMonthly": "Monthly",
+  "switchYearly": "Yearly",
+  "title": "Our pricing plans",
+  "getStarted": "Get Started",
+  "contactSales": "Contact sales",
+  "price": "{{amount, currency}}",
+  "priceDescription": "Per user/per month",
+  "billingFrequency": {
+    "monthly": "billed monthly",
+    "yearly": "billed yearly"
+  },
+  "savings": "Save {{amount, currency}} per user!",
+  "premium": {
+    "name": "Premium",
+    "contact": "Contact",
+    "description1": "1-800-Alcumus-Sales",
+    "description2": "example@alcumus.com"
+  }
+}

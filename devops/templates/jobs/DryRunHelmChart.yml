@@ -1,0 +1,20 @@
+parameters:
+  - name: environment
+  - name: appVersion
+  - name: applicationName
+  - name: namespace
+  - name: helmfileUrl
+
+jobs:
+  - job: dryRunHelmChart
+    displayName: Dry run deploy to ${{parameters.environment}}
+    steps:
+      - checkout: self
+
+      - template: ../steps/RunHelmfileCommand.yml
+        parameters:
+          appVersion: ${{parameters.appVersion}}
+          applicationName: ${{parameters.applicationName}}
+          namespace: ${{parameters.namespace}}
+          helmfileUrl: ${{parameters.helmfileUrl}}
+          helmfileCommand: lint

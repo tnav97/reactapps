@@ -1,0 +1,35 @@
+parameters:
+  - name: nodeVersion
+  - name: appName
+  - name: baseUrl
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: ${{parameters.nodeVersion}}
+    displayName: 'Setup Node v.${{parameters.nodeVersion}}'
+
+  - script: |
+      npm ci
+      npm run bootstrap:ci
+    displayName: 'Install dependencies'
+
+  - script: |
+      npx cypress run --headless --browser chrome --reporter junit --reporter-options "mochaFile=results-[hash].xml" --project ./apps/${{parameters.appName}}
+    displayName: 'Run Cypress tests'
+    env:
+      CYPRESS_BASE_URL: ${{parameters.baseUrl}}
+
+  - task: PublishTestResults@2
+    condition: always()
+    inputs:
+      testResultsFormat: 'JUnit'
+      testRunTitle: '${{parameters.appName}} Cypress Tests'
+      testResultsFiles: '**/results*.xml'
+
+  - task: PublishPipelineArtifact@1
+    condition: always()
+    displayName: 'Upload Videos'
+    inputs:
+      targetPath: './videos/${{parameters.appName}}'
+      artifactName: '${{parameters.appName}} Videos'

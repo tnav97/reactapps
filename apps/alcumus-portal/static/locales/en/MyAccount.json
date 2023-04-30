@@ -1,0 +1,10 @@
+{
+  "localeSection": {
+    "header": "Location & language",
+    "subtitle": "Select your preferred country, language, and timezone.",
+    "country": "Country",
+    "language": "Language",
+    "timezone": "Timezone",
+    "editModalTitle": "Edit location & language"
+  }
+}

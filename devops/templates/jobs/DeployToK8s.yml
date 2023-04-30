@@ -1,0 +1,56 @@
+parameters:
+  - name: environment
+  - name: appVersion
+  - name: applicationName
+  - name: namespace
+  - name: azureSubscription
+  - name: aksResourceGroup
+  - name: aksClusterName
+  - name: helmfileUrl
+  - name: variableGroup
+  - name: agentPool
+
+jobs:
+  - deployment: deploy
+    displayName: Deploy to ${{parameters.environment}}
+    pool: ${{parameters.agentPool}}
+    environment: ${{parameters.applicationName}}-${{parameters.environment}}
+    variables:
+      - group: ${{parameters.variableGroup}}
+      - name: kubectlVersion
+        value: 1.21.7
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - checkout: self
+
+            - task: Kubernetes@1
+              displayName: kubectl login
+              inputs:
+                connectionType: Azure Resource Manager
+                azureSubscriptionEndpoint: ${{parameters.azureSubscription}}
+                azureResourceGroup: ${{parameters.aksResourceGroup}}
+                kubernetesCluster: ${{parameters.aksClusterName}}
+                useClusterAdmin: true
+                command: login
+                versionSpec: $(kubectlVersion)
+
+            - template: ../steps/RunHelmfileCommand.yml
+              parameters:
+                appVersion: ${{parameters.appVersion}}
+                applicationName: ${{parameters.applicationName}}
+                namespace: ${{parameters.namespace}}
+                helmfileUrl: ${{parameters.helmfileUrl}}
+                helmfileCommand: sync --wait
+
+            - task: Kubernetes@1
+              displayName: kubectl logout
+              inputs:
+                connectionType: Azure Resource Manager
+                azureSubscriptionEndpoint: ${{parameters.azureSubscription}}
+                azureResourceGroup: ${{parameters.aksResourceGroup}}
+                kubernetesCluster: ${{parameters.aksClusterName}}
+                useClusterAdmin: false
+                command: logout
+                versionSpec: $(kubectlVersion)

@@ -1,0 +1,9 @@
+# This file defines the environment variables that this chart supports to be loaded under .Values.container
+required:
+  - ALCUMUS_PORTAL_SESSION_SECRET
+  
+optional:
+  - FEATURE_TOGGLE_DISABLE_DIRECT_PORTAL_LOGIN
+  - ALCUMUS_PORTAL_SUPPORTED_APPLICATION_LOOKUP_KEYS
+  - ALCUMUS_PORTAL_MIXPANEL_TOKEN
+  

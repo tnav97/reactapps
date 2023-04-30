@@ -1,0 +1,50 @@
+{
+  "congratulations": "Félicitations {{accountHolderName}}, ",
+  "welcomeToYour": "bienvenue dans votre ",
+  "plan": "{{planName}} plan",
+  "planFeatures": {
+    "starter": [
+      "Gestion des employés",
+      "Inspections",
+      "Incidents",
+      "Réunions",
+      "Mesures à prendre",
+      "Graphiques et rapports de base"
+    ],
+    "standard": [
+      "Gestion des employés",
+      "Inspections",
+      "Incidents",
+      "Réunions",
+      "Mesures à prendre",
+      "Graphiques et rapports de base",
+      "Documents",
+      "Gestion de la formation",
+      "Accès à notre bureau d'assistance technique pendant les heures de bureau",
+      "Accès à nos sessions mensuelles de partage des connaissances sur les produits"
+    ],
+    "premium": [
+      "Gestion des employés",
+      "Inspections",
+      "Incidents",
+      "Réunions",
+      "Mesures à prendre",
+      "Graphiques et rapports de base",
+      "Documents",
+      "Gestion de la formation",
+      "Accès à notre bureau d'assistance technique pendant les heures de bureau",
+      "Accès à nos sessions mensuelles de partage des connaissances sur les produits",
+      "Évaluation des risques",
+      "Programmes (ISO, COR, OSHA)",
+      "Gestion des actifs"
+    ]
+  },
+  "features": "Caractéristiques",
+  "billing": "Facturation",
+  "manage": "Gérer",
+  "userLicense": "Licence d'utilisateur",
+  "inviteUsers": "Inviter les utilisateurs",
+  "active": "actif",
+  "available": "disponible sur",
+  "welcomeToPaidPlan": "Bienvenue au plan payant"
+}

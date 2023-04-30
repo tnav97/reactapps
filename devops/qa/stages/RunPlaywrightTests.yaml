@@ -1,0 +1,12 @@
+parameters:
+  - name: nodeVersion
+  - name: variableGroup
+
+stages:
+  - stage: runUserAcceptanceTests
+    displayName: Run billing-portal UAT tests
+    jobs:
+      - template: ../jobs/RunBillingPortalTests.yaml
+        parameters:
+          nodeVersion: ${{parameters.nodeVersion}}
+          variableGroup: ${{parameters.variableGroup}}

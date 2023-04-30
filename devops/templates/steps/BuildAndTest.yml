@@ -1,0 +1,65 @@
+parameters:
+  - name: nodeVersion
+  - name: appVersion
+  - name: sourceVersion
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: ${{parameters.nodeVersion}}
+    displayName: 'Setup Node v.${{parameters.nodeVersion}}'
+
+  - script: |
+      echo "AppVersion: ${{parameters.appVersion}}"
+      echo "SourceVersion: ${{parameters.sourceVersion}}"
+    displayName: 'Echo Parameters'
+
+  - script: |
+      npm run docker:up
+    displayName: 'Start Docker'
+
+  - task: Cache@2
+    inputs:
+      key: 'npm | "$(Agent.OS)" | package-lock.json'
+      restoreKeys: |
+        npm | "$(Agent.OS)"
+      path: $(npm_config_cache)
+    displayName: Cache npm
+    continueOnError: true
+
+  - script: |
+      npm ci
+      npm run bootstrap:ci
+    displayName: 'Install dependencies'
+    env:
+      CYPRESS_INSTALL_BINARY: '0'
+
+  - script: |
+      npm run prettier:verify
+    displayName: 'Verify code formatting (prettier)'
+
+  - script: |
+      npm run lint
+    displayName: 'Verify code formatting (eslint)'
+
+  - script: |
+      npm run nx:build:affected
+    displayName: 'Build affected projects'
+
+  - script: |
+      npm run nx:test:affected
+    displayName: 'Test affected projects'
+    env:
+      JEST_JUNIT_INCLUDE_CONSOLE_OUTPUT: true
+
+  - script: |
+      npm run docker:down
+    displayName: 'Stop Docker'
+    condition: always()
+
+  - task: PublishTestResults@2
+    condition: always()
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '**/junit.xml'
+      mergeTestResults: true

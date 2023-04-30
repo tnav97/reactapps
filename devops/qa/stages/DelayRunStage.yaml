@@ -1,0 +1,14 @@
+parameters:
+  - name: delayForMinutes
+    default: '5'
+
+stages:
+  - stage: delayRun
+    displayName: Delay run
+    jobs:
+      - job: RunsOnServer
+        pool: Server
+        steps:
+          - task: Delay@1
+            inputs:
+              delayForMinutes: '${{parameters.delayForMinutes}}'

@@ -1,0 +1,30 @@
+{
+  "reviewSubscription": "Abonnement aux revues",
+  "requiredFieldLegend": "représente un champ obligatoire.",
+  "details": "Détails",
+  "pricingPlan": "Plan de tarification",
+  "plan": "Plan",
+  "billingFrequency": {
+    "monthly": "Mensuel",
+    "yearly": "Annuel (Economisez 20%)"
+  },
+  "maxSeatsHint": "Max 150 sièges",
+  "perUser": "{{price, currency}} chacun",
+  "seats": "Sièges",
+  "billingCycle": "Cycle de facturation",
+  "subscriptionTotal": "Total des abonnements",
+  "totalBeforeTaxes": "Total avant impôts :",
+  "totalBeforeTaxesAmount": "{{total, currency}}",
+  "additionalSeatsHint": "Vous avez {{seats}} utilisateurs actifs sur votre compte d'essai gratuit. Pour inviter d'autres utilisateurs, ajoutez des sièges supplémentaires ci-dessus. Vous pouvez gérer l'attribution des licences d'utilisation une fois que votre abonnement payant est lancé.",
+  "savingsHint": "Vous avez économisé {{amount, currency}} par utilisateur en passant à un plan annuel !",
+  "summaryCreditNote": "Le compte administrateur sera automatiquement crédité lorsque des utilisateurs seront supprimés ou ajoutés au système. Par conséquent, le total de votre facturation est susceptible de changer en fonction du nombre de sièges dans votre organisation. Pour consulter et gérer vos licences d'abonnement actives, visitez le module Employés.",
+  "terms": "J'accepte les <1>conditions d'annulation</1>, de <3>remboursement</3> et l'<5>accord de licence d'utilisation</5>.",
+  "proceedToSecureCheckout": "Passez à la caisse sécurisée",
+  "processing": "Traitement...",
+  "billingAccountDetails": "Compte de facturation",
+  "accountHolderNameLabel": "Nom complet",
+  "accountHolderEmailLabel": "Courriel :",
+  "stepper": ["Sélectionner le plan", "Consultez le site", "Paiement"],
+  "billedMonthly": "facturé mensuellement",
+  "billedYearly": "facturé annuellement"
+}

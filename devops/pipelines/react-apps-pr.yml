@@ -1,0 +1,45 @@
+parameters:
+  - name: nodeVersion
+    default: '16.x'
+
+trigger: none
+
+pr:
+  - develop
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  appVersion: '$(Build.BuildNumber)'
+  sourceVersion: '$(system.pullRequest.sourceCommitId)'
+
+stages:
+  - stage: buildAndTest
+    displayName: Build And Test
+    jobs:
+      - job: buildFromHarshConditions
+        displayName: Build From Harsh Conditions
+        steps:
+          - template: ../templates/steps/HarshBuild.yml
+            parameters:
+              nodeVersion: ${{parameters.nodeVersion}}
+
+      - job: buildAndTestApp
+        displayName: Build And Test
+        variables:
+          - name: npm_config_cache
+            value: $(Pipeline.Workspace)/.npm
+          # Used by Nx to figure out what changed
+          # https://nx.dev/ci/monorepo-ci-azure
+          - name: NX_BRANCH
+            value: $(System.PullRequest.PullRequestNumber)
+        steps:
+          - checkout: self
+            fetchDepth: 0
+            clean: true
+          - template: ../templates/steps/BuildAndTest.yml
+            parameters:
+              nodeVersion: ${{parameters.nodeVersion}}
+              appVersion: $(appVersion)
+              sourceVersion: $(sourceVersion)

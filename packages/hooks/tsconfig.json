@@ -1,0 +1,29 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "lib": ["ES2017", "DOM"],
+    "jsx": "react",
+    "moduleResolution": "Node",
+    "typeRoots": ["node_modules/@types", "./typings/"],
+    "types": ["node", "jest", "@types/jest"],
+    "outDir": "build/esm",
+    "rootDir": "./src",
+    "declaration": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["./src"],
+  "exclude": [
+    "node_modules",
+    "./build",
+    "./src/setupTests.ts",
+    "./src/**/*.test.tsx"
+  ]
+}

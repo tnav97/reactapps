@@ -1,0 +1,63 @@
+parameters:
+  - name: appVersion
+  - name: applicationName
+  - name: namespace
+  - name: helmfileUrl
+  - name: helmfileCommand
+    type: string
+    default: sync --wait
+
+steps:
+  - script: |
+      sudo curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 
+      sudo chmod 700 get_helm.sh 
+      sudo ./get_helm.sh
+    displayName: Install Helm
+
+  - task: HelmfileInstaller@1
+    inputs:
+      helmfileVersionToInstall: '0.139.8'
+    displayName: "Install Helmfile"
+
+  - script: |
+      cd $(Build.SourcesDirectory)/charts
+      echo "Helmfile command that will be run: ${{parameters.helmfileCommand}}"
+      helmfile --environment ${{parameters.applicationName}}-${{parameters.namespace}} --state-values-set "common.image.tag=${{parameters.appVersion}}" ${{parameters.helmfileCommand}}
+    displayName: Run Helmfile for ${{parameters.namespace}}
+    env:
+      # Common dependencies
+      REDIS_HOST: $(REDIS_HOST)
+      REDIS_PORT: $(REDIS_PORT)
+      REDIS_PASSWORD: $(REDIS_PASSWORD)
+      REDIS_SECURE_CONNECTION: $(REDIS_SECURE_CONNECTION)
+      SERVICES_API_KEY: $(SERVICES_API_KEY)
+      # Alcumus Portal
+      ALCUMUS_PORTAL_SESSION_SECRET: $(ALCUMUS_PORTAL_SESSION_SECRET)
+      ALCUMUS_PORTAL_MIXPANEL_TOKEN: $(ALCUMUS_PORTAL_MIXPANEL_TOKEN)
+      # Safety Intelligence
+      SAFETY_INTELLIGENCE_API: $(SAFETY_INTELLIGENCE_API)
+      SAFETY_INTELLIGENCE_SESSION_SECRET: $(SAFETY_INTELLIGENCE_SESSION_SECRET)
+      SAFETY_INTELLIGENCE_MIXPANEL_TOKEN: $(SAFETY_INTELLIGENCE_MIXPANEL_TOKEN)
+      # ECMS Digital Acquisition (Self-Signup)
+      ECMS_API: $(ECMS_API)
+      ECMS_MOBILE_API: $(ECMS_MOBILE_API)
+      ECMS_WEB: $(ECMS_WEB)
+      ECMS_CS_DEFAULT_SITE_ID: $(ECMS_CS_DEFAULT_SITE_ID)
+      ECMS_CS_EMAIL: $(ECMS_CS_EMAIL)
+      ECMS_CS_PASSWORD: $(ECMS_CS_PASSWORD)
+      SELF_SIGNUP_SPLIT_AUTH_KEY: $(SELF_SIGNUP_SPLIT_AUTH_KEY)
+      SELF_SIGNUP_SENTRY_DSN: $(SELF_SIGNUP_SENTRY_DSN)
+      SELF_SIGNUP_MIXPANEL_TOKEN: $(SELF_SIGNUP_MIXPANEL_TOKEN)
+      SELF_SIGNUP_SESSION_SECRET: $(SELF_SIGNUP_SESSION_SECRET)
+      SELF_SIGNUP_RECAPTCHA_SECRET_KEY: $(SELF_SIGNUP_RECAPTCHA_SECRET_KEY)
+      SELF_SIGNUP_RECAPTCHA_SITE_KEY: $(SELF_SIGNUP_RECAPTCHA_SITE_KEY)
+      SELF_SIGNUP_USE_RECAPTCHA_TOGGLE: $(SELF_SIGNUP_USE_RECAPTCHA_TOGGLE)
+      # ECMS Digital Acquisition (Billing Portal)
+      BILLING_SERVICE_API: $(BILLING_SERVICE_API)
+      BILLING_SERVICE_KEY: $(BILLING_SERVICE_KEY)
+      BILLING_PORTAL_SESSION_SECRET: $(BILLING_PORTAL_SESSION_SECRET)
+      BILLING_PORTAL_SESSION_TRANSFER_SECRET: $(BILLING_PORTAL_SESSION_TRANSFER_SECRET)
+      BILLING_PORTAL_IFRAME_HOSTS_WHITELIST: $(BILLING_PORTAL_IFRAME_HOSTS_WHITELIST)
+      # SafeContractor Registration Portal (SCRP) Secrets
+      SCRP_API_KEY: $(SCRP_API_KEY)
+      SCRP_EXPERIAN_API_KEY: $(SCRP_EXPERIAN_API_KEY)

@@ -1,0 +1,29 @@
+{
+  "companyName": "Alcumus",
+  "registartionNumber": "12345678",
+  "registartionYear": "2003",
+  "charityNumber": "87654321",
+  "charityYear": "2006",
+  "website": "www.alcumus.com",
+  "address1": "23 Hud Hill",
+  "address2": "Emmer Green",
+  "city": "London",
+  "postcode": "SW18 4DX",
+  "landline": "08923758723",
+  "mobile": "09237982374",
+  "billingaddress1": "33, Garland Road",
+  "billingaddress2": "Greater Manchester",
+  "billingcity": "Manchester",
+  "billingpostcode": "M22 5EJ",
+  "invalidRegistartionNumber": "123458",
+  "invalidRegistartionYear": "3456",
+  "invalidPostcode": "h8s6",
+  "invalidLandline": "23758723",
+  "invalidMobile": "37982374",
+  "subsidiary": {
+    "register1": "23478945",
+    "company1": "test1",
+    "register2": "87634343",
+    "company2": "test2"
+  }
+}

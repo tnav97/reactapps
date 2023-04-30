@@ -1,0 +1,33 @@
+{
+  "company": {
+    "id": "739812",
+    "coref": "JS4329",
+    "name": "Referral Code 20",
+    "address": {
+      "addressLine1": "CF44 5HQ",
+      "addressLine2": "Mr",
+      "addressLine3": "Sixteen",
+      "town": "",
+      "county": "",
+      "postCode": ""
+    },
+    "billingAddress": "",
+    "contactPerson": {
+      "title": "",
+      "firstName": "Address 38",
+      "surname": "Street 28",
+      "emailAddress": "2.222222222E9",
+      "telephoneNumber": "",
+      "mobileNumber": ""
+    },
+    "noOfEmployees": "",
+    "organisationType": "",
+    "otherOrganisationType": "",
+    "registrationNumber": "",
+    "registrationYear": "",
+    "charityNumber": "",
+    "charityYear": "",
+    "website": ""
+  },
+  "referralCode": "JS4329-572743-47"
+}

@@ -1,0 +1,47 @@
+{
+  "name": "@alcumus/analytics-package",
+  "version": "2.7.0",
+  "description": "A package to track user interactions",
+  "keywords": [
+    "alcumus",
+    "analytics"
+  ],
+  "main": "build/cjs/index.js",
+  "module": "build/esm/index.js",
+  "types": "build/esm/index.d.ts",
+  "private": true,
+  "scripts": {
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir build/cjs",
+    "build": "npm run build:esm && npm run build:cjs",
+    "clean": "rimraf build ",
+    "lint:ts": "eslint src/**/*.ts",
+    "lint": "npm run lint:ts && npm run lint:css",
+    "lint:fix": "eslint --fix .",
+    "prettier:verify": "prettier --check .",
+    "test": "jest --runInBand --passWithNoTests",
+    "test:watch": "jest --runInBand --watch"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@types/mixpanel": "^2.14.4",
+    "@types/mixpanel-browser": "^2.38.1",
+    "mixpanel-browser": "^2.46.0",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.1",
+    "@types/node": "^18.15.13",
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "eslint-plugin-react": "7.32.2",
+    "jest": "^29.5.0",
+    "jest-junit": "^16.0.0",
+    "ts-jest": "^29.1.0",
+    "typescript": "5.0.4"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2"
+  }
+}

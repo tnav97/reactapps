@@ -1,0 +1,14 @@
+{
+  "packages": ["packages/*", "apps/*", "uat/*"],
+  "version": "independent",
+  "command": {
+    "version": {
+      "push": false,
+      "conventionalCommits": true,
+      "includeMergedTags": true
+    }
+  },
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "useNx": false,
+  "useWorkspaces": false
+}

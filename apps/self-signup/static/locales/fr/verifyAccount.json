@@ -1,0 +1,8 @@
+{
+  "alertMessage": "Courriel de vérification envoyé",
+  "header": "Vous y êtes presque !",
+  "bodyLine1": "Nous avons envoyé un e-mail d'activation de compte à <1>{{email}}</1> ",
+  "bodyLine2": "Il suffit de cliquer sur activer mon compte pour commencer votre essai gratuit de 14 jours !",
+  "sendingEmailAltText": "Envoi de l'email...",
+  "resendVerificationText": "Renvoyer l'e-mail de vérification"
+}

@@ -1,0 +1,125 @@
+# Variables and functions
+
+# Clone and store Values and Environment values to pass in the "app-deployment" template below
+{{ $EnvironmentAndValues := (dict "Values" .Values "Environment" .Environment) }}
+
+# Template definition: Generate a release object for the specified app
+#
+# @var chartName: 
+# Name of the chart to use (e.g: self-signup, alcumus-portal)
+# Used to resolve chart name, image tag.
+#
+# @var releaseName (if not provided, assumed to be same as chartName): 
+# Name of the release (e.g: self-signup, self-signup-02, alcumus-portal)
+# Used to resolve hosts from .Values.common.hosts
+#
+# @var requiredEnvironmentVariables: List of env variables to load using requiredEnv into .Values.container
+#
+# @var environmentVariables: List of env variables to load using env into .Values.container
+#
+{{- define "app-deployment"}}
+  # $releaseName = Release Name if present, otherwise Chart Name
+  {{ $releaseName := coalesce (index . "releaseName") .chartName }}
+  - name: {{ $releaseName }}
+    namespace: {{ .Values.namespace }}
+    chart: ./{{ .chartName }}
+    values:
+      - replicaCount: {{ .Values.replicaCount }}
+      - {{ .Values.common | toRawJson }} # Convert to JSON because YAML indentation looked broken
+      {{- if or (hasKey . "imageTag") (hasKey . "imageName") }}
+      - image:
+          {{- if hasKey . "imageTag" }}
+            tag: {{ .imageTag }}
+          {{- end }}
+          {{- if hasKey . "imageName" }}
+            name: {{ .imageName }} # Override image.name if provided in release definition
+          {{- end }}
+      {{- end }}
+      - network:
+          ingress: {{ .Values.common.networkIngress }}
+          host: {{ index .Values.common.hosts $releaseName }} # Resolve the hostname from .Values.common.hosts[ReleaseName]
+          secretName: {{ .Values.common.tlsSecretName }}
+      - resources: {{ .Values.resources | toRawJson }} 
+      - scaling: {{ .Values.scaling | toRawJson }}
+      # Load variables file that defines all environment variables to load
+      {{ $environmentVariables := fromYaml (readFile (print "./" .chartName "/variables.yaml")) }}
+      {{ $secrets := get "secrets" (dict) $environmentVariables }}
+      - container:
+          {{ if hasKey $environmentVariables "required" }}
+          {{- range $environmentVariables.required }} # Iterate over requiredEnvironmentVariables and inject them using requiredEnv function
+          {{.}}: {{ requiredEnv . | quote }}
+          {{- end -}} # end range
+          {{ end }} # end if
+          
+          {{ if hasKey $environmentVariables "optional" }}
+          {{- range $environmentVariables.optional }} # Iterate over environmentVariables and inject them using env function
+          {{.}}: {{ env . | quote }}
+          {{- end }} # end range
+          {{ end }} # end if
+      - secrets:
+          {{ if hasKey $secrets "required" }}
+          {{- range $secrets.required }} # Iterate over requiredEnvironmentVariables and inject them using requiredEnv function
+          {{.}}: {{ requiredEnv . | b64enc | quote }}
+          {{- end -}} # end range
+          {{ end }} # end if
+          
+          {{ if hasKey $secrets "optional" }}
+          {{- range $secrets.optional }} # Iterate over environmentVariables and inject them using env function
+          {{.}}: {{ env . | b64enc | quote }}
+          {{- end }} # end range
+          {{ end }} # end if
+      {{- if hasKey . "overrides" }}
+      - {{ .overrides | toRawJson }}
+      {{- end }}
+      
+{{- end }}
+
+# Helmfile starts here
+environments:
+  react-apps-local:
+    values:
+      - ./environments/react-apps-local.yaml
+  react-apps-dev:
+    values:
+      - ./environments/react-apps-dev.yaml
+  react-apps-qa:
+    values:
+      - ./environments/react-apps-qa.yaml
+  react-apps-qa-bi:
+    values:
+      - ./environments/react-apps-qa-bi.yaml
+  react-apps-qa-da:
+    values:
+      - ./environments/react-apps-qa-da.yaml
+  react-apps-staging:
+    values:
+      - ./environments/react-apps-staging.yaml
+  react-apps-prod:
+    values:
+      - ./environments/react-apps-prod.yaml
+  alcumus-portal-dev:
+    values:
+      - ./environments/alcumus-portal-dev.yaml
+  safecontractor-registration-portal-dev:
+    values:
+      - ./environments/safecontractor-registration-portal-dev.yaml
+  safecontractor-registration-portal-qa:
+    values:
+      - ./environments/safecontractor-registration-portal-qa.yaml
+  alcumus-portal-qa:
+    values:
+      - ./environments/alcumus-portal-qa.yaml
+  safecontractor-registration-portal-staging:
+    values:
+      - ./environments/safecontractor-registration-portal-staging.yaml
+  safecontractor-registration-portal-prod:
+    values:
+      - ./environments/safecontractor-registration-portal-prod.yaml
+      
+helmDefaults:
+  createNamespace: true
+
+releases:
+  {{- range .Values.deployReleases }} # Iterate over all deployReleases defined in the environment file, and create a release definition
+  {{- template "app-deployment" (merge . $EnvironmentAndValues) }}
+  {{- end }}

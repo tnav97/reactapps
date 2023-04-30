@@ -1,0 +1,16 @@
+{
+  "resendInvitation": "Resend invitation",
+  "confirmResendInvitation": {
+    "resendInvitationForMemberWithName": "Are you sure you want to resend the invitation sent to {{firstName}} {{lastName}}?",
+    "resendInvitationForMemberWithEmailAddress": "Are you sure you want to resend the invitation sent to {{emailAddress}}?"
+  },
+  "errorResendingInvitation": {
+    "couldNotResendInvitationForMemberWithName": "Could not resend invitation for user {{firstName}} {{lastName}}",
+    "couldNotResendInvitationForMemberWithEmailAddress": "Could not resend invitation for user {{emailAddress}}"
+  },
+  "immediateEffect": "This change will take effect immediately.",
+  "successResendingInvitation": {
+    "invitationForMemberWithNameHasBeenResent": "Invitation for {{firstName}} {{lastName}} has been resent.",
+    "invitationForMemberWithEmailAddressHasBeenResent": "Invitation for {{emailAddress}} has been resent."
+  }
+}

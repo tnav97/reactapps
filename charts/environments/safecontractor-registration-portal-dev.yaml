@@ -1,0 +1,54 @@
+namespace: "dev"
+
+replicaCount: 2
+# Set of common variables used across charts AND helmfile
+common:
+  image:
+    pullPolicy: "Always"
+    repository: "alcscregdevacruks.azurecr.io/react-apps"
+    # Ideally, each chart has an independent image tag, but, for now we're using identical image tags for all releases
+    # This value has to be changed during deployment
+    tag: 0.0.1
+
+  networkIngress: nginx
+
+  # This key is used to pass values to ingresses as well
+  hosts:
+    safecontractor-registration-portal: screg-dev.alcdev.net
+    
+  tlsSecretName: alcdev-net-tls
+    
+  env:
+    nodeEnv: 'production'
+
+  callbackUrls:
+    authConsumerCallbacksWhitelist: '["https://*.fiddev.com/fieldid/","https://*.fidstage.com/fieldid/","https://*.fieldid.com/auth/session","https://*.theatworknetwork.com/api/auth/login/session"]'
+
+
+# All charts that should be deployed in this environment,
+# with a list of environment variables to resolve and pass
+
+# IMPORTANT: The values in this file DO NOT have to reflect prod, as the DEV environment
+# is intended to allow for cutting-edge trunk-based development, where user flows can
+# be disrupted as long as there are feature toggles in place that deactivate disruptive
+# changes in higher environments like QA, Staging, and Prod.
+deployReleases:
+  - chartName: safecontractor-registration-portal
+    overrides:
+      container:
+        SCRP_API_URL: 'https://devapi.safecontractor.net/registration_transformed'
+        SCRP_EXPERIAN_API_URL: 'https://api.experianaperture.io'
+        SCRP_PAYMENT_GATEWAY_API_URL: 'https://devapps.safecontractor.net/contractor-commands/contractor'
+        SCRP_ACCREDITATION_REDIRECTION_URL: 'https://sc2-dev-app-01.alcumus.net/AccreditationWeb/login'
+
+scaling:
+  enabled: false
+
+resources:
+  enabled: false
+  requests:
+    cpu: "250m"
+    memory: "512Mi"
+  limits:
+    cpu: "500m"
+    memory: "1024Mi"

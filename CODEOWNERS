@@ -1,0 +1,30 @@
+# These owners will be the default owners for everything in
+# the repo. Unless a later match takes precedence,
+# @global-owner1 and @global-owner2 will be requested for
+# review when someone opens a pull request.
+# *       @global-owner1 @global-owner2
+
+# Order is important; the last matching pattern takes the most
+# precedence. When someone opens a pull request that only
+# modifies JS files, only @js-owner and not the global
+# owner(s) will be requested for a review.
+
+# Set a default codeowner of alcumus-portal for any file not included below.
+* @Alcumus/alcumus-portal
+
+# We are trying to manage our abstractions rather carefully
+# so packages should be checked by a alcumus-portal member.
+/packages/ @Alcumus/alcumus-portal
+/apps/ @Alcumus/alcumus-portal
+/apps/safecontractor-registration-portal @Alcumus/alcumus-portal @Alcumus/scregportal
+/uat/ @Alcumus/alcumus-portal
+/scripts/ @Alcumus/alcumus-portal
+/infra/ @Alcumus/DevOpsTeam
+
+CODEOWNERS @Alcumus/DevOpsTeam @Alcumus/alcumus-portal @markgarethgabb
+
+# if making changes to charts or devops, please test it on a non-DEV environment first.
+# the best practice is to introduce your own team specific environment for deployment testing
+# or to borrow an existing environment from another team (like qa-bi).
+/charts/ @Alcumus/DevOpsTeam 
+/devops/ @Alcumus/DevOpsTeam 
