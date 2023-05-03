@@ -8,10 +8,7 @@ export interface PaymentDetailsReducerStateType {
   isRegistered?: boolean;
   to?: string;
   PaymentCard?: string;
-  paymentSelected?: boolean;
-  membershipDiscount?: boolean;
-  termsCondition?: boolean;
-  paymentCard_value?: number;
+  paymentCard_value?: string;
   register_request?: string;
   paymentDetails?: string;
 }
@@ -25,9 +22,6 @@ export const defaultState: PaymentDetailsReducerStateType = {
   PaymentCard: undefined,
   paymentCard_value: undefined,
   register_request: undefined,
-  paymentSelected: undefined,
-  membershipDiscount: undefined,
-  termsCondition: undefined,
   paymentDetails: undefined,
 };
 
@@ -42,13 +36,6 @@ export default function PaymentDetailsReducer(
         ...state,
         PaymentCard: payload?.PaymentCard,
         paymentCard_value: payload?.paymentCard_value,
-      };
-    case Actions.PaymentDetails.paymentData:
-      return {
-        ...state,
-        paymentSelected: payload?.paymentSelected,
-        membershipDiscount: payload?.membershipDiscount,
-        termsCondition: payload?.termsCondition,
       };
     case Actions.PaymentDetails.FetchDataCompleted: {
       return {

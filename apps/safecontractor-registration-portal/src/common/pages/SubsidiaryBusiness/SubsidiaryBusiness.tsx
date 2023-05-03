@@ -15,14 +15,13 @@ import clsx from 'clsx';
 import { DeleteOutline } from '@mui/icons-material';
 import { CardSelected } from '../../constants';
 import MobileFooterSection from '../../components/MobileFooterSection';
+import Stepper from '../../components/Stepper';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import ReadMore from '../../components/ReadMore';
 import { useHistory } from 'react-router-dom';
-import ProgressBar from '../../components/ProgressBar';
 
-const PROGRESS = 45;
-
+const STEPPER_DOTS = 2;
 const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: StyleVariables.fonts.weight.semiBold,
@@ -156,8 +155,19 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '100px',
   },
   deleteIcon: {
+    marginLeft: '13px',
     color: StyleVariables.colors.text.subdued,
     cursor: 'pointer',
+    marginTop: '58px',
+    [theme.breakpoints.down('sm')]: {
+      marginTop: '56px',
+    },
+    [theme.breakpoints.up('md')]: {
+      marginTop: '35px',
+    },
+    [theme.breakpoints.up('xl')]: {
+      marginTop: '33px',
+    },
   },
   registrationInput: {
     justifyContent: 'space-evenly',
@@ -246,19 +256,6 @@ const useStyles = makeStyles((theme) => ({
   leftBoxContainer: {
     direction: 'rtl',
   },
-  deleteButtonIcon: {
-    border: 'none',
-    backgroundColor: StyleVariables.colors.base.white,
-    marginTop: '53px',
-    marginLeft: '7px',
-    paddingTop: '8px',
-    [theme.breakpoints.down('xs')]: {
-      marginTop: '54px',
-    },
-    [theme.breakpoints.up('md')]: {
-      marginTop: '30px',
-    },
-  },
 }));
 
 export default function SubsidiaryBusiness() {
@@ -271,11 +268,7 @@ export default function SubsidiaryBusiness() {
   const history = useHistory();
   const subsidiaryListSelector = useSelector((state: any) => state.subsidiary);
   const initialState = { name: '', registrationNumber: '' };
-  const [inputFields, setInputFields] = useState(
-    !subsidiaryListSelector.companyList
-      ? [initialState]
-      : subsidiaryListSelector.companyList
-  );
+  const [inputFields, setInputFields] = useState([initialState]);
   const [registrationMessage, setRegistrationMessage] = React.useState<
     Array<string>
   >([]);
@@ -331,7 +324,7 @@ export default function SubsidiaryBusiness() {
       }
     }
     const lists = [...inputFields];
-    setInputFields(lists);
+
     lists.forEach((list) => {
       if (list.name === '' && list.registrationNumber === '') {
         setShow(false);
@@ -350,31 +343,17 @@ export default function SubsidiaryBusiness() {
     }
     setSelected(subsidiaryListSelector.selected);
     setSelectedValue(subsidiaryListSelector.selectedValue);
-    setInputFields(
-      !subsidiaryListSelector.companyList
-        ? [initialState]
-        : subsidiaryListSelector.companyList
-    );
-  }, [subsidiaryListSelector]);
-  useEffect(() => {
+    setInputFields(subsidiaryListSelector.companyList);
     if (subsidiaryListSelector.companyList) {
-      const list = subsidiaryListSelector.companyList;
-      setInputFields(
-        !subsidiaryListSelector.companyList
-          ? [initialState]
-          : subsidiaryListSelector.companyList
-      );
-      if (JSON.stringify(list) !== JSON.stringify([initialState])) {
-        for (let index = 0; index < list.length; index++) {
-          RegistrationValidate(
-            list[index].name,
-            list[index].registrationNumber,
-            index
-          );
+      setShow(true);
+      const lists = [...inputFields];
+      lists.forEach((list) => {
+        if (list.name === '' && list.registrationNumber === '') {
+          setShow(false);
         }
-      }
+      });
     }
-  }, []);
+  }, [subsidiaryListSelector]);
   useEffect(() => {
     if (selected !== CardSelected.Not_Selected) {
       dispatch({
@@ -440,7 +419,7 @@ export default function SubsidiaryBusiness() {
     register: () => undefined,
     footerSectionProps: {
       to: nextPage,
-      from: 'SSIPQuestion',
+      from: 'companyType',
       impaired: impaired,
       page: 'subsidiary',
     },
@@ -511,11 +490,11 @@ export default function SubsidiaryBusiness() {
   const submit = (item, index) => {
     setSelected(index);
     setSelectedValue(item);
-    const list = [...inputFields];
-    setInputFields(list);
+    setInputFields([initialState]);
     setNextPage('choosePlan');
     if (index === CardSelected.No) {
       setNextPage('responseTime');
+      setInputFields([]);
       setSelectedTabIndexYes(0);
     } else {
       setSelectedTabIndexNo(-1);
@@ -525,9 +504,9 @@ export default function SubsidiaryBusiness() {
   return (
     <Page className={classes.cssPage}>
       <Grid item xs={12} className={classes.scrollablediv}>
-        <AboutSection progress={PROGRESS} />
+        <AboutSection count={STEPPER_DOTS} />
         <Grid className={classes.stepper}>
-          <ProgressBar progress={PROGRESS} />
+          <Stepper count={STEPPER_DOTS}></Stepper>
         </Grid>
         <Typography className={classes.title} variant="h1" component="h1">
           Would you like to register any subsidiary businesses?
@@ -655,53 +634,53 @@ export default function SubsidiaryBusiness() {
                           </React.Fragment>
                         </FormControl>
                       </Grid>
-
-                      <Grid
-                        item
-                        xs={1}
-                        sm={1}
-                        md={1}
-                        lg={1}
-                        className={clsx(classes.mobileDeleteContainer)}
-                      >
-                        <FormControl variant='standard'
-                          fullWidth
-                          className={clsx(
-                            classes.formGroup,
-                            classes.deleteicon
-                          )}
-                        >
-                          <div
-                            title={
-                              index === 0
-                                ? 'Click here to remove'
-                                : 'Click here to remove'
-                            }
+                      {subsidiary.name !== '' &&
+                        subsidiary.registrationNumber !== '' && (
+                          <Grid
+                            item
+                            xs={1}
+                            sm={1}
+                            md={1}
+                            lg={1}
+                            className={clsx(classes.mobileDeleteContainer)}
                           >
-                            <button className={clsx(classes.deleteButtonIcon)}>
-                              <DeleteOutline
-                                className={clsx(classes.deleteIcon)}
-                                onClick={() =>
-                                  `${
-                                    index === 0 && inputFields?.length === 1
-                                      ? handleReset()
-                                      : handleRemoveFields(index)
-                                  }`
+                            <FormControl
+                              variant="standard"
+                              fullWidth
+                              className={clsx(
+                                classes.formGroup,
+                                classes.deleteicon
+                              )}>
+                              <div
+                                title={
+                                  index === 0
+                                    ? 'Click here to remove'
+                                    : 'Click here to remove'
                                 }
-                                onKeyDown={() =>
-                                  `${
-                                    index === 0 && inputFields?.length === 1
-                                      ? handleKeyReset(event)
-                                      : handleRemove(event, index)
-                                  }`
-                                }
-                                aria-hidden="false"
-                              />
-                            </button>
-                          </div>
-                        </FormControl>
-                      </Grid>
-
+                              >
+                                <DeleteOutline
+                                  className={clsx(classes.deleteIcon)}
+                                  tabIndex={0}
+                                  onClick={() =>
+                                    `${
+                                      index === 0 && inputFields?.length === 1
+                                        ? handleReset()
+                                        : handleRemoveFields(index)
+                                    }`
+                                  }
+                                  onKeyDown={() =>
+                                    `${
+                                      index === 0 && inputFields?.length === 1
+                                        ? handleKeyReset(event)
+                                        : handleRemove(event, index)
+                                    }`
+                                  }
+                                  aria-hidden="false"
+                                />
+                              </div>
+                            </FormControl>
+                          </Grid>
+                        )}
                       <Grid item xs={10} sm={5} md={4} lg={4}>
                         <FormControl
                           variant="standard"
@@ -747,57 +726,58 @@ export default function SubsidiaryBusiness() {
                           </React.Fragment>
                         </FormControl>
                       </Grid>
-
-                      <Grid
-                        item
-                        xs={1}
-                        sm={1}
-                        md={1}
-                        lg={1}
-                        className={clsx(classes.desktopDeleteContainer)}
-                      >
-                        <FormControl variant='standard'
-                          fullWidth
-                          className={clsx(
-                            classes.formGroup,
-                            classes.deleteicon
-                          )}
-                        >
-                          <div
-                            title={
-                              index === 0
-                                ? 'Click here to remove'
-                                : 'Click here to remove'
-                            }
+                      {subsidiary.name !== '' &&
+                        subsidiary.registrationNumber !== '' && (
+                          <Grid
+                            item
+                            xs={1}
+                            sm={1}
+                            md={1}
+                            lg={1}
+                            className={clsx(classes.desktopDeleteContainer)}
                           >
-                            <button className={clsx(classes.deleteButtonIcon)}>
-                              <DeleteOutline
-                                className={clsx(classes.deleteIcon)}
-                                data-testid={
+                            <FormControl
+                              variant="standard"
+                              fullWidth
+                              className={clsx(
+                                classes.formGroup,
+                                classes.deleteicon
+                              )}>
+                              <div
+                                title={
                                   index === 0
-                                    ? `reset${index}`
-                                    : `remove${index}`
+                                    ? 'Click here to remove'
+                                    : 'Click here to remove'
                                 }
-                                onClick={() =>
-                                  `${
-                                    index === 0 && inputFields?.length === 1
-                                      ? handleReset()
-                                      : handleRemoveFields(index)
-                                  }`
-                                }
-                                onKeyDown={() =>
-                                  `${
-                                    index === 0 && inputFields?.length === 1
-                                      ? handleKeyReset(event)
-                                      : handleRemove(event, index)
-                                  }`
-                                }
-                                aria-hidden="false"
-                              />
-                            </button>
-                          </div>
-                        </FormControl>
-                      </Grid>
+                              >
+                                <DeleteOutline
+                                  className={clsx(classes.deleteIcon)}
+                                  data-testid={
+                                    index === 0
+                                      ? `reset${index}`
+                                      : `remove${index}`
+                                  }
+                                  tabIndex={0}
+                                  onClick={() =>
+                                    `${
+                                      index === 0 && inputFields?.length === 1
+                                        ? handleReset()
+                                        : handleRemoveFields(index)
+                                    }`
+                                  }
+                                  onKeyDown={() =>
+                                    `${
+                                      index === 0 && inputFields?.length === 1
+                                        ? handleKeyReset(event)
+                                        : handleRemove(event, index)
+                                    }`
+                                  }
+                                  aria-hidden="false"
+                                />
+                              </div>
+                            </FormControl>
+                          </Grid>
+                        )}
                     </Grid>
                   </div>
                 ))}

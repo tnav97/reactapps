@@ -676,7 +676,7 @@ export default function PlanCard(cardProps: CardProps) {
                         </Typography>
                         <Typography className={clsx(classes.tabSelectPlan)}>
                           <Button
-                            title="Click here to select Plan"
+                            title="Click here to select plan"
                             data-testid={`mobileSelect${sTextWithoutSpace}`}
                             rounded
                             size="small"

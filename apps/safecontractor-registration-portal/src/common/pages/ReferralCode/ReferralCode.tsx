@@ -12,6 +12,7 @@ import AboutSection from '../../components/AboutSection';
 import FooterSection from '../../components/FooterSection';
 import DoneIcon from '@mui/icons-material/Done';
 import clsx from 'clsx';
+import Stepper from '../../components/Stepper';
 import MobileFooterSection from '../../components/MobileFooterSection';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
@@ -25,8 +26,6 @@ import {
 import { empolyeeCountSelection } from '../../components/constants';
 import serialize from 'serialize-javascript';
 import { useHistory } from 'react-router-dom';
-import ProgressBar from '../../components/ProgressBar';
-
 interface ReferralProps {
   validateReferralCode: Function;
   messageFromApi?: string;
@@ -34,7 +33,7 @@ interface ReferralProps {
   error?: string;
 }
 
-const PROGRESS = 9;
+const STEPPER_DOTS = 2;
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -232,14 +231,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ReferralCodePage(referralProps: ReferralProps) {
+  const [selected, setSelected] = React.useState(CardSelected.Not_Selected);
+  const [referralcode, setReferralcode] = useState('');
   const [referralMessage, setreferralMessage] = useState('');
   const referralValue = useSelector((state: any) => state.referral);
-  const [selected, setSelected] = React.useState(
-    referralValue.ReferralCode ?? CardSelected.Not_Selected
-  );
-  const [referralcode, setReferralcode] = useState(
-    referralValue.referralcode_value ?? ''
-  );
   const dispatch = useDispatch();
   const [show, setShow] = useState(true);
   const [appear, setAppear] = useState(true);
@@ -342,15 +337,6 @@ export default function ReferralCodePage(referralProps: ReferralProps) {
     }
   };
   const checkValidate = () => {
-    dispatch({
-      type: 'referral',
-      payload: {
-        ReferralCode: selected,
-        referralcode_value: referralcode,
-        scProductVersion: '',
-        companyDetails_value: '',
-      },
-    });
     if (referralcode?.length === 0) {
       setreferralMessage('');
       setReferralError(false);
@@ -381,8 +367,9 @@ export default function ReferralCodePage(referralProps: ReferralProps) {
     },
   };
   useEffect(() => {
-    referralValidate();
-  }, []);
+    setSelected(referralValue.ReferralCode);
+    setReferralcode(referralValue.referralcode_value);
+  }, [referralValue]);
 
   const handleKeyDown = (event, index) => {
     if (event.key === 'Enter' && index === CardSelected.No) {
@@ -406,23 +393,27 @@ export default function ReferralCodePage(referralProps: ReferralProps) {
   const images = ['/icons/Vectorup.png', '/icons/Vectordown.png'];
   const submit = (index) => {
     setSelected(index);
-    dispatch({
-      type: 'referral',
-      payload: {
-        ReferralCode: index,
-        referralcode_value: referralcode,
-        scProductVersion: '',
-        companyDetails_value: '',
-      },
-    });
+    if (index === CardSelected.No) {
+      setreferralMessage('');
+      setReferralError(false);
+      dispatch({
+        type: 'referral',
+        payload: {
+          ReferralCode: index,
+          referralcode_value: '',
+          scProductVersion: '',
+          companyDetails_value: '',
+        },
+      });
+    }
   };
   return (
     <Page className={classes.pageContainer}>
       <style type="text/css">{mobileLiveChatContainerBox}</style>
       <Grid item xs={12} className={classes.scrollablediv}>
-        <AboutSection progress={PROGRESS} />
+        <AboutSection count={STEPPER_DOTS} />
         <Grid className={classes.stepper}>
-          <ProgressBar progress={PROGRESS} />
+          <Stepper count={STEPPER_DOTS}></Stepper>
         </Grid>
         <Typography className={classes.title} variant="h1" component="h1">
           Do you have a referral code?

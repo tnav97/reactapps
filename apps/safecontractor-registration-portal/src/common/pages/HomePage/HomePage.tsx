@@ -156,7 +156,7 @@ export default function HomePage() {
                 />
               </header>
               <Typography className={classes.title} variant="h1" component="h1">
-                Register for SafeContractor Membership
+                Register for SafeContractor membership
               </Typography>
               <Typography className={classes.subtitle}>
                 SafeContractor is the leading Health and Safety Accreditation,

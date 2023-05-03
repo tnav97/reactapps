@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate, Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import { IReduxRootState } from '../../../client/redux/reducers';
 import { PrevUrl } from '../../pages/RedirectTo/PrevUrl';
 
@@ -64,7 +64,7 @@ function MotoProtectedRoute({
   if (pathName === 'referral') {
     const redirectDRef = redirectBack(createAccountState);
     if (redirectDRef === 1) {
-      return <Navigate to="/moto" />;
+      return <Redirect to="/moto" />;
     } else if (redirectDRef === 2) {
       return <PrevUrl />;
     }
@@ -72,7 +72,7 @@ function MotoProtectedRoute({
   if (pathName === 'employee') {
     const redirectDEmp = redirectBack(referralValue);
     if (redirectDEmp === 1) {
-      return <Navigate to="/moto" />;
+      return <Redirect to="/moto" />;
     } else if (redirectDEmp === 2) {
       return <PrevUrl />;
     }
@@ -80,7 +80,7 @@ function MotoProtectedRoute({
   if (pathName === 'companyType') {
     const redirectDCT = redirectBack(employeeCardValue);
     if (redirectDCT === 1) {
-      return <Navigate to="/moto" />;
+      return <Redirect to="/moto" />;
     } else if (redirectDCT === 2) {
       return <PrevUrl />;
     }
@@ -88,7 +88,7 @@ function MotoProtectedRoute({
   if (pathName === 'subsidiaryBusiness') {
     const redirectDSub = redirectBack(companyTypeValue);
     if (redirectDSub === 1) {
-      return <Navigate to="/moto" />;
+      return <Redirect to="/moto" />;
     } else if (redirectDSub === 2) {
       return <PrevUrl />;
     }
@@ -96,7 +96,7 @@ function MotoProtectedRoute({
   if (pathName === 'responseTime') {
     const redirectDRes = redirectBack(subsidiaryListSelector);
     if (redirectDRes === 1) {
-      return <Navigate to="/moto" />;
+      return <Redirect to="/moto" />;
     } else if (redirectDRes === 2) {
       return <PrevUrl />;
     }
@@ -104,7 +104,7 @@ function MotoProtectedRoute({
   if (pathName === 'needSupport') {
     const redirectDNeed = redirectBack(responseTimeSelector);
     if (redirectDNeed === 1) {
-      return <Navigate to="/moto" />;
+      return <Redirect to="/moto" />;
     } else if (redirectDNeed === 2) {
       return <PrevUrl />;
     }
@@ -115,21 +115,21 @@ function MotoProtectedRoute({
       undefined
     );
     if (subsidiaryPageValues > -1) {
-      return <Navigate to="/moto" />;
+      return <Redirect to="/moto" />;
     } else if (subsidiaryPageLength === 0) {
       return <PrevUrl />;
     } else {
       if (subsidiaryListSelector?.selectedValue === 'Yes') {
         const redirectDS = redirectBack(companyTypeValue);
         if (redirectDS === 1) {
-          return <Navigate to="/moto" />;
+          return <Redirect to="/moto" />;
         } else if (redirectDS === 2) {
           return <PrevUrl />;
         }
       } else {
         const redirectDn = redirectBack(needSupportSelector);
         if (redirectDn === 1) {
-          return <Navigate to="/moto" />;
+          return <Redirect to="/moto" />;
         } else if (redirectDn === 2) {
           return <PrevUrl />;
         }
@@ -139,7 +139,7 @@ function MotoProtectedRoute({
   if (pathName === 'companyDetails') {
     const redirectDComp = redirectBack(choosePlansSelector);
     if (redirectDComp === 1) {
-      return <Navigate to="/moto" />;
+      return <Redirect to="/moto" />;
     } else if (redirectDComp === 2) {
       return <PrevUrl />;
     }
@@ -147,7 +147,7 @@ function MotoProtectedRoute({
   if (pathName === 'paymentDetails') {
     const redirectDPay = redirectBack(companyDetailsSelector);
     if (redirectDPay === 1) {
-      return <Navigate to="/moto" />;
+      return <Redirect to="/moto" />;
     } else if (redirectDPay === 2) {
       return <PrevUrl />;
     }
@@ -156,17 +156,18 @@ function MotoProtectedRoute({
   if (pathName === 'orderConfirmation') {
     const redirectDOrder = redirectBack(confirmationState);
     if (redirectDOrder === 1) {
-      return <Navigate to="/moto" />;
+      return <Redirect to="/moto" />;
     } else if (redirectDOrder === 2) {
       return <PrevUrl />;
     }
   }
   return (
     <Route
+      exact={exact}
       path={path}
-      Component={(props) =>
+      render={(props) =>
         confirmationState.isRegistered ? (
-          <Navigate to={isRedirect} />
+          <Redirect to={isRedirect} />
         ) : (
           <Component {...props} />
         )

@@ -1,6 +1,6 @@
 import React from 'react';
 import loadable from '@loadable/component';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
 import PrivateRoute from './components/PrivateRoute';
 import MotoProtectedRoute from './components/MotoProtectedRoute';
@@ -9,7 +9,7 @@ import { NotFound } from './pages/Errors/NotFound';
 
 export default function ProtectedRouter() {
   return (
-    <Routes>
+    <Switch>
       <ProtectedRoute
         exact
         path="/"
@@ -24,11 +24,6 @@ export default function ProtectedRouter() {
         exact
         path="/questionnaire"
         component={loadable(() => import('./pages/Questionnaire'))}
-      />
-      <ProtectedRoute
-        path="/SSIPQuestion"
-        exact
-        component={loadable(() => import('./pages/SsipRegistration'))}
       />
       <ProtectedRoute
         path="/referral"
@@ -79,7 +74,7 @@ export default function ProtectedRouter() {
       />
       <Route
         path="/orderConfirmation"
-        Component={loadable(() => import('./pages/OrderConfirmation'))}
+        component={loadable(() => import('./pages/OrderConfirmation'))}
       />
       <PrivateRoute
         path="/registrationComplete"
@@ -87,11 +82,7 @@ export default function ProtectedRouter() {
       />
       <Route
         path="/status"
-        Component={loadable(() => import('./pages/Status'))}
-      />
-      <Route
-        path="/termsofservice"
-        Component={loadable(() => import('./pages/TermsAndConditions'))}
+        component={loadable(() => import('./pages/Status'))}
       />
       <MotoProtectedRoute
         exact
@@ -157,7 +148,7 @@ export default function ProtectedRouter() {
       />
       <Route
         path="/moto/orderConfirmation"
-        Component={loadable(() => import('./pages/MotoOrderConfirmation'))}
+        component={loadable(() => import('./pages/MotoOrderConfirmation'))}
       />
       <MotoPrivateRoute
         path="/moto/registrationComplete"
@@ -166,6 +157,6 @@ export default function ProtectedRouter() {
       <Route>
         <NotFound />
       </Route>
-    </Routes>
+    </Switch>
   );
 }

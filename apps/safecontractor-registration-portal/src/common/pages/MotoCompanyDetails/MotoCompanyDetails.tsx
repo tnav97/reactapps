@@ -17,7 +17,9 @@ import {
   Text,
 } from '@alcumus/components';
 import clsx from 'clsx';
+import Stepper from '../../components/Stepper';
 import MotoMobileFooterSection from '../../components/MotoMobileFooterSection';
+
 import {
   CountryCode,
   CountryDataSets,
@@ -33,7 +35,6 @@ import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { postcodeValidator } from 'postcode-validator';
 import { Address, CompanyDetails } from '../../types';
 import Autocomplete from '@mui/material/Autocomplete';
-import Stepper from '../../components/Stepper';
 
 interface FormErrors {
   name: boolean;

@@ -4,11 +4,18 @@ import {
   EnterCreateAccount,
   Package,
   Pricing,
-} from '../../cypress/functions/registerFunctions.cy';
+} from '../fixtures/functions/registerFunctions.cy';
 
 describe('referral codes', () => {
   EnterCreateAccount();
   it('Enter referral code', () => {
+    cy.intercept(
+      'GET',
+      'https://devapi.safecontractor.net/registration_transformed/client-referral?code=JS4329-572743-47',
+      {
+        statusCode: 200,
+      }
+    ).as('req');
     cy.fixture('referralResponse.json').then((referral) => {
       cy.get('[data-testid=startQuestions]').click();
       cy.get("[data-testid='referralYes']").click();
@@ -18,8 +25,6 @@ describe('referral codes', () => {
       cy.get('[data-testid=fiftyOneEmployee]').click();
       cy.get('[data-testid=companyType]').click();
       cy.get('[data-testid=limitedCompany]').click();
-      cy.get('[data-testid=SSIPQuestion]').click();
-      cy.get('[data-testid=ssipNo]').click();
       cy.get('[data-testid=subsidiaryBusiness]').click();
       cy.get('[data-testid=subsidiaryNo]').click();
       cy.get('[data-testid=responseTime]').click();

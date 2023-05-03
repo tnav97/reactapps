@@ -7,13 +7,13 @@ import FooterSection from '../../components/FooterSection';
 import MobileFooterSection from '../../components/MobileFooterSection';
 import clsx from 'clsx';
 import { responseTime } from '../../constants';
+import Stepper from '../../components/Stepper';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import ReadMore from '../../components/ReadMore';
 import { useHistory } from 'react-router-dom';
-import ProgressBar from '../../components/ProgressBar';
 
-const PROGRESS = 54;
+const STEPPER_DOTS = 2;
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -79,7 +79,6 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.up('sm')]: {
       width: '200px',
-      marginTop: '10px',
     },
     borderRadius: '8px',
     borderWidth: '2px',
@@ -228,13 +227,6 @@ export default function ResponseTime() {
           selectedValue: selectedValue,
         },
       });
-      dispatch({
-        type: 'choosePlan',
-        payload: {
-          selected: undefined,
-          selectedValue: undefined,
-        },
-      });
     }
   }, [selected, selectedValue]);
 
@@ -259,9 +251,9 @@ export default function ResponseTime() {
   return (
     <Page className={classes.cssPage}>
       <Grid item xs={12} className={classes.scrollablediv}>
-        <AboutSection progress={PROGRESS} />
+        <AboutSection count={STEPPER_DOTS} />
         <Grid className={classes.stepper}>
-          <ProgressBar progress={PROGRESS} />
+          <Stepper count={STEPPER_DOTS}></Stepper>
         </Grid>
         <Typography className={classes.title} variant="h1" component="h1">
           Once your Health & Safety Assessment has been submitted, how quickly

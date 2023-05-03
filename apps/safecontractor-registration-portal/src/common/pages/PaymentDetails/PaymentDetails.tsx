@@ -10,11 +10,7 @@ import { useSelector } from 'react-redux/es/hooks/useSelector';
 import FooterSection from '../../components/FooterSection';
 import { CompanyDetails, RegisterRequest, Subsidiaries } from '../../types';
 import {
-  allowedListCharity,
-  CardSelected,
   DefaultBrand,
-  DefaultCharityNumber,
-  DefaultCharityYear,
   DefaultPaymentCard,
   DefaultSourcePortal,
   PaymentAccount,
@@ -29,10 +25,9 @@ import {
 import { useHistory } from 'react-router-dom';
 import MobileFooterSection from '../../components/MobileFooterSection';
 import { REFERENCE } from '../../components/constants';
+import Stepper from '../../components/Stepper';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import serialize from 'serialize-javascript';
-import ProgressBar from '../../components/ProgressBar';
-
 interface PaymentDetailsPageProps {
   register: Function;
   updateRegistrationPayment: Function;
@@ -40,7 +35,7 @@ interface PaymentDetailsPageProps {
   error?: string;
   messageFromApi?: string;
 }
-const PROGRESS = 90;
+const STEPPER_DOTS = 5;
 const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: StyleVariables.fonts.weight.semiBold,
@@ -277,11 +272,17 @@ const useStyles = makeStyles((theme) => ({
 export default function PaymentDetailsPage(
   paymentDetailsPageProps: PaymentDetailsPageProps
 ) {
+  const [nextText, setnextText] = useState('Complete registration & pay now');
+  const [nextPage, setnextPage] = useState('/orderConfirmation');
+  const [selected, setSelected] = useState(paymentOptions.CARD);
+  const [isChecked, setIsChecked] = useState(true);
   const [loading, setLoading] = React.useState(false);
   const createAccountValue = useSelector((state: any) => state.createAccount);
   const referralValue = useSelector((state: any) => state.referral);
   const [registerRequest, setRegisterRequest] = useState<RegisterRequest>();
   const [errorMessage, setErrorMessage] = React.useState<string[]>([]);
+  const [sendInviteWhenSaving, setSendInviteWhenSaving] = useState(false);
+  const [sendInviteWhenSaving1, setSendInviteWhenSaving1] = useState(false);
   const dispatch = useDispatch();
   const employeeCardValue = useSelector((state: any) => state.employee);
   const companyTypeValue = useSelector((state: any) => state.companyType);
@@ -292,20 +293,6 @@ export default function PaymentDetailsPage(
   const needSupportSelector = useSelector((state: any) => state.needSupport);
   const subsidiaryListSelector = useSelector((state: any) => state.subsidiary);
   const basketSelector = useSelector((state: any) => state.basket);
-  const [isChecked, setIsChecked] = useState(
-    registerPaymentSelector.paymentSelected ?? true
-  );
-  const [checkBoxMemberShip, setCheckBoxMemberShip] = useState(
-    registerPaymentSelector?.membershipDiscount ?? false
-  );
-  const [checkBoxTermsCondition, setCheckBoxTermsCondition] = useState(
-    registerPaymentSelector?.termsCondition ?? false
-  );
-  const [nextText, setnextText] = useState('Complete registration & pay now');
-  const [nextPage, setnextPage] = useState('/orderConfirmation');
-  const [selected, setSelected] = useState(
-    registerPaymentSelector.PaymentCard ?? paymentOptions.CARD
-  );
   const [basketSelected, setBasketSelected] = useState(undefined);
 
   const [windowDimenion, detectHW] = useState({
@@ -320,28 +307,6 @@ export default function PaymentDetailsPage(
     });
   };
 
-  const handleDispatch = (e) => {
-    dispatch({
-      type: 'paymentData',
-      payload: {
-        paymentSelected: isChecked,
-        membershipDiscount: e.target.checked,
-        termsCondition: checkBoxTermsCondition,
-      },
-    });
-  };
-
-  const handleDispatchTermsCondition = (e) => {
-    dispatch({
-      type: 'paymentData',
-      payload: {
-        paymentSelected: isChecked,
-        membershipDiscount: checkBoxMemberShip,
-        termsCondition: e.target.checked,
-      },
-    });
-  };
-
   useEffect(() => {
     window.addEventListener('resize', detectSize);
     return () => {
@@ -352,7 +317,7 @@ export default function PaymentDetailsPage(
   const FooterProps = {
     footerSectionProps: {
       from: 'companyDetails',
-      impaired: checkBoxTermsCondition,
+      impaired: sendInviteWhenSaving1,
       text: nextText,
       mobileText: nextText,
       prevText: 'Previous',
@@ -376,10 +341,7 @@ export default function PaymentDetailsPage(
     const responseTime = responseTimeSelector.selectedValue;
     const requireAssistance = needSupportSelector.selectedValue;
     const subsidiaryList = subsidiaryListSelector.companyList;
-    const subsidiaries: Subsidiaries[] =
-      subsidiaryListSelector.selected === CardSelected.Yes
-        ? subsidiaryList
-        : [];
+    const subsidiaries: Subsidiaries[] = subsidiaryList ?? [];
     const noOfSubsidiaries = subsidiaries.length;
     const companyDetailsValue = companyDetailsSelector.companyDetails;
 
@@ -387,15 +349,9 @@ export default function PaymentDetailsPage(
       const companyDetails: CompanyDetails = JSON.parse(companyDetailsValue);
       if (companyDetails) {
         setRegisterRequest({
-          scProductVersion:
-            referralValue.ReferralCode === CardSelected.Yes
-              ? scProductVersion
-              : '',
+          scProductVersion: scProductVersion ?? '',
           referral: {
-            referralCode:
-              referralValue.ReferralCode === CardSelected.Yes
-                ? referralCode
-                : '',
+            referralCode: referralCode ?? '',
           },
           company: {
             ...companyDetails,
@@ -409,18 +365,15 @@ export default function PaymentDetailsPage(
             },
             contactPerson: {
               ...companyDetails.contactPerson,
-              firstName:
-                referralValue.ReferralCode === CardSelected.Yes
-                  ? companyDetails?.contactPerson?.firstName
-                  : createAccountValue.firstName,
-              surname:
-                referralValue.ReferralCode === CardSelected.Yes
-                  ? companyDetails?.contactPerson?.surname
-                  : createAccountValue.lastName,
-              emailAddress:
-                referralValue.ReferralCode === CardSelected.Yes
-                  ? companyDetails?.contactPerson?.emailAddress
-                  : createAccountValue.email,
+              firstName: referralCode
+                ? companyDetails?.contactPerson?.firstName
+                : createAccountValue.firstName,
+              surname: referralCode
+                ? companyDetails?.contactPerson?.surname
+                : createAccountValue.lastName,
+              emailAddress: referralCode
+                ? companyDetails?.contactPerson?.emailAddress
+                : createAccountValue.email,
             },
             noOfEmployees: noOfEmployees ? parseInt(noOfEmployees) : 0,
             organisationType: organisationType ?? '',
@@ -428,7 +381,7 @@ export default function PaymentDetailsPage(
             noOfSubsidiaries: noOfSubsidiaries,
             subsidiaries: subsidiaries,
             password: createAccountValue.password ?? '',
-            preventExternalMarketing: checkBoxMemberShip,
+            preventExternalMarketing: sendInviteWhenSaving,
           },
           productSelection: {
             brands: [
@@ -437,7 +390,7 @@ export default function PaymentDetailsPage(
                 memberships: choosePlan ? [choosePlan] : [],
                 requireAssistance: !!requireAssistance,
                 responseTime: responseTime ?? responseTimeSelected.TWO_DAYS,
-                discountCodes: basketSelector.basketApiSuccess
+                discountCodes: basketSelector.discountCode
                   ? [basketSelector.discountCode]
                   : [],
                 total: basketSelected ?? 0,
@@ -446,29 +399,8 @@ export default function PaymentDetailsPage(
             total: basketSelected ?? 0,
           },
         });
-
-        if (ssipValueSelector.selected === CardSelected.Yes) {
-          setRegisterRequest((registerRequest) => ({
-            ...registerRequest,
-            company: {
-              ...registerRequest?.company,
-              ssipInfo: JSON.parse(ssipValueSelector.ssipRegistrationForm),
-            },
-          }));
-        }
-        if (allowedListCharity.includes(companyTypeValue.selectedValue)) {
-          setRegisterRequest((registerRequest) => ({
-            ...registerRequest,
-            company: {
-              ...registerRequest?.company,
-              charityYear: companyDetails?.charityYear ?? DefaultCharityYear,
-              charityNumber: !companyDetails?.charityNumber
-                ? DefaultCharityNumber
-                : companyDetails?.charityNumber,
-            },
-          }));
-        }
       }
+
       dispatch({
         type: 'FetchDataCompleted',
         payload: {
@@ -476,7 +408,7 @@ export default function PaymentDetailsPage(
         },
       });
     }
-  }, [selected, basketSelected, checkBoxMemberShip]);
+  }, [selected, basketSelected, sendInviteWhenSaving]);
 
   const history = useHistory();
   const registration = () => {
@@ -595,6 +527,7 @@ export default function PaymentDetailsPage(
 
   const choosePaymentSelection = (value) => {
     let selectedValue;
+
     if (value === paymentOptions.CARD) {
       setnextText('Complete registration & pay now');
       setnextPage('/orderConfirmation');
@@ -609,14 +542,6 @@ export default function PaymentDetailsPage(
       payload: {
         PaymentCard: serialize(value),
         paymentcard_Value: selectedValue,
-      },
-    });
-    dispatch({
-      type: 'paymentData',
-      payload: {
-        paymentSelected: !isChecked,
-        membershipDiscount: checkBoxMemberShip,
-        termsCondition: checkBoxTermsCondition,
       },
     });
     setIsChecked(!isChecked);
@@ -644,12 +569,11 @@ export default function PaymentDetailsPage(
         <>
           <Grid item xs={12} className={classes.scrollablediv}>
             <header>
-              <AboutSection progress={PROGRESS} />
+              <AboutSection count={STEPPER_DOTS} />
             </header>
             <Grid className={classes.stepper}>
-              <ProgressBar progress={PROGRESS} />
+              <Stepper count={STEPPER_DOTS}></Stepper>
             </Grid>
-
             <Typography className={classes.title} variant="h1" component="h1">
               Payment details
             </Typography>
@@ -820,13 +744,12 @@ export default function PaymentDetailsPage(
                       <input
                         type="checkbox"
                         className={clsx(classes.check, classes.blueCheck)}
-                        checked={checkBoxMemberShip}
-                        title="Click here for SafeContractor Member benefits"
+                        checked={sendInviteWhenSaving}
+                        title="Click here for SafeContractor member discounts"
                         required={true}
-                        onChange={(e) => {
-                          setCheckBoxMemberShip(e.target.checked);
-                          handleDispatch(e);
-                        }}
+                        onChange={(e) =>
+                          setSendInviteWhenSaving(e.target.checked)
+                        }
                         // @ts-ignore
                         data-testid="SafeContractorMemberDiscounts"
                       />
@@ -840,7 +763,7 @@ export default function PaymentDetailsPage(
                           className={classes.checkboxTitle}
                           aria-hidden="false"
                         >
-                          SafeContractor Member benefits
+                          SafeContractor member discounts
                         </Typography>
                         <Typography
                           className={classes.helpertext}
@@ -864,13 +787,12 @@ export default function PaymentDetailsPage(
                       <input
                         type="checkbox"
                         className={clsx(classes.check, classes.blueCheck)}
-                        checked={checkBoxTermsCondition}
-                        title="Click here for Terms and Conditions"
+                        checked={sendInviteWhenSaving1}
+                        title="Click here for SafeContractor member discounts"
                         required={true}
-                        onChange={(e) => {
-                          setCheckBoxTermsCondition(e.target.checked);
-                          handleDispatchTermsCondition(e);
-                        }}
+                        onChange={(e) =>
+                          setSendInviteWhenSaving1(e.target.checked)
+                        }
                         // @ts-ignore
                         data-testid="agreeTerms"
                       />

@@ -6,13 +6,7 @@ import { Image, Page, StyleVariables, Button } from '@alcumus/components';
 import RightOrderComponent from '../../components/RightOrderComponentSection';
 import AboutSection from '../../components/AboutSection';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
-import {
-  DevRedirectionUrl,
-  liveChatContainer,
-  ProdRedirectionUrl,
-  QaRedirectionUrl,
-  StagingRedirectionUrl,
-} from '../../constants';
+import { liveChatContainer } from '../../constants';
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -149,27 +143,11 @@ const useStyles = makeStyles((theme) => ({
 export default function RegistrationCompletePage() {
   const [membershipId, setMembershipId] = useState('');
   const paymentDetailsSelector = useSelector((state: any) => state.payment);
-  const [redirectionLink, setRedirectionLink] = useState('');
   useEffect(() => {
     if (paymentDetailsSelector.membershipId !== undefined) {
       setMembershipId(paymentDetailsSelector.membershipId);
     }
   }, [paymentDetailsSelector]);
-  useEffect(() => {
-    const Host = window.location.host;
-    if (Host.includes('localhost')) {
-      setRedirectionLink(DevRedirectionUrl);
-    } else if (Host.includes('qa')) {
-      setRedirectionLink(QaRedirectionUrl);
-    } else if (Host.includes('staging')) {
-      setRedirectionLink(StagingRedirectionUrl);
-    } else if (Host.includes('dev')) {
-      setRedirectionLink(DevRedirectionUrl);
-    } else {
-      setRedirectionLink(ProdRedirectionUrl);
-    }
-  }, []);
-
   const classes = useStyles();
   return (
     <Page className={classes.cssPage}>
@@ -318,7 +296,7 @@ export default function RegistrationCompletePage() {
                 </Grid>
                 <Grid item lg={12} className={classes.margin}>
                   <a
-                    href={redirectionLink}
+                    href="https://apps.alcumusgroup.net/AccreditationWeb/"
                     target="_blank"
                     rel="noreferrer"
                     className={classes.logoLink}

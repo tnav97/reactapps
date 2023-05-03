@@ -38,7 +38,6 @@
       - network:
           ingress: {{ .Values.common.networkIngress }}
           host: {{ index .Values.common.hosts $releaseName }} # Resolve the hostname from .Values.common.hosts[ReleaseName]
-          secretName: {{ .Values.common.tlsSecretName }}
       - resources: {{ .Values.resources | toRawJson }} 
       - scaling: {{ .Values.scaling | toRawJson }}
       # Load variables file that defines all environment variables to load
@@ -109,15 +108,9 @@ environments:
   alcumus-portal-qa:
     values:
       - ./environments/alcumus-portal-qa.yaml
-  safecontractor-registration-portal-staging:
-    values:
-      - ./environments/safecontractor-registration-portal-staging.yaml
-  safecontractor-registration-portal-prod:
-    values:
-      - ./environments/safecontractor-registration-portal-prod.yaml
       
 helmDefaults:
-  createNamespace: true
+  createNamespace: false
 
 releases:
   {{- range .Values.deployReleases }} # Iterate over all deployReleases defined in the environment file, and create a release definition

@@ -8,6 +8,7 @@ import AboutSection from '../../components/AboutSection';
 import Card from '../../components/PlanCards';
 import clsx from 'clsx';
 import { Memberships, PlanDetail } from '../../../server/models/choosePlan';
+import Stepper from '../../components/Stepper';
 import {
   CardSelected,
   ChoosePlanList,
@@ -17,7 +18,6 @@ import {
 import { Subsidiaries } from '../../types';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
-import ProgressBar from '../../components/ProgressBar';
 
 interface ChoosePlanProps {
   choosePlan: Function;
@@ -25,7 +25,7 @@ interface ChoosePlanProps {
   error?: string;
 }
 
-const PROGRESS = 72;
+const STEPPER_DOTS = 3;
 const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: StyleVariables.fonts.weight.semiBold,
@@ -114,9 +114,9 @@ export default function ChoosePlanPage(choosePlanProps: ChoosePlanProps) {
   const [previousPage, setPreviousPage] = React.useState('needSupport');
   const scProductVersion = referralValue.scProductVersion;
   const subsidiaryList = subsidiaryListSelector.companyList;
-  const subsidiaries: Subsidiaries[] =
-    subsidiaryListSelector.selected === CardSelected.Yes ? subsidiaryList : [];
+  const subsidiaries: Subsidiaries[] = subsidiaryList ?? [];
   const noOfSubsidiaries = subsidiaries.length;
+
   useEffect(() => {
     if (needSupportSelector.selected === CardSelected.Yes) {
       const responseTimeValue = responseTimeSelector.selected;
@@ -221,17 +221,17 @@ export default function ChoosePlanPage(choosePlanProps: ChoosePlanProps) {
       ) : (
         <Grid item xs={12} className={classes.scrollablediv}>
           <header>
-            <AboutSection progress={PROGRESS} />
+            <AboutSection count={STEPPER_DOTS} />
           </header>
           <Grid className={classes.stepper}>
-            <ProgressBar progress={PROGRESS} />
+            <Stepper count={STEPPER_DOTS}></Stepper>
           </Grid>
           <Typography
             className={clsx(classes.title)}
             variant="h1"
             component="h1"
           >
-            Select pricing Plan
+            Select pricing plan
           </Typography>
           {errorMessage ? (
             <Typography
@@ -246,7 +246,7 @@ export default function ChoosePlanPage(choosePlanProps: ChoosePlanProps) {
               className={clsx(classes.subtitle)}
               data-testid={`${selectedPlanTextWithoutSpace}`}
             >
-              Based on your responses, it looks like the best Plan for you is
+              Based on your responses, it looks like the best plan for you is
               the <b>{selectedPlanText}</b>.
             </Typography>
           )}

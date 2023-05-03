@@ -1,12 +1,12 @@
 /// <reference types="cypress" />
 
-import { EnterCreateAccount } from '../../cypress/functions/registerFunctions.cy';
+import { EnterCreateAccount } from '../fixtures/functions/registerFunctions.cy';
 import {
   GoToEmployee,
   GoToPaymentDetails,
   checkPrices,
   GoToPaymentWithSubsidiary,
-} from '../../cypress/functions/pricingFunction.cy';
+} from '../fixtures/functions/pricingFunction.cy';
 context('pricing', () => {
   describe('Verify pricing for 5 employees', () => {
     EnterCreateAccount();

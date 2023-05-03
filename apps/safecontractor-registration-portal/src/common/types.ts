@@ -25,17 +25,6 @@ export interface BasketRequest {
 export interface ReferralCode {
   referralCode?: string;
 }
-export interface SSIPRegistrationDetails {
-  ssipClientName?: string;
-  ssipClientId?: number;
-  accreditationDate?: string;
-  expirationDate?: string;
-}
-
-export interface SSIPData {
-  id: number;
-  name: string;
-}
 
 export interface CompanyDetails {
   name?: string;
@@ -51,7 +40,6 @@ export interface CompanyDetails {
   registrationYear?: number;
   charityNumber?: string;
   charityYear?: number;
-  ssipInfo?: string;
   website?: string;
   password?: string;
   preventExternalMarketing?: boolean;

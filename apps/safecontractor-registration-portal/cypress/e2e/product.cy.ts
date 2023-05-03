@@ -3,59 +3,46 @@
 import {
   EnterCreateAccount,
   DefaultQuestionnaireValues,
-} from '../../cypress/functions/registerFunctions.cy';
-
-import { GoBackToResponseTime } from '../../cypress/functions/pricingFunction.cy';
+} from '../fixtures/functions/registerFunctions.cy';
 
 EnterCreateAccount();
 DefaultQuestionnaireValues();
-describe('Verify Standard package recommandation', () => {
+describe('Verify package recommandation', () => {
   it('Verify Standard', () => {
     cy.get('[data-testid=twentyWorkingDays]').click();
     cy.get('[data-testid=needSupport]').click();
     cy.get('[data-testid=doYouRequireSupportNo]').click();
-    cy.get('[data-testid=choosePlan]').click();
-    cy.contains(
-      'Based on your responses, it looks like the best Plan for you is the Standard Plan.'
-    );
+    cy.get('[data-testid="choosePlan"]').click();
+    cy.get('[data-testid=Standardplan]').should('contain', 'Standard plan');
   });
-});
 
-describe('Verify Express package recommandation', () => {
-  GoBackToResponseTime();
   it('Verify Express', () => {
+    cy.get('[data-testid=needSupport]').click();
+    cy.get('[data-testid=responseTime]').click();
     cy.get('[data-testid=fiveWorkingDays]').click();
     cy.get('[data-testid=needSupport]').click();
     cy.get('[data-testid=doYouRequireSupportNo]').click();
-    cy.get('[data-testid=choosePlan]').click();
-    cy.contains(
-      'Based on your responses, it looks like the best Plan for you is the Express Plan.'
-    );
+    cy.get('[data-testid="choosePlan"]').click();
+    cy.get('[data-testid=Expressplan]').should('contain', 'Express plan');
   });
-});
 
-describe('Verify Assisted package recommandation', () => {
-  GoBackToResponseTime();
   it('Verify Assisted', () => {
+    cy.get('[data-testid=needSupport]').click();
+    cy.get('[data-testid=responseTime]').click();
     cy.get('[data-testid=twentyWorkingDays]').click();
     cy.get('[data-testid=needSupport]').click();
     cy.get('[data-testid=doYouRequireSupportYes]').click();
-    cy.get('[data-testid=choosePlan]').click();
-    cy.contains(
-      'Based on your responses, it looks like the best Plan for you is the Assisted Plan.'
-    );
+    cy.get('[data-testid="choosePlan"]').click();
+    cy.get('[data-testid=Assistedplan]').should('contain', 'Assisted plan');
   });
-});
 
-describe('Verify Premier package recommandation', () => {
-  GoBackToResponseTime();
   it('Verify Premier', () => {
+    cy.get('[data-testid=needSupport]').click();
+    cy.get('[data-testid=responseTime]').click();
     cy.get('[data-testid=twoworkingDays]').click();
     cy.get('[data-testid=needSupport]').click();
     cy.get('[data-testid=doYouRequireSupportYes]').click();
-    cy.get('[data-testid=choosePlan]').click();
-    cy.contains(
-      'Based on your responses, it looks like the best Plan for you is the Premier Plan.'
-    );
+    cy.get('[data-testid="choosePlan"]').click();
+    cy.get('[data-testid=Premierplan]').should('contain', 'Premier plan');
   });
 });

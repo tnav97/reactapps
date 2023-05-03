@@ -13,7 +13,10 @@ import { useSelector } from 'react-redux/es/hooks/useSelector';
 import MobileFooterSection from '../../components/MobileFooterSection';
 import RightHomeSection from '../../components/RightHomeSection';
 import { REFERENCE } from '../../components/constants';
+import Stepper from '../../components/Stepper';
 import { liveChatContainer, mobileLiveChatContainerBox } from '../../constants';
+
+const STEPPER_DOTS = 1;
 
 const useStyles = makeStyles((theme) => ({
   image: {
@@ -76,18 +79,12 @@ const useStyles = makeStyles((theme) => ({
     height: '40px',
     marginTop: '30px',
     borderRadius: '8px',
-    [theme.breakpoints.down('xs')]: {
-      marginTop: '10px',
-    },
   },
   email: {
     height: '40px',
     marginTop: '30px',
     textAlign: 'left',
     borderRadius: '8px',
-    [theme.breakpoints.down('xs')]: {
-      marginTop: '23px',
-    },
   },
   userName: {
     height: '40px',
@@ -311,7 +308,7 @@ export default function CreateAccountPage() {
     },
   };
   const passwordValidate = () => {
-    const passwordMatch = password?.toLowerCase();
+    const passwordMatch = password.toLowerCase();
     const options = {
       minLength: 7,
       minLowercase: 1,
@@ -320,8 +317,8 @@ export default function CreateAccountPage() {
       minSymbols: 1,
     };
     if (
-      passwordMatch.match(firstName?.toLowerCase()) ||
-      passwordMatch.match(lastName?.toLowerCase())
+      passwordMatch.match(firstName.toLowerCase()) ||
+      passwordMatch.match(lastName.toLowerCase())
     ) {
       setpasswordMessage('Password should not contain firstname or lastname');
     } else if (
@@ -329,7 +326,7 @@ export default function CreateAccountPage() {
       !validator.isStrongPassword(password, options)
     ) {
       setpasswordMessage(
-        'Password must be over 7 characters and contain all of the following: upper case, lower case, numbers and special characters'
+        'Password must be over 7 characters and contain at least 3 of the following: upper case, lower case, numbers and special characters'
       );
       setPasswordError(true);
       return false;
@@ -365,8 +362,11 @@ export default function CreateAccountPage() {
       >
         <Grid item xs={12} sm={12} md={8} lg={6}>
           <header>
-            <AboutSection />
+            <AboutSection count={STEPPER_DOTS} />
           </header>
+          <Grid className={classes.stepper}>
+            <Stepper count={STEPPER_DOTS}></Stepper>
+          </Grid>
           <Grid item md={12} className={classes.heightAlignment}>
             <Typography className={classes.title} variant="h1" component="h1">
               Create your account

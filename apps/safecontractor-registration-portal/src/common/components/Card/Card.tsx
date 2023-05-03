@@ -87,6 +87,7 @@ const useStyles = makeStyles((theme) => ({
   boxContainer: {
     justifyContent: 'center',
     marginBottom: '8px',
+
     height: '114px',
     marginTop: '16px',
     [theme.breakpoints.down('sm')]: {

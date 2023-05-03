@@ -3,27 +3,11 @@ import { Image, StyleVariables } from '@alcumus/components';
 import { Grid } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import Typography from '@mui/material/Typography';
-import LinearProgress from '@mui/material/LinearProgress';
+import Stepper from '../Stepper';
 
 interface AboutSection {
   count?: number;
-  progress?: number;
 }
-
-const BorderLinearProgress = withStyles(() => ({
-  root: {
-    height: 6,
-    borderRadius: 8,
-  },
-  colorPrimary: {
-    backgroundColor: StyleVariables.colors.surface.neutral.disabled,
-  },
-  bar: {
-    borderRadius: 0,
-    backgroundColor: StyleVariables.colors.interactive.default,
-  },
-}))(LinearProgress);
-
 const useStyles = makeStyles((theme) => ({
   logoContainer: {
     height: '4.5rem',
@@ -90,19 +74,6 @@ const useStyles = makeStyles((theme) => ({
       paddingRight: '15px',
     },
   },
-  progressContainer: {
-    marginTop: '22px',
-    width: '152px',
-    textAlign: 'center',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-  },
-  textContainer: {
-    marginBottom: '4px',
-    fontSize: StyleVariables.fonts.size.xs,
-    lineHeight: StyleVariables.fonts.lineHeight.xs,
-    fontWeight: StyleVariables.fonts.weight.regular,
-  },
 }));
 
 export default function AboutSection(aboutSectionProps: AboutSection) {
@@ -120,16 +91,8 @@ export default function AboutSection(aboutSectionProps: AboutSection) {
           />
         </Grid>
         <Grid item sm={4} md={4} className={classes.ellipsis}>
-          {typeof aboutSectionProps?.progress === 'number' ? (
-            <Grid className={classes.progressContainer}>
-              <Typography className={classes.textContainer}>
-                {`${aboutSectionProps?.progress}% complete`}
-              </Typography>
-              <BorderLinearProgress
-                variant="determinate"
-                value={aboutSectionProps?.progress}
-              />
-            </Grid>
+          {aboutSectionProps?.count ? (
+            <Stepper count={aboutSectionProps?.count}></Stepper>
           ) : (
             ''
           )}

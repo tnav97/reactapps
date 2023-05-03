@@ -15,13 +15,10 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands';
-// @ts-ignore
-import registerCypressGrep from '@cypress/grep';
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
 Cypress.on('uncaught:exception', () => {
   return false;
 });
-
-registerCypressGrep();

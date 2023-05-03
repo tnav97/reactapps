@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
@@ -8,13 +8,7 @@ import RightOrderComponent from '../../components/RightOrderComponentSection';
 import AboutSection from '../../components/AboutSection';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
-import {
-  DevRedirectionUrl,
-  liveChatContainer,
-  ProdRedirectionUrl,
-  QaRedirectionUrl,
-  StagingRedirectionUrl,
-} from '../../constants';
+import { liveChatContainer } from '../../constants';
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -184,7 +178,6 @@ export default function OrderConfirmationPage() {
   const dispatch = useDispatch();
   const paymentDetailsSelector = useSelector((state: any) => state.payment);
   const cartIdExist = paymentDetailsSelector.cartIdExist;
-  const [redirectionLink, setRedirectionLink] = useState('');
   const history = useHistory();
 
   useEffect(() => {
@@ -202,22 +195,6 @@ export default function OrderConfirmationPage() {
       }
     }
   }, []);
-
-  useEffect(() => {
-    const Host = window.location.host;
-    if (Host.includes('localhost')) {
-      setRedirectionLink(DevRedirectionUrl);
-    } else if (Host.includes('qa')) {
-      setRedirectionLink(QaRedirectionUrl);
-    } else if (Host.includes('staging')) {
-      setRedirectionLink(StagingRedirectionUrl);
-    } else if (Host.includes('dev')) {
-      setRedirectionLink(DevRedirectionUrl);
-    } else {
-      setRedirectionLink(ProdRedirectionUrl);
-    }
-  }, []);
-
   return (
     <Page className={classes.cssPage}>
       <style type="text/css">{liveChatContainer}</style>
@@ -286,7 +263,7 @@ export default function OrderConfirmationPage() {
                 </Grid>
                 <Grid item lg={12} className={classes.assistanceInfo}>
                   <a
-                    href={redirectionLink}
+                    href="https://apps.alcumusgroup.net/AccreditationWeb/"
                     target="_blank"
                     rel="noreferrer"
                     className={classes.logoLink}

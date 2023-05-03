@@ -4,14 +4,13 @@ import {
   EnterCreateAccount,
   Pricing,
   Package,
-  SSIPandSubsidiary,
-} from '../../cypress/functions/registerFunctions.cy';
+} from '../fixtures/functions/registerFunctions.cy';
 
 import {
   VerifyRegistrationFields,
   VerifyCharityFields,
   GotoCompanyType,
-} from '../../cypress/functions/validation.cy';
+} from '../fixtures/functions/validation.cy';
 
 describe('Verify company details additional fields for SOLE_TRADER_OR_PROPRIETOR', () => {
   EnterCreateAccount();
@@ -36,56 +35,62 @@ describe('Verify company details additional fields for LIMITED_COMPANY', () => {
     cy.get('[data-testid=twoHundredEmployee]').click();
     cy.get('[data-testid=companyType]').click();
     cy.get('[data-testid=limitedCompany]').click();
+    cy.get('[data-testid=subsidiaryBusiness]').click();
+    cy.get('[data-testid=subsidiaryNo]').click();
+    cy.get('[data-testid=responseTime]').click();
   });
-  SSIPandSubsidiary();
   Package();
   Pricing();
   VerifyRegistrationFields();
 });
 
 describe('Verify company details additional fields for  LIMITED_LIABILITY_PARTNERSHIP', () => {
-  EnterCreateAccount();
   GotoCompanyType();
   it('Selecting company type as  LIMITED_LIABILITY_PARTNERSHIP', () => {
     cy.get('[data-testid=limitedLiabilityPartnership]').click();
+    cy.get('[data-testid=subsidiaryBusiness]').click();
+    cy.get('[data-testid=subsidiaryNo]').click();
+    cy.get('[data-testid=responseTime]').click();
   });
-  SSIPandSubsidiary();
   Package();
   Pricing();
   VerifyRegistrationFields();
 });
 
 describe('Verify company details additional fields for REGISTERED_SOCIAL_LANDLORD', () => {
-  EnterCreateAccount();
   GotoCompanyType();
   it('Selecting company type as REGISTERED_SOCIAL_LANDLORD', () => {
     cy.get('[data-testid=registeredSocialLandlord]').click();
+    cy.get('[data-testid=subsidiaryBusiness]').click();
+    cy.get('[data-testid=subsidiaryNo]').click();
+    cy.get('[data-testid=responseTime]').click();
   });
-  SSIPandSubsidiary();
   Package();
   Pricing();
   VerifyRegistrationFields();
 });
 
 describe('Verify company details additional fields for PUBLIC_LIMITED_COMPANY', () => {
-  EnterCreateAccount();
   GotoCompanyType();
   it('Selecting company type as PUBLIC_LIMITED_COMPANY', () => {
     cy.get('[data-testid=publicLimitedCompany]').click();
+    cy.get('[data-testid=subsidiaryBusiness]').click();
+    cy.get('[data-testid=subsidiaryNo]').click();
+    cy.get('[data-testid=responseTime]').click();
   });
-  SSIPandSubsidiary();
   Package();
   Pricing();
   VerifyRegistrationFields();
 });
 
 describe('Verify company details additional fields for CHARITY_AND_LIMITED_COMPANY', () => {
-  EnterCreateAccount();
   GotoCompanyType();
   it('Selecting company type as CHARITY_AND_LIMITED_COMPANY', () => {
     cy.get('[data-testid=charityandLimitedCompany]').click();
+    cy.get('[data-testid=subsidiaryBusiness]').click();
+    cy.get('[data-testid=subsidiaryNo]').click();
+    cy.get('[data-testid=responseTime]').click();
   });
-  SSIPandSubsidiary();
   Package();
   Pricing();
   VerifyCharityFields();
@@ -93,48 +98,52 @@ describe('Verify company details additional fields for CHARITY_AND_LIMITED_COMPA
 });
 
 describe('Verify company details additional fields for CHARITY_OR_VOLUNTARY_SECTOR', () => {
-  EnterCreateAccount();
   GotoCompanyType();
   it('Selecting company type as CHARITY_OR_VOLUNTARY_SECTOR', () => {
     cy.get('[data-testid=charityorVoluntarySector]').click();
+    cy.get('[data-testid=subsidiaryBusiness]').click();
+    cy.get('[data-testid=subsidiaryNo]').click();
+    cy.get('[data-testid=responseTime]').click();
   });
-  SSIPandSubsidiary();
   Package();
   Pricing();
   VerifyCharityFields();
 });
 
 describe('Verify company details additional fields for LOCAL_AUTHORITY_COLLEGE', () => {
-  EnterCreateAccount();
   GotoCompanyType();
   it('Selecting company type as LOCAL_AUTHORITY_COLLEGE', () => {
     cy.get('[data-testid=localAuthorityCollege]').click();
+    cy.get('[data-testid=subsidiaryBusiness]').click();
+    cy.get('[data-testid=subsidiaryNo]').click();
+    cy.get('[data-testid=responseTime]').click();
   });
-  SSIPandSubsidiary();
   Package();
   Pricing();
   VerifyCharityFields();
 });
 
 describe('Verify company details additional fields for UNIVERSITY', () => {
-  EnterCreateAccount();
   GotoCompanyType();
   it('Selecting company type as UNIVERSITY', () => {
     cy.get('[data-testid=University]').click();
+    cy.get('[data-testid=subsidiaryBusiness]').click();
+    cy.get('[data-testid=subsidiaryNo]').click();
+    cy.get('[data-testid=responseTime]').click();
   });
-  SSIPandSubsidiary();
   Package();
   Pricing();
   VerifyCharityFields();
 });
 
 describe('Verify company details additional fields for COMPANY_LIMITED_BY_GUARANTEE', () => {
-  EnterCreateAccount();
   GotoCompanyType();
   it('Selecting company type as COMPANY_LIMITED_BY_GUARANTEE', () => {
     cy.get('[data-testid=companyLimitedbyGuarantee]').click();
+    cy.get('[data-testid=subsidiaryBusiness]').click();
+    cy.get('[data-testid=subsidiaryNo]').click();
+    cy.get('[data-testid=responseTime]').click();
   });
-  SSIPandSubsidiary();
   Package();
   Pricing();
   VerifyCharityFields();

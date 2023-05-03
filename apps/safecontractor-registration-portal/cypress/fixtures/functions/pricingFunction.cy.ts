@@ -13,19 +13,10 @@ export function GoToEmployee() {
   });
 }
 
-export function GoBackToResponseTime() {
-  it('Go to response time page', () => {
-    cy.get('[data-testid=needSupport]').click();
-    cy.get('[data-testid=responseTime]').click();
-  });
-}
-
 export function GoToPaymentDetails() {
   it('Select Company type and Subsidiary', () => {
     cy.get('[data-testid=companyType]').click();
     cy.get('[data-testid=limitedCompany]').click();
-    cy.get('[data-testid=SSIPQuestion]').click();
-    cy.get('[data-testid=ssipNo]').click();
     cy.get('[data-testid=subsidiaryBusiness]').click();
     cy.get('[data-testid=subsidiaryNo]').click();
     cy.get('[data-testid=responseTime]').click();
@@ -40,8 +31,6 @@ export function GoToPaymentWithSubsidiary() {
     cy.fixture('defaultValues.json').then((company) => {
       cy.get('[data-testid=companyType]').click();
       cy.get('[data-testid=limitedCompany]').click();
-      cy.get('[data-testid=SSIPQuestion]').click();
-      cy.get('[data-testid=ssipNo]').click();
       cy.get('[data-testid=subsidiaryBusiness]').click();
       cy.get('[data-testid=subsidiaryYes]').click();
       cy.get('[data-testid=companyName0]')

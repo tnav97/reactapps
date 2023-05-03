@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate, Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import { IReduxRootState } from '../../../client/redux/reducers';
 
 interface PrivateRoute {
@@ -21,11 +21,11 @@ function PrivateRoute({
     <Route
       path={path}
       {...restOfProps}
-      Component={(restOfProps) =>
+      render={(restOfProps) =>
         confirmationState.isRegistered ? (
           <Component {...restOfProps} />
         ) : (
-          <Navigate to="/" />
+          <Redirect to="/" />
         )
       }
     />

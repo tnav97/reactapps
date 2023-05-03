@@ -10,6 +10,7 @@ import webpack from 'webpack';
 import crypto from 'crypto';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import 'fetch-everywhere';
 import { Types, Utilities } from '@alcumus/core';
 import getRedisClient, { getRedisStore } from './lib/clients/redis';
 import { AppOptions, ResponseError, Translations } from './types';
@@ -63,6 +64,9 @@ export default function configureApp(options: AppOptions) {
     scriptSrc: [
       (req: any, res: any) => `'nonce-${res.locals.scriptNonce}'`,
       "'self'",
+      "'unsafe-inline'",
+      "'unsafe-eval'",
+      "'strict-dynamic'",
       'http:',
       'https:',
     ],
@@ -167,7 +171,7 @@ export default function configureApp(options: AppOptions) {
       crossOriginEmbedderPolicy: false,
       contentSecurityPolicy: {
         useDefaults: false,
-        // @ts-ignore
+        // @ts-expect-error the type match is causing issue as we are trying to override express type definitions
         directives: cspDirectivesOption,
       },
     })

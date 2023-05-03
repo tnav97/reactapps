@@ -27,22 +27,18 @@ export const Actions = {
     FetchDataCompleted: 'FetchDataCompleted',
     FetchDataFailed: 'FetchDataFailed',
   },
-  ssipData: {
-    FetchDataPending: 'FetchDataPending',
-    FetchDataCompleted: 'FetchDataCompleted',
-    FetchDataFailed: 'FetchDataFailed',
-  },
   ChoosePlan: {
     FetchDataPending: 'FetchDataPending',
     FetchDataCompleted: 'FetchDataCompleted',
     FetchDataFailed: 'FetchDataFailed',
   },
+
   PaymentDetails: {
     paymentDetails: 'paymentDetails',
     registerDetails: 'registerDetails',
     FetchDataCompleted: 'FetchDataCompleted',
-    paymentData: 'paymentData',
   },
+
   Registration: {
     FetchDataPending: 'FetchDataPending',
     FetchDataCompleted: 'FetchDataCompleted',
@@ -91,10 +87,6 @@ export const Actions = {
   },
   Subsidiary: {
     subsidiary: 'subsidiary',
-  },
-  SSIP: {
-    ssip: 'SSIPQuestion',
-    ssipInfo: 'ssipInfo',
   },
   Referral: {
     referral: 'referral',
@@ -203,17 +195,6 @@ export const validateStatusHealth = () =>
       Actions.StatusHealth.FetchDataPending,
       Actions.StatusHealth.FetchDataCompleted,
       Actions.StatusHealth.FetchDataFailed,
-    ],
-  });
-
-export const getSsipData = () =>
-  generateRequest({
-    endpoint: '/api/ssipData',
-    method: 'GET',
-    types: [
-      Actions.ssipData.FetchDataPending,
-      Actions.ssipData.FetchDataCompleted,
-      Actions.ssipData.FetchDataFailed,
     ],
   });
 

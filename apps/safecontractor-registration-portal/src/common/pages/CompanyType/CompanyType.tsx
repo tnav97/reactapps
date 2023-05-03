@@ -4,9 +4,9 @@ import makeStyles from '@mui/styles/makeStyles';
 import { Page, StyleVariables } from '@alcumus/components';
 import AboutSection from '../../components/AboutSection';
 import Card from '../../components/Card';
-import ProgressBar from '../../components/ProgressBar';
+import Stepper from '../../components/Stepper';
 
-const PROGRESS = 27;
+const STEPPER_DOTS = 2;
 const useStyles = makeStyles((theme) => ({
   title: {
     color: StyleVariables.colors.text.default,
@@ -125,9 +125,9 @@ export default function CompanyType() {
   return (
     <Page className={classes.cssPage}>
       <Grid item xs={12} className={classes.scrollablediv}>
-        <AboutSection progress={PROGRESS} />
+        <AboutSection count={STEPPER_DOTS} />
         <Grid className={classes.stepper}>
-          <ProgressBar progress={PROGRESS} />
+          <Stepper count={STEPPER_DOTS}></Stepper>
         </Grid>
         <Typography className={classes.title} variant="h1" component="h1">
           What is the type of your organisation?
@@ -135,7 +135,7 @@ export default function CompanyType() {
         <div className={classes.companyTypeCard}>
           <Card
             contents={contents}
-            to="SSIPQuestion"
+            to="subsidiaryBusiness"
             type="list"
             from="employee"
             page="companyType"

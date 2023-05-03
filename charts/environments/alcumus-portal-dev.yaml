@@ -38,8 +38,6 @@ common:
     sypol: https://www.alcumus.com/en-gb/coshh/
     mango: https://www.mangolive.com/
     esg: https://www.alcumus.com/en-ca/environmental-social-governance/
-  
-  tlsSecretName: alcdev-net-tls
 
   env:
     nodeEnv: 'production'

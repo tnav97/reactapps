@@ -50,9 +50,9 @@ export const ChoosePlanList: PlanDetail[] = [
   {
     id: 'PREMIER',
     image: '/icons/premier.png',
-    label: 'Premier Plan',
+    label: 'Premier plan',
     context:
-      'The fastest way to achieve accreditation with expert support from our team',
+      'The fastest and easiest way to achieve accreditation with expert support from our team',
     benefits: 'Dedicated application assistant',
     callInfo: 'Contact within 1 working day',
     task: 'Assessment review within 2 working days',
@@ -61,7 +61,7 @@ export const ChoosePlanList: PlanDetail[] = [
   {
     id: 'EXPRESS',
     image: '/icons/express.png',
-    label: 'Express Plan',
+    label: 'Express plan',
     context:
       'Perfect if you need a quick turnaround and are familiar with the required documentation',
     benefits: 'Induction and application review',
@@ -72,9 +72,9 @@ export const ChoosePlanList: PlanDetail[] = [
   {
     id: 'ASSISTED',
     image: '/icons/assisted.png',
-    label: 'Assisted Plan',
+    label: 'Assisted plan',
     context:
-      'Select this Plan if you’re new to health & safety paperwork or need guidance on what’s required ',
+      'Select this plan if you’re new to health & safety paperwork or need guidance on what’s required ',
     benefits: 'Dedicated application assistant',
     callInfo: 'Contact within 5 working days',
     task: 'Assessment review within 5 working days',
@@ -83,7 +83,7 @@ export const ChoosePlanList: PlanDetail[] = [
   {
     id: 'STANDARD',
     image: '/icons/standard.png',
-    label: 'Standard Plan',
+    label: 'Standard plan',
     context:
       'Designed for those familiar and confident with legal, health and safety, and ethical requirements',
     benefits: 'Induction to assessment',
@@ -92,32 +92,6 @@ export const ChoosePlanList: PlanDetail[] = [
     rate: 859,
   },
 ];
-
-export const termsServicePackageData = [
-  {
-    package: 'Premier',
-    description:
-      'The Premier Package is the ultimate in dedicated support, with a technical expert assigned to take a contractor through the accreditation process. This is the fastest and the most supported way to gain accreditation in the market. This package provides contact within one working day, and a response to the submitted health and safety assessment within two working days.',
-  },
-  {
-    package: 'Assisted',
-    description:
-      'The Assisted Package is ideal for contractors who would like dedicated personalised assistance through the accreditation process. This package shall provide contact within five working days, and a response to the submitted health and safety assessment within another five working days.',
-  },
-  {
-    package: 'Express',
-    description:
-      'The Express Package is ideal for contractors who need a quick turn-around on accreditation. This package shall provide contact within two working days, and a response to the submitted health and safety assessment within two working days.',
-  },
-  {
-    package: 'Standard',
-    description:
-      'The original and the best since 1999 this industry leading Standard Package provides support through the accreditation process for contractors familiar with health and safety requirements. This package shall provide contact within seven working days and a response to the submitted health and safety assessment within twenty working days.',
-  },
-];
-
-export const DefaultCharityYear = 1000;
-export const DefaultCharityNumber = '00000000';
 
 export const DefaultBrand = 'SAFECONTRACTOR';
 export const DefaultPaymentCard = 'CARD';
@@ -131,15 +105,6 @@ export const PaymentAccount = '61501739';
 export const PaymentIBAN = 'GB66HBUK40161361501739';
 export const PaymentSwift = 'HBUKGB4B';
 
-export const DevRedirectionUrl =
-  'https://sc2-dev-app-01.alcumus.net/AccreditationWeb/login';
-export const QaRedirectionUrl =
-  'https://sc2-test-app-01.alcumus.net/AccreditationWeb/login';
-export const StagingRedirectionUrl =
-  'https://sc2-uat-app-01.alcumus.net/AccreditationWeb/login';
-export const ProdRedirectionUrl =
-  'https://apps.alcumusgroup.net/AccreditationWeb/';
-
 export const registerRegex = /[A-Z]{2}\d{6}|[0-9]{8}/;
 export const ukPhoneRegex = /^((\+44)|(0)) ?\d{4} ?\d{6}$/;
 
@@ -148,73 +113,7 @@ export enum County {
   France = 'FX',
   Ierland = 'IE',
 }
-export const SSIPKeyValue = {
-  name1: 'Acclaim Accreditation',
-  name2: 'Achilles BuildingConfidence',
-  name3: 'ACM',
-  name4: 'ACS Registrars',
-  name5: 'Advanced Certification',
-  name6: 'AJA Registrars',
-  name7: 'Alcumus ISOQAR',
-};
-export const SSIP_CLIENT_ARRAY = [
-  { id: 54, name: 'Acclaim Accreditation' },
-  { id: 55, name: 'Achilles BuildingConfidence' },
-  { id: 56, name: 'ACM' },
-  { id: 57, name: 'ACS Registrars' },
-  { id: 58, name: 'Advanced Certification' },
-  { id: 59, name: 'AJA Registrars' },
-  { id: 60, name: 'Alcumus ISOQAR' },
-  { id: 61, name: 'Alcumus SafeContractor' },
-  { id: 62, name: 'Altius VA CDM Comply' },
-  { id: 63, name: 'ARB Approved Contractor Scheme' },
-  {
-    id: 64,
-    name: 'Association for Project Safety (APS) - Corporate Membership',
-  },
-  { id: 65, name: 'Avetta' },
-  { id: 66, name: 'British Constructional Steelwork Association (BCSA)' },
-  { id: 67, name: 'British Standards Institution (BSI)' },
-  { id: 68, name: 'Bureau Veritas Certification UK' },
-  { id: 69, name: 'Capabiliteez Ltd PQS - Pre Qualification Scheme' },
-  { id: 70, name: 'Certification Europe (UK) Ltd' },
-  { id: 71, name: 'Construction Federation Services (Safe T Cert)' },
-  { id: 72, name: 'Contractors Health and Safety Assessment Scheme (CHAS)' },
-  { id: 73, name: 'CQMS Safety-Scheme' },
-  { id: 74, name: 'D W Health & Safety Contractor Competency Scheme' },
-  { id: 75, name: 'DAS Certification' },
-  { id: 76, name: 'DNV Certification' },
-  { id: 77, name: 'DQS UK Ltd' },
-  { id: 78, name: 'Eurosafe CDM Competent' },
-  { id: 79, name: 'Exor H&S Qualifed' },
-  { id: 80, name: 'Exova BM TRADA Certification' },
-  { id: 81, name: 'FASET Membership Audit' },
-  { id: 82, name: 'Greenlight Safety Consultancy' },
-  { id: 83, name: 'IMS International' },
-  { id: 84, name: 'International Powered Access Federation (IPAF)' },
-  { id: 85, name: 'Intertek Certification (formally Moody International)' },
-  { id: 86, name: "Laing O'Rouke - LOR Contractors HSE Assessment Scheme" },
-  { id: 87, name: 'LRQA SSIP Registration Scheme' },
-  { id: 88, name: 'MSL Safepartner' },
-  { id: 89, name: 'National Access & Scaffolding Confederation (NASC)' },
-  { id: 90, name: 'National Association of Shopfitters (NAS)' },
-  { id: 91, name: 'National House-Building Council (NHBC) Safemark' },
-  { id: 92, name: 'NQA' },
-  { id: 93, name: 'NSAI' },
-  { id: 94, name: 'Ocean Certification' },
-  { id: 95, name: 'Principal Approved Supplier Scheme - PASS' },
-  { id: 96, name: 'Safety Management Advisory Services (SMAS)' },
-  { id: 97, name: 'SGS Systems & Services Certification Services' },
-  { id: 98, name: 'SOCOTEC Certification United Kingdom' },
-  { id: 106, name: 'SSIP Scheme' },
-  { id: 99, name: 'Steel Construction Certification Scheme' },
-  { id: 100, name: 'System Certification Services Ltd' },
-  { id: 101, name: 'The BESA Health & Safety Assessment' },
-  { id: 102, name: 'The British Assessment Bureau' },
-  { id: 103, name: 'The Health and Safety Assessment Scheme (HSAS)' },
-  { id: 104, name: 'TÜV UK Ltd' },
-  { id: 105, name: 'United Registar Systems (URS)' },
-];
+
 export const companyTypeSelected = {
   SOLE_TRADER_OR_PROPRIETOR: 0,
   PARTNERSHIP: 1,

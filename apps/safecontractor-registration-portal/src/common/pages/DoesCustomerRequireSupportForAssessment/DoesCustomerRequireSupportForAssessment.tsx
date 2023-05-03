@@ -5,6 +5,7 @@ import { Page, StyleVariables, Image } from '@alcumus/components';
 import { TFunction } from 'i18next';
 import AboutSection from '../../components/AboutSection';
 import FooterSection from '../../components/FooterSection';
+import Stepper from '../../components/Stepper';
 import { CardSelected } from '../../constants';
 import MobileFooterSection from '../../components/MobileFooterSection';
 import clsx from 'clsx';
@@ -13,13 +14,12 @@ import { useSelector } from 'react-redux/es/hooks/useSelector';
 import ReadMore from '../../components/ReadMore';
 import { useHistory } from 'react-router-dom';
 import { Trans } from 'react-i18next';
-import ProgressBar from '../../components/ProgressBar';
 
 export interface DoesCustomerRequireSupportForAssessmentProps {
   t: TFunction;
 }
 
-const PROGRESS = 63;
+const STEPPER_DOTS = 2;
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -110,8 +110,10 @@ const useStyles = makeStyles((theme) => ({
     margin: 'auto',
   },
   cssPage: {
-    padding: 0,
-    margin: 0,
+    [theme.breakpoints.down('sm')]: {
+      padding: 0,
+      margin: 0,
+    },
   },
   stepper: {
     [theme.breakpoints.up('sm')]: {
@@ -174,13 +176,6 @@ export function DoesCustomerRequireSupportForAssessment({
           selectedValue,
         },
       });
-      dispatch({
-        type: 'choosePlan',
-        payload: {
-          selected: undefined,
-          selectedValue: undefined,
-        },
-      });
     }
   }, [selected, selectedValue]);
 
@@ -219,9 +214,9 @@ export function DoesCustomerRequireSupportForAssessment({
   return (
     <Page className={classes.cssPage}>
       <Grid item xs={12} className={classes.scrollablediv}>
-        <AboutSection progress={PROGRESS} />
+        <AboutSection count={STEPPER_DOTS} />
         <Grid className={classes.stepper}>
-          <ProgressBar progress={PROGRESS} />
+          <Stepper count={STEPPER_DOTS}></Stepper>
         </Grid>
         <Grid item md={7} lg={7} className={classes.titleContainer}>
           <Typography className={classes.title} variant="h1" component="h1">

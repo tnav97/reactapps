@@ -6,11 +6,11 @@ import { StyleVariables, Button, Page } from '@alcumus/components';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import AboutSection from '../../components/AboutSection';
+import Stepper from '../../components/Stepper';
 import MobileFooterSection from '../../components/MobileFooterSection';
 import { liveChatContainer, mobileLiveChatContainerBox } from '../../constants';
-import ProgressBar from '../../components/ProgressBar';
 
-const PROGRESS = 0;
+const STEPPER_DOTS = 2;
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -98,10 +98,10 @@ export default function Questionnaire() {
       <style type="text/css">{liveChatContainer}</style>
       <style type="text/css">{mobileLiveChatContainerBox}</style>
       <Grid item xs={12}>
-        <AboutSection progress={PROGRESS} />
-      </Grid>
-      <Grid className={classes.stepper}>
-        <ProgressBar progress={PROGRESS}></ProgressBar>
+        <AboutSection count={STEPPER_DOTS} />
+        <Grid className={classes.stepper}>
+          <Stepper count={STEPPER_DOTS}></Stepper>
+        </Grid>
       </Grid>
       <Grid container>
         <Grid item xs={1} md={1}></Grid>

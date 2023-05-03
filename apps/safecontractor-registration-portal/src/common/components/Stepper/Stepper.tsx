@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function StepperSection(stepperSectionProps: StepperSection) {
   const classes = useStyles();
-
   const stepper = [false, false, false, false, false];
   if (stepperSectionProps?.count) {
     for (let i = 0; i < stepperSectionProps?.count; i++) {

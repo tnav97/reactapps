@@ -4,10 +4,9 @@ import makeStyles from '@mui/styles/makeStyles';
 import { Page, StyleVariables } from '@alcumus/components';
 import AboutSection from '../../components/AboutSection';
 import Card from '../../components/Card';
+import Stepper from '../../components/Stepper';
 import ReadMore from '../../components/ReadMore';
-import ProgressBar from '../../components/ProgressBar';
-
-const PROGRESS = 18;
+const STEPPER_DOTS = 2;
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -133,9 +132,9 @@ export default function Employee() {
   return (
     <Page className={classes.cssPage}>
       <Grid item xs={12} className={classes.scrollablediv}>
-        <AboutSection progress={PROGRESS} />
+        <AboutSection count={STEPPER_DOTS} />
         <Grid className={classes.stepper}>
-          <ProgressBar progress={PROGRESS} />
+          <Stepper count={STEPPER_DOTS}></Stepper>
         </Grid>
         <Typography className={classes.title} variant="h1" component="h1">
           How many employees and labour only workers do you have?

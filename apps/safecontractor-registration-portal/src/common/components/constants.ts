@@ -1,6 +1,7 @@
 export const REFERENCE = {
   PRIVACY_POLICY: 'https://www.safecontractor.com/payment-privacy-policy',
-  TERMS_OF_SERVICE: '/termsofservice',
+  TERMS_OF_SERVICE:
+    'https://s3.eu-west-2.amazonaws.com/alcumus-london-prod-s3-public-documents/Alcumus+SafeContractor+and+SafePQQ+Terms+December+2020.pdf',
 };
 
 export const companyTypeSelection = [

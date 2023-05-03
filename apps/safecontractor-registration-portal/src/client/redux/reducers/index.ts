@@ -56,7 +56,6 @@ import motoCompanyDetailsReducer, {
   MotoCompanyDetailsReducerStateType,
 } from './motoCompanyDetails';
 import motoCardReducer from './motoCard';
-import ssipListReducer, { ssipListReducerStateType } from './ssip';
 
 export interface IReduxRootState {
   subsidiary: SubsidiaryListReducerStateType;
@@ -69,7 +68,6 @@ export interface IReduxRootState {
   companyDetails: CompanyDetailsReducerStateType;
   createAccount: CreateAccountReducerStateType;
   payment: PaymentDetailsReducerStateType;
-  ssip: ssipListReducerStateType;
   motoSubsidiary: MotoSubsidiaryListReducerStateType;
   motoNeedSupport: MotoNeedSupportReducerStateType;
   motoResponseTime: MotoResponseTimeReducerStateType;
@@ -100,7 +98,6 @@ export default combineReducers({
   companyDetails: companyDetailsReducer,
   card: cardReducer,
   basket: basketReducer,
-  ssip: ssipListReducer,
   motoEmployee: motoEmployeeReducer,
   motoCompanyType: motoCompanyTypeReducer,
   motoNeedSupport: motoNeedSupportReducer,

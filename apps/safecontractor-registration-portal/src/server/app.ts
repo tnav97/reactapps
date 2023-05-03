@@ -16,38 +16,15 @@ const app: Application = configureApp({
     webApp.use('*', renderPage);
   },
   cspDirectives: {
-    defaultSrc: [
-      'dev.visualwebsiteoptimizer.com',
-      'cdn-cn.vwo-analytics.com',
-      'static.hotjar.com',
-      'script.hotjar.com',
-      'https://*.hotjar.com',
-      'https://*.hotjar.io',
-      'wss://*.hotjar.com',
-    ],
-    scriptSrc: ['static.hotjar.com', 'script.hotjar.com'],
-    styleSrc: [
-      'fonts.googleapis.com',
-      'static.hotjar.com',
-      'script.hotjar.com',
-    ],
-    imgSrc: [
-      'dev.visualwebsiteoptimizer.com',
-      'static.hotjar.com',
-      'script.hotjar.com',
-    ],
-    fontSrc: ['cdn.livechatinc.com', 'script.hotjar.com'],
-    frameSrc: ['secure-fra.livechatinc.com', 'vars.hotjar.com'],
+    defaultSrc: ['dev.visualwebsiteoptimizer.com', 'cdn-cn.vwo-analytics.com'],
+    styleSrc: ['fonts.googleapis.com'],
+    imgSrc: ['dev.visualwebsiteoptimizer.com'],
+    fontSrc: ['cdn.livechatinc.com'],
+    frameSrc: ['secure-fra.livechatinc.com'],
     connectSrc: [
       'www.google-analytics.com',
       'dev.visualwebsiteoptimizer.com',
       'screg-dev.alcdev.net',
-      'screg-qa.alcdev.net',
-      'screg-staging.alcdev.net',
-      'registration.safecontractor.net',
-      'https://*.hotjar.com',
-      'https://*.hotjar.io',
-      'wss://*.hotjar.com',
     ],
   },
 });

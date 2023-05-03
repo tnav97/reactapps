@@ -13,11 +13,11 @@ import {
   StyleVariables,
   RegularIcon,
   Input,
-  Button,
   Select,
   Text,
 } from '@alcumus/components';
 import clsx from 'clsx';
+import Stepper from '../../components/Stepper';
 import MobileFooterSection from '../../components/MobileFooterSection';
 import serialize from 'serialize-javascript';
 import {
@@ -36,7 +36,6 @@ import { postcodeValidator } from 'postcode-validator';
 import { Address, CompanyDetails } from '../../types';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Suggestion } from '../../../server/models/postAddressLookup';
-import ProgressBar from '../../components/ProgressBar';
 
 interface FormErrors {
   name: boolean;
@@ -71,7 +70,7 @@ interface CompanyDetailProps {
   error?: string;
 }
 
-const PROGRESS = 81;
+const STEPPER_DOTS = 4;
 const useStyles = makeStyles((theme) => ({
   title: {
     color: StyleVariables.colors.text.default,
@@ -93,6 +92,7 @@ const useStyles = makeStyles((theme) => ({
   formGroup: {
     textAlign: 'left',
     marginTop: '10px',
+    paddingLeft: '16px',
   },
   formGroupm: {
     textAlign: 'left',
@@ -103,11 +103,13 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down('md')]: {
       marginTop: '10px',
+      paddingLeft: '17px',
     },
   },
   formGroupLandline: {
     textAlign: 'left',
     marginTop: '10px',
+    paddingLeft: '17px',
   },
   companyDetailsContainer: {
     justifyContent: 'center',
@@ -227,19 +229,6 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '-0.875rem',
     marginBottom: '-0.25rem',
   },
-  hiddenContainer: {
-    display: 'none',
-  },
-  registrationRightContainer: {
-    [theme.breakpoints.up('sm')]: {
-      paddingRight: '8px',
-    },
-  },
-  registrationLeftContainer: {
-    [theme.breakpoints.up('sm')]: {
-      paddingLeft: '8px',
-    },
-  },
 }));
 export default function CompanyDetails(companyDetailProps: CompanyDetailProps) {
   const classes = useStyles();
@@ -339,7 +328,8 @@ export default function CompanyDetails(companyDetailProps: CompanyDetailProps) {
         const addressLine2 =
           res?.payload?.response?.result?.address.address_line_3 === ''
             ? res?.payload?.response?.result?.address.address_line_2
-            : `${res?.payload?.response?.result?.address.address_line_2}, ${res?.payload?.response?.result?.address.address_line_3}`;
+            : `${res?.payload?.response?.result?.address.address_line_2} ,
+            ${res?.payload?.response?.result?.address.address_line_3}`;
         const county =
           res?.payload?.response?.result?.address.country === 'UNITED KINGDOM'
             ? County.United_Kingdom
@@ -376,7 +366,8 @@ export default function CompanyDetails(companyDetailProps: CompanyDetailProps) {
         const addressLine2 =
           res?.payload?.response?.result?.address.address_line_3 === ''
             ? res?.payload?.response?.result?.address.address_line_2
-            : `${res?.payload?.response?.result?.address.address_line_2}, ${res?.payload?.response?.result?.address.address_line_3}`;
+            : `${res?.payload?.response?.result?.address.address_line_2} ,
+              ${res?.payload?.response?.result?.address.address_line_3}`;
         const county =
           res?.payload?.response?.result?.address.country === 'UNITED KINGDOM'
             ? County.United_Kingdom
@@ -402,14 +393,14 @@ export default function CompanyDetails(companyDetailProps: CompanyDetailProps) {
   const handleClick = (e) => {
     setCompanyDetailsForm({
       ...companyDetailsForm,
-      registrationYear: e.target.valueAsNumber,
+      registrationYear: e.target.value,
     });
   };
 
   const handleIncorporationRegistrationYear = (e) => {
     setCompanyDetailsForm({
       ...companyDetailsForm,
-      charityYear: e.target.valueAsNumber,
+      charityYear: e.target.value,
     });
   };
 
@@ -464,10 +455,7 @@ export default function CompanyDetails(companyDetailProps: CompanyDetailProps) {
   };
 
   const validateCharityYear = (year) => {
-    if (year >= 1000 && year <= new Date().getFullYear()) {
-      setCharityYearMessage('');
-      setCharityYearError(false);
-    } else if (!year) {
+    if ((year >= 1000 && year <= new Date().getFullYear()) || year === '') {
       setCharityYearMessage('');
       setCharityYearError(false);
     } else {
@@ -478,7 +466,7 @@ export default function CompanyDetails(companyDetailProps: CompanyDetailProps) {
 
   const validateRegistrationYear = (year) => {
     const currentYear = new Date().getFullYear();
-    if (year >= 1000 && year <= currentYear) {
+    if ((year >= 1000 && year <= currentYear) || year === '') {
       setRegistrationYearMessage('');
       setRegistrationYearError(false);
     } else {
@@ -549,15 +537,15 @@ export default function CompanyDetails(companyDetailProps: CompanyDetailProps) {
     };
     if (
       Object.values(companyBasicDetailsErrors).filter(Boolean).length ||
+      !addressLookup ||
       registrationYearError ||
-      registrationError ||
-      mobileError ||
       charityError ||
       charityYearError ||
+      registrationError ||
+      mobileError ||
       landlineError ||
       contactAddressError ||
-      (billingAddressError && sendInviteWhenSaving) ||
-      !show
+      (billingAddressError && sendInviteWhenSaving)
     ) {
       setCanSubmitForm(false);
     } else {
@@ -612,32 +600,6 @@ export default function CompanyDetails(companyDetailProps: CompanyDetailProps) {
         }
       }
       validateForm();
-      if (allowedListCharity.includes(companyTypeValue.selectedValue)) {
-        if (companyDetails.charityNumber) {
-          validateCharityNumber(companyDetails.charityNumber);
-        }
-        if (companyDetails.charityYear) {
-          validateCharityYear(companyDetails.charityYear);
-        }
-      }
-      if (companyDetails.registrationNumber) {
-        validate(companyDetails.registrationNumber);
-      }
-      if (companyDetails.contactPerson?.telephoneNumber) {
-        validateLandlinePhone(companyDetails.contactPerson?.telephoneNumber);
-      }
-      if (companyDetails.contactPerson?.mobileNumber) {
-        validateMobilePhone(companyDetails.contactPerson?.mobileNumber);
-      }
-      if (companyDetails.registrationYear) {
-        validateRegistrationYear(companyDetails.registrationYear);
-      }
-      if (companyDetails.address?.postCode) {
-        validateAddressPostCode(companyDetails.address?.postCode);
-      }
-      if (companyDetails.billingAddress?.postCode) {
-        validateBillingAddressPostCode(companyDetails.billingAddress.postCode);
-      }
     } else {
       setCompanyDetailsForm({
         ...companyDetailsForm,
@@ -673,11 +635,7 @@ export default function CompanyDetails(companyDetailProps: CompanyDetailProps) {
         }
       }
     });
-    if (!addressLookup) {
-      setLoading(false);
-      setAddressSuggestions([]);
-      setAddressList([]);
-    }
+
     setShow(true);
   };
 
@@ -704,11 +662,6 @@ export default function CompanyDetails(companyDetailProps: CompanyDetailProps) {
         }
       }
     });
-    if (!billingAddressLookup) {
-      setBillingLoading(false);
-      setBillingAddressSuggestions([]);
-      setBillingAddressList([]);
-    }
     setBillingShow(true);
   };
 
@@ -724,19 +677,14 @@ export default function CompanyDetails(companyDetailProps: CompanyDetailProps) {
         },
       });
     }
-  }, [
-    companyDetailsForm,
-    sendInviteWhenSaving,
-    addressLookup,
-    billingAddressLookup,
-  ]);
+  }, [companyDetailsForm, addressLookup, sendInviteWhenSaving]);
 
   return (
     <Page className={classes.cssPage}>
       <Grid item xs={12} className={classes.scrollablediv}>
-        <AboutSection progress={PROGRESS} />
+        <AboutSection count={STEPPER_DOTS} />
         <Grid className={classes.stepper}>
-          <ProgressBar progress={PROGRESS} />
+          <Stepper count={STEPPER_DOTS}></Stepper>
         </Grid>
         <Grid item md={12} className={classes.boxContainer}>
           <Typography className={classes.title} variant="h1" component="h1">
@@ -811,7 +759,7 @@ export default function CompanyDetails(companyDetailProps: CompanyDetailProps) {
                             data-testid="registrationYearInput"
                             onChange={(e) => {
                               handleClick(e);
-                              validateRegistrationYear(e.target.valueAsNumber);
+                              validateRegistrationYear(e.target.value);
                             }}
                           />
                           <React.Fragment>
@@ -828,13 +776,8 @@ export default function CompanyDetails(companyDetailProps: CompanyDetailProps) {
                   )}
                   {showRegistrationNumberDetails && (
                     <Grid container>
-                      <Grid
-                        item
-                        xs={12}
-                        sm={6}
-                        className={classes.registrationRightContainer}
-                      >
-                        <FormControl variant='standard' fullWidth className={classes.formGroup}>
+                      <Grid item xs={12} sm={6}>
+                        <FormControl variant="standard" fullWidth className={classes.formGroup}>
                           <Input
                             type="text"
                             label="Company registration number"
@@ -860,13 +803,8 @@ export default function CompanyDetails(companyDetailProps: CompanyDetailProps) {
                           </React.Fragment>
                         </FormControl>
                       </Grid>
-                      <Grid
-                        item
-                        xs={12}
-                        sm={6}
-                        className={classes.registrationLeftContainer}
-                      >
-                        <FormControl variant='standard' fullWidth className={classes.formGroup}>
+                      <Grid item xs={12} sm={6}>
+                        <FormControl variant="standard" fullWidth className={classes.formGroup}>
                           <Input
                             type="number"
                             label="Company registration year"
@@ -877,7 +815,7 @@ export default function CompanyDetails(companyDetailProps: CompanyDetailProps) {
                             data-testid="registrationYearInput"
                             onChange={(e) => {
                               handleClick(e);
-                              validateRegistrationYear(e.target.valueAsNumber);
+                              validateRegistrationYear(e.target.value);
                             }}
                           />
                           <React.Fragment>
@@ -921,12 +859,7 @@ export default function CompanyDetails(companyDetailProps: CompanyDetailProps) {
                           </React.Fragment>
                         </FormControl>
                       </Grid>
-                      <Grid
-                        item
-                        xs={12}
-                        sm={6}
-                        className={classes.registrationLeftContainer}
-                      >
+                      <Grid item xs={12} sm={6}>
                         <FormControl variant="standard" fullWidth className={classes.formGroup}>
                           <Input
                             type="number"
@@ -934,11 +867,13 @@ export default function CompanyDetails(companyDetailProps: CompanyDetailProps) {
                             placeholder="YYYY"
                             required={false}
                             maxLength={4}
-                            value={companyDetailsForm?.charityYear}
+                            value={companyDetailsForm?.charityYear || ''}
                             data-testid="charityIncorporationYearInput"
                             onChange={(e) => {
+                              console.log('-->', e.target.value);
+
                               handleIncorporationRegistrationYear(e);
-                              validateCharityYear(e.target.valueAsNumber);
+                              validateCharityYear(e.target.value);
                             }}
                           />
                           <React.Fragment>
@@ -971,19 +906,6 @@ export default function CompanyDetails(companyDetailProps: CompanyDetailProps) {
                         }
                       />
                     </FormControl>
-                  </Grid>
-                  <Grid item>
-                    <Typography className={classes.hiddenContainer}>
-                      <Button
-                        title="Click here to toggle Address"
-                        rounded
-                        onClick={() => setShow(true)}
-                        data-testid="toggleAddress"
-                        tabIndex={-1}
-                      >
-                        <Typography>Address Toggle</Typography>
-                      </Button>
-                    </Typography>
                   </Grid>
                   <Grid item xs={12}>
                     <FormControl variant="standard" fullWidth className={clsx(classes.formGroup)}>
@@ -1294,19 +1216,6 @@ export default function CompanyDetails(companyDetailProps: CompanyDetailProps) {
                             </Grid>
                           </FormControl>
                         </Grid>
-                      </Grid>
-                      <Grid item>
-                        <Typography className={classes.hiddenContainer}>
-                          <Button
-                            title="Click here to toggle Billing Address"
-                            rounded
-                            onClick={() => setBillingShow(true)}
-                            data-testid="toggleBillingAddress"
-                            tabIndex={-1}
-                          >
-                            <Typography>Billing Address Toggle</Typography>
-                          </Button>
-                        </Typography>
                       </Grid>
                       {sendInviteWhenSaving && (
                         <Grid item xs={12}>

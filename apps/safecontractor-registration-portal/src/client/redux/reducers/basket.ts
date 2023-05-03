@@ -4,13 +4,11 @@ import { Actions } from '../actions';
 export interface BasketReducerStateType {
   total?: number;
   discountCode?: string;
-  basketApiSuccess?: boolean;
 }
 
 export const defaultState: BasketReducerStateType = {
   total: undefined,
   discountCode: undefined,
-  basketApiSuccess: undefined,
 };
 
 export default function BasketReducer(
@@ -24,7 +22,6 @@ export default function BasketReducer(
         ...state,
         total: payload?.total,
         discountCode: payload?.discountCode,
-        basketApiSuccess: payload?.basketApiSuccess,
       };
     default:
       return state;

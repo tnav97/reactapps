@@ -3,44 +3,27 @@ import { Types } from '@alcumus/core';
 import { NextFunction, Response } from 'express';
 import ReactDOMServer from 'react-dom/server';
 import path from 'path';
-import { StaticRouter } from 'react-router-dom/server';
+import { StaticRouter } from 'react-router-dom';
 import { ChunkExtractor } from '@loadable/server';
 import configureStore from '../../client/redux/configureStore';
 import Router from '../../common/router';
 import ReduxStateDecorator from '../../client/redux/StateDecorator';
 import serialize from 'serialize-javascript';
-import { createHmac } from 'crypto';
-import fs from 'fs';
-import { validateStatusHealth } from '../models/statusHealth';
-export default async function renderPage(
+export default function renderPage(
   req: Types.Request,
   res: Response,
   next: NextFunction
 ) {
-  const response = await validateStatusHealth();
-  if (req.headers.host?.includes('localhost')) {
-    res.header('Access-Control-Allow-Origin', req.headers.host);
-  } else {
-    res.header('Access-Control-Allow-Origin', `https://${req.headers.host}/`);
-  }
-  if (req.headers.host?.includes('localhost')) {
-    res.header('Access-Control-Allow-Headers', [
-      req.headers.host,
-      'Content-Type',
-      'x-requested-with',
-    ]);
-  } else {
-    res.header('Access-Control-Allow-Headers', [
-      `https://${req.headers.host}/`,
-      'Content-Type',
-      'x-requested-with',
-    ]);
-  }
-
+  res.header('Permissions-Policy', 'self');
   res.header('Access-Control-Allow-Origin', req.headers.host);
   res.header('Access-Control-Allow-Methods', req.method);
-  res.header('Permissions-Policy', `fullscreen=(self)`);
-
+  Object.keys(req.cookies).forEach(function eachKey(key) {
+    res.cookie(key, req.cookies[key], {
+      httpOnly: true,
+      secure: true,
+      sameSite: true,
+    });
+  });
   const contentType =
     req.headers['content-type'] || req.headers['Content-Type'];
   if (contentType && !contentType.includes('text/html')) {
@@ -62,23 +45,12 @@ export default async function renderPage(
     }
 
     const html = ReactDOMServer.renderToString(
-      <StaticRouter location={req.url} >
+      <StaticRouter location={req.url} context={context}>
         <ReduxStateDecorator>
           <Router />
         </ReduxStateDecorator>
       </StaticRouter>
     );
-
-    const data = `User-agent: *
-Disallow: /images
-Disallow: /icons
-Disallow: /locales
-Sitemap:  https://${req.headers.host}/
-`;
-    fs.writeFile('static/robots.txt', data, (err) => {
-      // In case of a error throw err.
-      if (err) throw err;
-    });
 
     const statsFile = path.join(
       process.cwd(),
@@ -95,11 +67,7 @@ Sitemap:  https://${req.headers.host}/
       : '<base href="/">';
 
     const currentNonce = res.locals.scriptNonce;
-    const HotJarCode =
-      req.headers.host?.includes('localhost') ||
-      req.headers.host?.includes('alcdev')
-        ? ''
-        : `<script nonce='${currentNonce}'> (function(h,o,t,j,a,r){ h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)}; h._hjSettings={hjid:3343101,hjsv:6}; a=o.getElementsByTagName('head')[0]; r=o.createElement('script');r.async=1; r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv; a.appendChild(r); })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv='); </script>`;
+
     res.send(`
       <!DOCTYPE html>
       <html lang="en-US">
@@ -118,56 +86,40 @@ Sitemap:  https://${req.headers.host}/
           <script id="stateData" nonce='${currentNonce}'>window.__PRELOADED_STATE__ = ${serialize(
       preloadedState
     ).replace(/</g, '\\u003c')};</script>
-     
-          <script  nonce='${currentNonce}' type="text/javascript" id="">window.__lc=window.__lc||{};window.__lc.license=11284403;(function(){var a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"==document.location.protocol?"https://":"http://")+"cdn.livechatinc.com/tracking.js";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})();</script>
-          <!-- Hotjar Tracking Code for SafeContractor Checkout --> ${HotJarCode}
-          <!--Start Google tag (gtag.js)-->
-          <script  nonce='${currentNonce}' async src="https://www.googletagmanager.com/gtag/js?id=G-LSRTZLEJQ0"></script> 
-          <script nonce='${currentNonce}'> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-LSRTZLEJQ0', {cookie_flags: 'max-age=7200;secure;samesite=none'}); </script>
-          <!--End Google tag (gtag.js)-->
-          <script nonce='${currentNonce}'>
-          '${Object.keys(req.cookies).forEach(function eachKey(key) {
-            const keyContent = key;
-            const keyValue = req.cookies[key];
-            const domainValue =
-              req.headers.host?.substring(req.headers.host?.indexOf('.') + 1) ??
-              'localhost';
-            res.clearCookie(key);
-            if (req.headers.host?.includes('localhost')) {
-              res.cookie(
-                keyContent,
-                createHmac('sha256', keyValue)
-                  .update('Cookies Encrypted')
-                  .digest('hex'),
-                {
-                  domain: 'localhost',
-                  httpOnly: true,
-                  secure: true,
-                  sameSite: true,
-                }
-              );
-            } else {
-              if (!keyContent.startsWith('_ga')) {
-                res.cookie(
-                  keyContent,
-                  createHmac('sha256', keyValue)
-                    .update('Cookies Encrypted')
-                    .digest('hex'),
-                  {
-                    domain:
-                      keyContent === '_vwo_uuid_v2'
-                        ? `.${req.headers.host}`
-                        : `.${domainValue}`,
-                    httpOnly: true,
-                    secure: true,
-                    sameSite: true,
-                  }
-                );
-              }
-            }
-          })}'
+        <!-- Start VWO Async SmartCode -->
+          <script type='text/javascript' nonce='${currentNonce}'>
+          window._vwo_code = window._vwo_code || (function(){
+          var account_id=480599,
+          settings_tolerance=2000,
+          library_tolerance=2500,
+          use_existing_jquery=false,
+          is_spa=1,
+          hide_element='body',
+  
+        /* DO NOT EDIT BELOW THIS LINE */
+          f=false,d=document,code={use_existing_jquery:function()
+          {return use_existing_jquery;},library_tolerance:function()
+          {return library_tolerance;},finish:function()
+          {if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');
+          if(a)a.parentNode.removeChild(a);}},finished:function()
+          {return f;},load:function(a){var b=d.createElement('script');
+          b.src=a;b.type='text/javascript';b.innerText;b.onerror=function()
+          {_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);}
+          ,init:function(){window.settings_timer=setTimeout(function () {_vwo_code.finish() }
+          ,settings_tolerance);var a=d.createElement('style'),
+          b=hide_element?hide_element+'{opacity:0 !important; filter:alpha(opacity=0) !important;background:none !important;}':'',
+          h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');
+          a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;
+          else a.appendChild(d.createTextNode(b));h.appendChild(a);
+          this.load('https://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&f='+(+is_spa)+'&r='+Math.random());
+          return settings_timer; }};window._vwo_settings_timer = code.init(); return code; }());
           </script>
-
+        <!-- End VWO Async SmartCode -->
+          <script  nonce='${currentNonce}' type="text/javascript" id="">window.__lc=window.__lc||{};window.__lc.license=11284403;(function(){var a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"==document.location.protocol?"https://":"http://")+"cdn.livechatinc.com/tracking.js";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})();</script>
+          <!--Start Google tag (gtag.js)-->
+          <script  nonce='${currentNonce}' async src="https://www.googletagmanager.com/gtag/js?id=G-KP0E77Q7KR"></script> 
+          <script nonce='${currentNonce}'> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-KP0E77Q7KR'); </script>
+          <!--End Google tag (gtag.js)-->
         </head>
         <body>
         <style type="text/css">
@@ -193,11 +145,6 @@ Sitemap:  https://${req.headers.host}/
             -webkit-appearance: none;
             margin: 0;
             }
-            input[type="date"]::-webkit-inner-spin-button,
-input[type="date"]::-webkit-calendar-picker-indicator {
-    display: none;
-    -webkit-appearance: none;
-}
         /* Firefox */
             input[type=number] {
             -moz-appearance: textfield;
@@ -207,42 +154,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
             body {
             background-color:#ffffff
             }
-            @media only screen and (max-width: 470px) {
-              ::-webkit-scrollbar {
-                width:0;
-              }
-            }
-            @media only screen and (min-width: 470px) {
             ::-webkit-scrollbar {
-              width: 5px;
-            }
-            
-            /* Track */
-            ::-webkit-scrollbar-track {
-              background: #F8F8F8; 
-            }
-             
-            /* Handle */
-            ::-webkit-scrollbar-thumb {
-              background: #888; 
-            }
-            
-            /* Handle on hover */
-            ::-webkit-scrollbar-thumb:hover {
-              background: #555; 
-            }
-          }
+              width: 0;
+              }
           </style>
           <script nonce='${currentNonce}'>
             <a href="https://www.livechatinc.com/chat-with/11284403/" rel="nofollow">Chat with us</a>,
             powered by <a href="https://www.livechatinc.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a>
           </script>
           <div id="root">${html}
-          <div id="myDIV" style="display:none;">
-          <h3 id="statusCake">${response.status}</h3>
-          </div>
-          <div id="chat-widget-container" ><iframe sandbox="allow-same-origin allow-forms" allow="autoplay;" src="https://secure-fra.livechatinc.com/customer/action/open_chat?license_id=11284403&amp;group=3&amp;embedded=1&amp;widget_version=3&amp;unique_groups=0" allowtransparency="true" id="chat-widget" name="chat-widget" title="LiveChat chat widget" scrolling="no" style="width: 100%; height: 100%; min-height: 0px; min-width: 0px; margin: 0px; padding: 0px; background-image: none; background-position: 0% 0%; background-size: initial; background-attachment: scroll; background-origin: initial; background-clip: initial; background-color: rgba(0, 0, 0, 0); border-width: 0px; float: none; position: absolute; inset: 0px; transition: none 0s ease 0s !important;"></iframe>
-          </div>
+          <div id="chat-widget-container" ><iframe sandbox="allow-same-origin allow-scripts allow-forms" allow="autoplay;" src="https://secure-fra.livechatinc.com/customer/action/open_chat?license_id=11284403&amp;group=3&amp;embedded=1&amp;widget_version=3&amp;unique_groups=0" allowtransparency="true" id="chat-widget" name="chat-widget" title="LiveChat chat widget" scrolling="no" style="width: 100%; height: 100%; min-height: 0px; min-width: 0px; margin: 0px; padding: 0px; background-image: none; background-position: 0% 0%; background-size: initial; background-attachment: scroll; background-origin: initial; background-clip: initial; background-color: rgba(0, 0, 0, 0); border-width: 0px; float: none; position: absolute; inset: 0px; transition: none 0s ease 0s !important;"></iframe></div>
           </div>
           ${extractor.getScriptTags({ nonce: currentNonce })}
         </body>

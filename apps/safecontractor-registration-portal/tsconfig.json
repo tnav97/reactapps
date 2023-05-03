@@ -16,7 +16,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "typeRoots": ["node_modules/@types", "./typings"],
-    "types": ["node", "jest", "@types/jest", "@cypress/grep"]
+    "types": ["node", "jest", "@types/jest"]
   },
   "include": ["./src", "./tests", "./src/utils"],
   "exclude": [

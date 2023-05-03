@@ -105,7 +105,7 @@ export default function ExpandableCard() {
       <Card variant="outlined" className={classes.card}>
         <CardContent>
           <Typography variant="inherit" className={classes.subtitle}>
-            Selected Plan:
+            Selected plan:
           </Typography>
           <Grid container>
             <Grid item xs={7}>

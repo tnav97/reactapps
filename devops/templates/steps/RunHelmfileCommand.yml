@@ -8,21 +8,15 @@ parameters:
     default: sync --wait
 
 steps:
-  - script: |
-      sudo curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 
-      sudo chmod 700 get_helm.sh 
-      sudo ./get_helm.sh
-    displayName: Install Helm
-
-  - task: HelmfileInstaller@1
-    inputs:
-      helmfileVersionToInstall: '0.139.8'
-    displayName: "Install Helmfile"
+  - bash: |
+      curl -L ${{parameters.helmfileUrl}} > $(Build.SourcesDirectory)/charts/helmfile
+      chmod +x $(Build.SourcesDirectory)/charts/helmfile
+    displayName: 'Install Helmfile Executable'
 
   - script: |
       cd $(Build.SourcesDirectory)/charts
       echo "Helmfile command that will be run: ${{parameters.helmfileCommand}}"
-      helmfile --environment ${{parameters.applicationName}}-${{parameters.namespace}} --state-values-set "common.image.tag=${{parameters.appVersion}}" ${{parameters.helmfileCommand}}
+      ./helmfile --environment ${{parameters.applicationName}}-${{parameters.namespace}} --state-values-set "common.image.tag=${{parameters.appVersion}}" ${{parameters.helmfileCommand}}
     displayName: Run Helmfile for ${{parameters.namespace}}
     env:
       # Common dependencies

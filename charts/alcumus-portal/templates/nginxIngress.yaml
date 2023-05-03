@@ -17,7 +17,7 @@ spec:
   tls:
     - hosts:
         - {{ .Values.network.host }}
-      secretName: {{ .Values.network.secretName }}
+      secretName: alcdev-net-tls
   rules:
     - host: {{ .Values.network.host }}
       http:

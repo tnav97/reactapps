@@ -7,7 +7,7 @@ import {
   DefaultCompanyDetails,
   CardPaymentSelection,
   Package,
-} from '../../cypress/functions/registerFunctions.cy';
+} from '../fixtures/functions/registerFunctions.cy';
 
 describe('Register a contractor with default values', () => {
   EnterCreateAccount();
@@ -16,14 +16,4 @@ describe('Register a contractor with default values', () => {
   Pricing();
   DefaultCompanyDetails();
   CardPaymentSelection();
-
-  it('Enter Card/Cardholder Details ', () => {
-    cy.get('#cardNumber').type('4444333322221111');
-    cy.get('#expiryMonth').type('12');
-    cy.get('#expiryYear').type('28');
-    cy.get('#securityCode').type('123');
-    cy.get('#submitButton').click();
-    cy.url().should('contain', 'orderConfirmation');
-    cy.get('[data-testid="orderConifrmation"]').should('be.visible');
-  });
 });
