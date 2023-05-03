@@ -1,10 +1,10 @@
-import { Grid, Theme } from '@mui/material';
+import { Grid, createTheme } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import Image from '../Image';
 import Button from '../Button';
-
-const useStyles = makeStyles((theme: Theme) => ({
+const Breakpoints = createTheme().breakpoints;
+const useStyles = makeStyles((theme) => ({
   logoContainer: {
     paddingTop: '1rem',
     paddingBottom: '1rem',
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   logo: {
     width: '9.375rem',
     height: '6vh',
-    [theme.breakpoints.down('sm')]: { width: '5.375rem', height: '5vh' },
+    [Breakpoints.down('sm')]: { width: '5.375rem', height: '5vh' },
   },
 }));
 

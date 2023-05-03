@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Card, FormControl, Grid } from '@mui/material';
+import { Box, Card, FormControl, Grid ,createTheme} from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import Typography from '@mui/material/Typography';
 import {
@@ -20,8 +20,10 @@ import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import ReadMore from '../../components/ReadMore';
 import { useHistory } from 'react-router-dom';
+import { Theme } from '@mui/material';
 
 const STEPPER_DOTS = 2;
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: StyleVariables.fonts.weight.semiBold,
@@ -31,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     marginLeft: '24px',
     marginRight: '24px',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       marginLeft: '16px',
       marginRight: '16px',
     },
@@ -39,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   text: {
     textAlign: 'center',
     marginTop: '32px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginTop: '14px',
       fontWeight: StyleVariables.fonts.weight.medium,
       fontSize: StyleVariables.fonts.size.h5,
@@ -56,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
   formGroup: {
     marginBottom: '1rem',
     textAlign: 'inherit',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginBottom: '0rem',
     },
   },
@@ -69,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 'auto',
     justifyContent: 'space-evenly',
     textAlignLast: 'left',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       marginTop: '24px',
     },
   },
@@ -78,10 +80,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-evenly',
     textAlignLast: 'left',
     marginTop: '8px',
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       marginTop: '24px',
     },
-    [theme.breakpoints.up('md')]: {
+    [Breakpoints.up('md')]: {
       marginTop: '0px',
     },
   },
@@ -100,12 +102,12 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '8px',
     marginRight: '8px',
 
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       height: '56px',
       margin: 'auto',
       marginBottom: '8px',
     },
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       width: '200px',
     },
     borderRadius: '8px',
@@ -120,19 +122,19 @@ const useStyles = makeStyles((theme) => ({
     height: 'calc(100vh - 80px)',
     overflow: 'auto',
     scrollbarWidth: 'none',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       height: 'calc(100vh - 105px)',
     },
   },
   thumbsUp: {
     marginTop: '16px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
   },
   thumbsDown: {
     marginTop: '16px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
   },
@@ -143,7 +145,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContainer: {
     marginTop: '16px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'block',
       marginTop: 0,
       marginLeft: '20px',
@@ -159,13 +161,13 @@ const useStyles = makeStyles((theme) => ({
     color: StyleVariables.colors.text.subdued,
     cursor: 'pointer',
     marginTop: '58px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginTop: '56px',
     },
-    [theme.breakpoints.up('md')]: {
+    [Breakpoints.up('md')]: {
       marginTop: '35px',
     },
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       marginTop: '33px',
     },
   },
@@ -178,7 +180,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-evenly',
     margin: 'auto',
     marginRight: '16px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginRight: 0,
     },
     borderRadius: '8px',
@@ -206,17 +208,17 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   inputsContainer: {
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginLeft: '16px',
     },
   },
   stepper: {
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       display: 'none',
     },
   },
   footerVisibility: {
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
   },
@@ -231,22 +233,22 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '1rem',
     marginLeft: '42px',
     marginRight: '42px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginLeft: '16px',
       marginRight: '16px',
     },
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       marginLeft: '1rem',
       marginRight: '1rem',
     },
   },
   mobileDeleteContainer: {
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       display: 'none',
     },
   },
   desktopDeleteContainer: {
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
   },

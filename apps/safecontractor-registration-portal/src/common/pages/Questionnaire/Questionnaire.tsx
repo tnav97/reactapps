@@ -9,9 +9,11 @@ import AboutSection from '../../components/AboutSection';
 import Stepper from '../../components/Stepper';
 import MobileFooterSection from '../../components/MobileFooterSection';
 import { liveChatContainer, mobileLiveChatContainerBox } from '../../constants';
+import { createTheme} from '@mui/material';
 
 const STEPPER_DOTS = 2;
 
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   title: {
     color: StyleVariables.colors.text.default,
@@ -21,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: StyleVariables.fonts.lineHeight.h2,
     marginTop: '116px',
     textTransform: 'capitalize',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       marginTop: '16px',
       textAlign: 'center',
       fontSize: StyleVariables.fonts.size.h3,
@@ -36,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: StyleVariables.fonts.size.h4,
     lineHeight: StyleVariables.fonts.lineHeight.h4,
     marginTop: '24px',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       marginTop: '8px',
       textAlign: 'center',
       fontWeight: StyleVariables.fonts.weight.regular,
@@ -50,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
   questionButton: {
     marginTop: '32px',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       display: 'none',
     },
   },
@@ -69,12 +71,12 @@ const useStyles = makeStyles((theme) => ({
   },
   paddingRight: {
     paddingRight: '2rem',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       paddingRight: 0,
     },
   },
   stepper: {
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       display: 'none',
     },
   },

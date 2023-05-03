@@ -9,7 +9,9 @@ import MotoAboutSection from '../../components/MotoAboutSection';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { liveChatContainer } from '../../constants';
+import { createTheme} from '@mui/material';
 
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   logo: {
     alignItems: 'center',
@@ -17,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '18px',
     maxWidth: '175px',
     maxHeight: '32px',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       display: 'none',
     },
   },
@@ -27,15 +29,15 @@ const useStyles = makeStyles((theme) => ({
     fontSize: StyleVariables.fonts.size.h3,
     lineHeight: StyleVariables.fonts.lineHeight.h3,
     fontWeight: StyleVariables.fonts.weight.semiBold,
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       fontWeight: StyleVariables.fonts.weight.semiBold,
       marginTop: '24px',
     },
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       fontWeight: StyleVariables.fonts.weight.medium,
       marginTop: '24px',
     },
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       fontWeight: StyleVariables.fonts.weight.semiBold,
       fontSize: StyleVariables.fonts.size.h1,
       lineHeight: StyleVariables.fonts.lineHeight.h1,
@@ -50,16 +52,16 @@ const useStyles = makeStyles((theme) => ({
     fontSize: StyleVariables.fonts.size.h5,
     lineHeight: StyleVariables.fonts.lineHeight.regular,
     fontWeight: StyleVariables.fonts.weight.semiBold,
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       fontWeight: StyleVariables.fonts.weight.semiBold,
       fontSize: StyleVariables.fonts.size.h5,
       lineHeight: StyleVariables.fonts.lineHeight.h5,
       marginTop: '40px',
     },
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginTop: '32px',
     },
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       fontWeight: StyleVariables.fonts.weight.semiBold,
       fontSize: StyleVariables.fonts.size.h3,
       lineHeight: StyleVariables.fonts.lineHeight.h3,
@@ -73,16 +75,16 @@ const useStyles = makeStyles((theme) => ({
     fontSize: StyleVariables.fonts.size.h5,
     lineHeight: StyleVariables.fonts.lineHeight.regular,
     fontWeight: StyleVariables.fonts.weight.semiBold,
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       fontWeight: StyleVariables.fonts.weight.semiBold,
       fontSize: StyleVariables.fonts.size.h5,
       lineHeight: StyleVariables.fonts.lineHeight.regular,
       marginTop: '16px',
     },
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginTop: '16px',
     },
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       fontWeight: StyleVariables.fonts.weight.semiBold,
       fontSize: StyleVariables.fonts.size.h3,
       lineHeight: StyleVariables.fonts.lineHeight.h3,
@@ -98,18 +100,18 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: StyleVariables.fonts.weight.regular,
     fontSize: StyleVariables.fonts.size.h6,
     lineHeight: StyleVariables.fonts.lineHeight.regular,
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       fontWeight: StyleVariables.fonts.weight.regular,
       fontSize: StyleVariables.fonts.size.h6,
       lineHeight: StyleVariables.fonts.lineHeight.h5,
     },
     marginTop: '8px',
     marginBottom: '8px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginTop: '0.875rem',
       marginBottom: '0.875rem',
     },
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       fontWeight: StyleVariables.fonts.weight.regular,
       fontSize: StyleVariables.fonts.size.h4,
       lineHeight: StyleVariables.fonts.lineHeight.h4,
@@ -123,16 +125,16 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: StyleVariables.fonts.weight.regular,
     fontSize: StyleVariables.fonts.size.h6,
     lineHeight: StyleVariables.fonts.lineHeight.regular,
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       fontWeight: StyleVariables.fonts.weight.regular,
       fontSize: StyleVariables.fonts.size.h6,
       lineHeight: StyleVariables.fonts.lineHeight.h5,
     },
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginTop: '0.875rem',
       marginBottom: '0.875rem',
     },
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       fontWeight: StyleVariables.fonts.weight.regular,
       fontSize: StyleVariables.fonts.size.h4,
       lineHeight: StyleVariables.fonts.lineHeight.h4,
@@ -149,7 +151,7 @@ const useStyles = makeStyles((theme) => ({
   assistanceInfo: {
     marginTop: '1rem',
     marginBottom: '1rem',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginTop: '0.875rem',
       marginBottom: '0.875rem',
     },
@@ -168,7 +170,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '100px',
   },
   header: {
-    [theme.breakpoints.up('md')]: {
+    [Breakpoints.up('md')]: {
       display: 'none',
     },
   },

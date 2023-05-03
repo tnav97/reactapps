@@ -9,6 +9,7 @@ import { TypeData } from '../../../server/models/questionnarie';
 import MotoMobileFooterSection from '../MotoMobileFooterSection';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { createTheme} from '@mui/material';
 import {
   companyTypeSelected,
   companyTypeSelection,
@@ -34,6 +35,7 @@ interface CardProps {
   gridSizeDesktop?: number;
 }
 
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   cardContent: {
     height: '70px',
@@ -83,13 +85,13 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     marginBottom: '8px',
     height: '114px',
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       height: '165px',
     },
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       height: '56px',
     },
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       height: '114px',
       marginLeft: '10px',
     },
@@ -118,12 +120,12 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
   stepper: {
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       display: 'none',
     },
   },
   footerVisibility: {
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
   },

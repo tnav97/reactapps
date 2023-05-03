@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import MotoAboutSection from '../../components/MotoAboutSection';
-import { Grid, Checkbox, CircularProgress, Divider, IconButton, ListItem } from '@mui/material';
+import { Grid, Checkbox, CircularProgress, Divider, IconButton, ListItem ,createTheme} from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import FormControl from '@mui/material/FormControl';
 import Typography from '@mui/material/Typography';
@@ -69,6 +69,7 @@ interface CompanyDetailProps {
 }
 
 const STEPPER_DOTS = 4;
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   title: {
     color: StyleVariables.colors.text.default,
@@ -102,7 +103,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '8em',
     paddingTop: '8px',
     paddingBottom: '8px',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       paddingLeft: 0,
       paddingRight: 0,
       height: '40px',
@@ -142,7 +143,7 @@ const useStyles = makeStyles((theme) => ({
     height: 'calc(100vh - 80px)',
     overflow: 'auto',
     scrollbarWidth: 'none',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       height: 'calc(100vh - 120px)',
     },
   },
@@ -160,31 +161,31 @@ const useStyles = makeStyles((theme) => ({
   },
 
   boxContainer: {
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       marginLeft: '7.25rem',
       marginRight: '7.25rem',
     },
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginLeft: '1rem',
       marginRight: '1rem',
     },
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       marginRight: '10rem',
     },
   },
   cardContainer: {
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       display: 'none',
     },
   },
   stepper: {
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       display: 'none',
     },
   },
 
   footerVisibility: {
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
   },
@@ -868,97 +869,7 @@ export default function MotoCompanyDetails(
                     </FormControl>
                   </Grid>
                   <Grid item xs={12}>
-                    <FormControl
-                      variant="standard"
-                      fullWidth
-                      className={clsx(
-                        classes.formGroup,
-                        classes.hiddenContainer
-                      )}>
-                      <Autocomplete
-                        id="addressLookupInput"
-                        options={addressSuggestions}
-                        open={open}
-                        onOpen={() => setOpen(true)}
-                        onClose={() => setOpen(false)}
-                        loading={loading}
-                        disableClearable={true}
-                        value={addressLookup}
-                        isOptionEqualToValue={(option, value) => option === value}
-                        onChange={handleChangeAddress}
-                        filterOptions={(options) => options}
-                        ListboxProps={{
-                          onScroll: () => {
-                            <div>
-                              {addressSuggestions.map((item) => {
-                                return <option key={item}>{item}</option>;
-                              })}
-                            </div>;
-                          },
-                        }}
-                        renderOption={(option, { selected }) => (
-                          <ListItem
-                            component="div"
-                            key={option}
-                            dense
-                            className={classes.listItem}
-                            onChange={() => {
-                              setLoading(false);
-                            }}
-                          >
-                            {option}
-
-                            {selected && (
-                              <RegularIcon
-                                icon="check"
-                                style={{
-                                  color: StyleVariables.colors.text.success,
-                                }}
-                              />
-                            )}
-                          </ListItem>
-                        )}
-                        renderInput={(params) => (
-                          <div ref={params.InputProps.ref}>
-                            <Input
-                              {...params.inputProps}
-                              type="text"
-                              label="Address"
-                              placeholder="Start typing an address..."
-                              required={false}
-                              value={addressLookup}
-                              data-testid="addressLookupInput"
-                              list="datalist"
-                              onChange={(e) => {
-                                onChangeHandler(e.target.value);
-                              }}
-                              adornment={
-                                <div>
-                                  {loading ? (
-                                    <CircularProgress
-                                      color="inherit"
-                                      size={20}
-                                    />
-                                  ) : (
-                                    <IconButton
-                                      size="small"
-                                      onClick={() => setOpen(!open)}
-                                    >
-                                      <ExpandMoreOutlinedIcon />
-                                    </IconButton>
-                                  )}
-                                </div>
-                              }
-                            />
-                            <Divider
-                              className={classes.divider}
-                              orientation="vertical"
-                              flexItem
-                            />
-                          </div>
-                        )}
-                      />
-                    </FormControl>
+                 
                   </Grid>
                   {show && (
                     <Grid container>
@@ -1177,102 +1088,7 @@ export default function MotoCompanyDetails(
                       {sendInviteWhenSaving && (
                         <Grid container>
                           <Grid item xs={12}>
-                            <FormControl
-                              variant="standard"
-                              fullWidth
-                              className={clsx(
-                                classes.formGroup,
-                                classes.hiddenContainer
-                              )}>
-                              <Autocomplete
-                                id="billingAddressLookupInput"
-                                options={billingAddressSuggestions}
-                                open={billingOpen}
-                                onOpen={() => billingSetOpen(true)}
-                                onClose={() => billingSetOpen(false)}
-                                loading={billingLoading}
-                                disableClearable={true}
-                                value={billingAddressLookup}
-                                isOptionEqualToValue={(option, value) =>
-                                  option === value
-                                }
-                                onChange={handleChangeBillingAddress}
-                                filterOptions={(options) => options}
-                                ListboxProps={{
-                                  onScroll: () => {
-                                    <div>
-                                      {billingAddressSuggestions.map((item) => (
-                                        <option key={item}>{item}</option>
-                                      ))}
-                                    </div>;
-                                  },
-                                }}
-                                renderOption={(option, { selected }) => (
-                                  <ListItem
-                                    component="div"
-                                    key={option}
-                                    dense
-                                    className={classes.listItem}
-                                    onChange={() => {
-                                      setBillingLoading(false);
-                                    }}
-                                  >
-                                    {option}
-
-                                    {selected && (
-                                      <RegularIcon
-                                        icon="check"
-                                        style={{
-                                          color:
-                                            StyleVariables.colors.text.success,
-                                        }}
-                                      />
-                                    )}
-                                  </ListItem>
-                                )}
-                                renderInput={(params) => (
-                                  <div ref={params.InputProps.ref}>
-                                    <Input
-                                      {...params.inputProps}
-                                      type="text"
-                                      label="Billing Address"
-                                      placeholder="Start typing an address..."
-                                      required={false}
-                                      value={billingAddressLookup}
-                                      data-testid="addressLookupbilling"
-                                      list="billingdatalist"
-                                      onChange={(e) => {
-                                        onChangeHandlerBilling(e.target.value);
-                                      }}
-                                      adornment={
-                                        <div>
-                                          {billingLoading ? (
-                                            <CircularProgress
-                                              color="inherit"
-                                              size={20}
-                                            />
-                                          ) : (
-                                            <IconButton
-                                              size="small"
-                                              onClick={() =>
-                                                billingSetOpen(!billingOpen)
-                                              }
-                                            >
-                                              <ExpandMoreOutlinedIcon />
-                                            </IconButton>
-                                          )}
-                                        </div>
-                                      }
-                                    />
-                                    <Divider
-                                      className={classes.divider}
-                                      orientation="vertical"
-                                      flexItem
-                                    />
-                                  </div>
-                                )}
-                              />
-                            </FormControl>
+                           
                           </Grid>
                           <Grid item xs={12}>
                             <FormControl

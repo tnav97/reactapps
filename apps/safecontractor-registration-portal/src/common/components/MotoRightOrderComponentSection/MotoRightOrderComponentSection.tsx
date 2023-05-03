@@ -1,18 +1,19 @@
 import React from 'react';
 import { Grid } from '@mui/material';
-
+import { createTheme} from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   containerImage: {
     backgroundImage: `url(/images/manvanLogo.png)`,
     backgroundRepeat: `no-repeat`,
     backgroundSize: `cover`,
     minHeight: '100vh',
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       display: 'none',
     },
-    [theme.breakpoints.down('xl')]: {
+    [Breakpoints.down('xl')]: {
       backgroundSize: 'contain',
     },
   },

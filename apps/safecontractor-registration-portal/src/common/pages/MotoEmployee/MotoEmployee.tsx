@@ -6,8 +6,11 @@ import MotoAboutSection from '../../components/MotoAboutSection';
 import MotoCard from '../../components/MotoCard';
 import MotoStepper from '../../components/MotoStepper';
 import ReadMore from '../../components/ReadMore';
+import { createTheme} from '@mui/material';
+
 const STEPPER_DOTS = 2;
 
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   title: {
     color: StyleVariables.colors.text.default,
@@ -30,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '12px',
     paddingLeft: '230px',
     paddingRight: '230px',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       marginLeft: '1.5rem',
       marginRight: '1.5rem',
       paddingLeft: '0px',
@@ -51,12 +54,12 @@ const useStyles = makeStyles((theme) => ({
     height: 'calc(100vh - 80px)',
     overflow: 'auto',
     scrollbarWidth: 'none',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       height: 'calc(100vh - 120px)',
     },
   },
   stepper: {
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       display: 'none',
     },
   },

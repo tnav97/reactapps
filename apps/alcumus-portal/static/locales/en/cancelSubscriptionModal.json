@@ -1,7 +1,0 @@
-{
-  "cancelSubscription": "Cancel subscription",
-  "bodyText": "Please ensure all necessary tasks have been completed in order to successfully cancel the subscription.",
-  "confirmMessage": "Are you sure you want to cancel this subscription?",
-  "successMessage": "Subscription cancelled successfully",
-  "errorMessage": "Failed to cacnel subscription"
-}

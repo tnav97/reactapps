@@ -1,8 +1,0 @@
-{
-  "alertMessage": "Verification email sent",
-  "header": "You're almost there!",
-  "bodyLine1": "We have sent an account activation email to <1>{{email}}</1> ",
-  "bodyLine2": "Simply click “activate my account” to begin your free 14 day trial!",
-  "sendingEmailAltText": "Sending email...",
-  "resendVerificationText": "Resend verification email"
-}

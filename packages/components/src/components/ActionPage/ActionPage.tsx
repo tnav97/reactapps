@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { Grid, Theme } from '@mui/material';
+import { Grid, createTheme } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import Text from '../Text';
 import Image from '../Image';
 import styleVariables from '../../styles/variables';
 import DAPage from '../PageWithNavbar/PageWithNavbar';
 import clsx from 'clsx';
+const Breakpoints = createTheme().breakpoints;
 
 export interface ActionPageProps {
   pageTitle?: string;
@@ -17,7 +18,7 @@ export interface ActionPageProps {
   imageClassName?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
   page: {
     backgroundColor: styleVariables.colors.white,
     padding: 0,
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 600,
     color: styleVariables.colors.grey5,
     margin: '2.25rem 0 1.5rem 0',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginTop: '3rem',
     },
   },

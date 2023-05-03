@@ -1,13 +1,13 @@
 import React from 'react';
 import MuiModal from '@mui/material/Modal';
 import clsx from 'clsx';
-import { IconButton, Theme } from '@mui/material';
+import { IconButton, createTheme } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import Text from '../Text';
 import styleVariables from '../../styles/variables';
 import { RegularIcon } from '../Icon';
-
-const useStyles = makeStyles((theme: Theme) => ({
+const Breakpoints = createTheme().breakpoints;
+const useStyles = makeStyles((theme) => ({
   modalHeader: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: styleVariables.fonts.size.h4,
     fontFamily: styleVariables.fonts.family.heading,
     color: styleVariables.colors.text.default,
-    [theme.breakpoints.only('sm')]: {
+    [Breakpoints.only('sm')]: {
       fontSize: styleVariables.fonts.size.h3,
     },
   },

@@ -4,6 +4,8 @@ import { Grid, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { Link } from 'react-router-dom';
 import { FooterBackgroundColor } from '../constants';
+import { createTheme} from '@mui/material';
+
 interface FooterSectionMainProps {
   register: Function;
   footerSectionProps?: MobileFooterSectionProps;
@@ -19,6 +21,7 @@ interface MobileFooterSectionProps {
   type?: string;
   page?: string;
 }
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   footer: {
     padding: '16px',
@@ -27,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     bottom: '0',
     left: '0',
     width: '100%',
-    [theme.breakpoints.up('md')]: {
+    [Breakpoints.up('md')]: {
       display: 'none',
     },
   },
@@ -40,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     height: '40px',
     fontSize: StyleVariables.fonts.size.regular,
     lineHeight: StyleVariables.fonts.lineHeight.h3,
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       width: 'fill-available',
     },
   },
@@ -56,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: StyleVariables.colors.action.secondary.default,
     },
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       width: 'fill-available',
     },
   },
@@ -64,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: StyleVariables.fonts.weight.semiBold,
     fontSize: StyleVariables.fonts.mobile.size.h5,
     lineHeight: StyleVariables.fonts.mobile.lineHeight.h4,
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       fontSize: StyleVariables.fonts.mobile.size.h6,
     },
   },

@@ -1,9 +1,11 @@
 import React from 'react';
 import { StyleVariables } from '@alcumus/components';
 import { Grid, LinearProgress } from '@mui/material';
+import { createTheme} from '@mui/material';
 
 import makeStyles from '@mui/styles/makeStyles';
 
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   gridImage: {
     height: '90vh',
@@ -14,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   LoadingImage: {
     width: '30vw',
     marginLeft: '-25px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       width: '45vw',
     },
   },
@@ -24,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     height: '8px',
     borderRadius: '5px',
     marginTop: '9%',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       width: '30vw',
       backgroundColor: StyleVariables.colors.surface.neutral.default,
       height: '6px',

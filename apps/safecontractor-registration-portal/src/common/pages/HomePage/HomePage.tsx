@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, createTheme } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import Typography from '@mui/material/Typography';
 import { Image, Page, StyleVariables, Button } from '@alcumus/components';
@@ -7,10 +7,11 @@ import { Link } from 'react-router-dom';
 import RightHomeSection from '../../components/RightHomeSection';
 import { liveChatContainer } from '../../constants';
 
-const useStyles = makeStyles((theme) => ({
+const Breakpoints = createTheme().breakpoints;
+const useStyles = makeStyles({
   linksContainer: {
     marginTop: '178px',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       marginTop: '126px',
       textAlign: 'center',
       marginLeft: 0,
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '64px',
     maxWidth: '250px',
     maxHeight: '56px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       alignItems: 'center',
       marginTop: '40px',
       maxWidth: '313px',
@@ -35,13 +36,13 @@ const useStyles = makeStyles((theme) => ({
     fontSize: StyleVariables.fonts.size.h2,
     lineHeight: StyleVariables.fonts.lineHeight.h2,
     fontWeight: StyleVariables.fonts.weight.semiBold,
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       fontWeight: StyleVariables.fonts.weight.semiBold,
       fontSize: StyleVariables.fonts.size.h3,
       lineHeight: StyleVariables.fonts.lineHeight.h3,
       marginTop: '30px',
     },
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       fontWeight: StyleVariables.fonts.weight.semiBold,
       fontSize: StyleVariables.fonts.size.h2,
       lineHeight: StyleVariables.fonts.lineHeight.h2,
@@ -56,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
   },
   logoLink: {
     textDecoration: 'none',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
@@ -65,12 +66,12 @@ const useStyles = makeStyles((theme) => ({
   subtitle: {
     color: StyleVariables.colors.text.default,
     fontFamily: StyleVariables.fonts.family.heading,
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       fontWeight: StyleVariables.fonts.weight.regular,
       fontSize: StyleVariables.fonts.size.h6,
       lineHeight: StyleVariables.fonts.lineHeight.h6,
     },
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       fontWeight: StyleVariables.fonts.weight.regular,
       fontSize: StyleVariables.fonts.mobile.size.h5,
       lineHeight: StyleVariables.fonts.mobile.lineHeight.h4,
@@ -82,12 +83,12 @@ const useStyles = makeStyles((theme) => ({
   subtitleNext: {
     color: StyleVariables.colors.text.default,
     fontFamily: StyleVariables.fonts.family.heading,
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       fontWeight: StyleVariables.fonts.weight.regular,
       fontSize: StyleVariables.fonts.size.h6,
       lineHeight: StyleVariables.fonts.lineHeight.h6,
     },
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       fontWeight: StyleVariables.fonts.weight.regular,
       fontSize: StyleVariables.fonts.mobile.size.h5,
       lineHeight: StyleVariables.fonts.mobile.lineHeight.h4,
@@ -102,12 +103,12 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: StyleVariables.fonts.weight.regular,
     fontSize: StyleVariables.fonts.size.h6,
     lineHeight: StyleVariables.fonts.lineHeight.h6,
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       fontWeight: StyleVariables.fonts.weight.regular,
       fontSize: StyleVariables.fonts.size.h6,
       lineHeight: StyleVariables.fonts.lineHeight.h6,
     },
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       fontWeight: StyleVariables.fonts.weight.regular,
       fontSize: StyleVariables.fonts.mobile.size.h6,
       lineHeight: StyleVariables.fonts.mobile.lineHeight.h6,
@@ -131,12 +132,12 @@ const useStyles = makeStyles((theme) => ({
   containerPadding: {
     paddingRight: '1rem',
     paddingLeft: '1rem',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       paddingRight: 0,
       paddingLeft: 0,
     },
   },
-}));
+});
 export default function HomePage() {
   const classes = useStyles();
 

@@ -4,15 +4,17 @@ import { Grid } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import Typography from '@mui/material/Typography';
 import MotoStepper from '../MotoStepper';
+import { createTheme} from '@mui/material';
 
 interface AboutSection {
   count?: number;
 }
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   logoContainer: {
     height: '4.5rem',
     position: 'relative',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       boxShadow: '0 4px 4px rgb(0,0,0,0.25)',
     },
   },
@@ -21,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     marginLeft: '1.5rem',
     marginTop: '1rem',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       marginLeft: '1rem',
       marginTop: '1.5rem',
       maxWidth: '8.25rem',
@@ -33,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: StyleVariables.fonts.weight.medium,
   },
   ellipsis: {
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
   },
@@ -44,13 +46,13 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: StyleVariables.fonts.lineHeight.h6,
     fontWeight: StyleVariables.fonts.weight.semiBold,
     justifySelf: 'right',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       marginTop: '1.188rem',
       fontSize: StyleVariables.fonts.size.xs,
       lineHeight: StyleVariables.fonts.lineHeight.xs,
       fontWeight: StyleVariables.fonts.weight.regular,
     },
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       marginLeft: '-2rem',
       marginBottom: '0.5rem',
     },
@@ -61,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: StyleVariables.fonts.weight.regular,
     lineHeight: StyleVariables.fonts.lineHeight.xs,
     display: 'flex',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       marginTop: '-19px',
     },
     color: StyleVariables.colors.base.primary,
@@ -70,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
   additional: {
     display: 'inline-grid',
     paddingRight: '24px',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       paddingRight: '15px',
     },
   },

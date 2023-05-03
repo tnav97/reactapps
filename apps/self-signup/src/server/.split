@@ -1,6 +1,0 @@
-# this is a comment
-# to switch between treatments, comment the lines that are not needed and uncomment the ones that are desired.
-self-signup-register-form single_page
-self-signup-questionnaire sentence-builder
-# self-signup-register-form multiple_pages
-# self-signup-questionnaire wizard

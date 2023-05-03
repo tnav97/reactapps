@@ -25,6 +25,34 @@ function convertEnvVarsToDefinePluginDefinition(environmentVariables: {
   return definitions;
 }
 
+function ReduxAPIMiddlewareCSPResolver() {}
+
+ReduxAPIMiddlewareCSPResolver.prototype.apply = function apply(resolver) {
+  const target = resolver.ensureHook('resolve');
+  resolver
+    .getHook('resolve')
+    .tapAsync(
+      'ReduxAPIMiddlewareCSPResolver',
+      function tapAsync(request, resolveContext, callback) {
+        if (request.request === 'redux-api-middleware') {
+          resolver.doResolve(
+            target,
+            {
+              ...request,
+              request: 'redux-api-middleware/es/index.js',
+            },
+            null,
+            resolveContext,
+            callback
+          );
+        } else {
+          callback();
+        }
+      }
+    );
+};
+
+
 export default function getWebpackConfig(
   environment: Environment,
   basePath: string,
@@ -129,6 +157,7 @@ export default function getWebpackConfig(
     },
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+      plugins: [new ReduxAPIMiddlewareCSPResolver()],
     },
     devtool: isProduction ? 'cheap-source-map' : false,
     performance: {

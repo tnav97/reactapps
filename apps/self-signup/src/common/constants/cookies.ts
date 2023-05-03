@@ -1,1 +1,0 @@
-export const EXPIRED_TRIAL = 'EXPIRED_TRIAL';

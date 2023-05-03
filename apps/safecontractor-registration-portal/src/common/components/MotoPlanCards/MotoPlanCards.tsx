@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
+import { Button, Image, StyleVariables } from '@alcumus/components';
 import AssignmentTurnedInOutlined from '@mui/icons-material/AssignmentTurnedInOutlined';
+import DoneIcon from '@mui/icons-material/Done';
 import ExpandLessOutlinedIcon from '@mui/icons-material/ExpandLessOutlined';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
-import DoneIcon from '@mui/icons-material/Done';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
+import { Grid, Theme, Typography ,createTheme} from '@mui/material';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { Grid, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
-import { StyleVariables, Button, Image } from '@alcumus/components';
 import clsx from 'clsx';
-import MotoFooterSection from '../MotoFooterSection';
-import { PlanDetail } from '../../../server/models/choosePlan';
-import MotoMobileFooterSection from '../MotoMobileFooterSection';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { PlanDetail } from '../../../server/models/choosePlan';
+import MotoFooterSection from '../MotoFooterSection';
+import MotoMobileFooterSection from '../MotoMobileFooterSection';
 interface CardProps {
   contents?: PlanDetail[];
   text?: string;
@@ -27,6 +27,7 @@ interface CardProps {
   selectedPlan?: number;
   page?: string;
 }
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   separator: {
     background: StyleVariables.colors.border.default,
@@ -34,14 +35,14 @@ const useStyles = makeStyles((theme) => ({
     fontSize: StyleVariables.fonts.size.smaller,
     marginLeft: '16px',
     marginRight: '16px',
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       display: 'none',
     },
   },
   logo: {
     display: 'block',
     margin: 'auto',
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       display: 'none',
     },
   },
@@ -50,11 +51,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: StyleVariables.fonts.size.h3,
     lineHeight: StyleVariables.fonts.lineHeight.h3,
     textAlign: 'center',
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       fontSize: StyleVariables.fonts.size.h2,
       lineHeight: StyleVariables.fonts.lineHeight.h2,
     },
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       fontSize: StyleVariables.fonts.size.h4,
       lineHeight: StyleVariables.fonts.lineHeight.h4,
       marginTop: '0.5rem',
@@ -69,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: StyleVariables.fonts.lineHeight.h6,
     textAlign: 'center',
     margin: 'auto',
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       fontSize: StyleVariables.fonts.size.small,
       lineHeight: StyleVariables.fonts.lineHeight.h5,
     },
@@ -82,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
   },
   planCardGrid: {
     justifyContent: 'center',
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       marginTop: '24px',
     },
   },
@@ -93,17 +94,17 @@ const useStyles = makeStyles((theme) => ({
   selectPlan: {
     display: 'block',
     margin: 'auto',
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       display: 'none',
     },
   },
   tabSelectPlan: {
     display: 'block',
     margin: 'auto',
-    [theme.breakpoints.up('lg')]: {
+    [Breakpoints.up('lg')]: {
       display: 'none',
     },
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       margin: 0,
     },
   },
@@ -111,21 +112,21 @@ const useStyles = makeStyles((theme) => ({
   displayFlex: {
     display: 'flex',
     justifyContent: 'center',
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       justifyContent: 'start',
     },
   },
   displayPlanContainer: {
     display: 'flex',
     justifyContent: 'center',
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       justifyContent: 'end',
       marginLeft: '-8px',
     },
   },
   textAlign: {
     textAlign: 'center',
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       textAlign: 'left',
     },
   },
@@ -136,10 +137,10 @@ const useStyles = makeStyles((theme) => ({
   border: {
     border: `2px solid ${StyleVariables.colors.border.default}`,
     borderRadius: '8px',
-    [theme.breakpoints.up('lg')]: {
+    [Breakpoints.up('lg')]: {
       height: '490px',
     },
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       padding: '1rem',
       height: '633px',
     },
@@ -161,74 +162,74 @@ const useStyles = makeStyles((theme) => ({
     borderColor: StyleVariables.colors.base.primary,
   },
   personContainer: {
-    [theme.breakpoints.up('lg')]: {
+    [Breakpoints.up('lg')]: {
       height: '40px',
     },
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       marginBottom: '1rem',
     },
   },
   cardContentContainer: {
     padding: '16px 25px',
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       padding: '2rem',
     },
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       paddingBottom: 0,
     },
   },
   cardTopContentContainer: {
-    [theme.breakpoints.up('lg')]: {
+    [Breakpoints.up('lg')]: {
       height: '214px',
     },
-    [theme.breakpoints.up('md')]: {
+    [Breakpoints.up('md')]: {
       paddingLeft: '1.4rem',
       paddingRight: '1.4rem',
       paddingTop: '1rem',
       paddingBottom: '1rem',
     },
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       paddingBottom: 0,
     },
   },
   cardMiddleContentContainer: {
-    [theme.breakpoints.up('md')]: {
+    [Breakpoints.up('md')]: {
       paddingLeft: '1.5rem',
       paddingRight: '1.5rem',
       paddingTop: '1rem',
       paddingBottom: '1rem',
     },
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       paddingBottom: 0,
     },
   },
   cardMobileMiddleContainer: {
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       display: 'none',
     },
   },
   cardDesktopMiddleContainer: {
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
   },
   cardRateContainer: {
-    [theme.breakpoints.up('md')]: {
+    [Breakpoints.up('md')]: {
       paddingBottom: '0.5rem',
     },
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       paddingTop: 0,
     },
   },
   subtitleContainer: {
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       marginTop: '0.3rem',
     },
   },
   showDetails: {
     display: 'flex',
     justifyContent: 'end',
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       display: 'none',
     },
   },
@@ -242,23 +243,23 @@ const useStyles = makeStyles((theme) => ({
     transform: 'rotate(180deg)',
   },
   stepper: {
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       display: 'none',
     },
   },
   footerVisibility: {
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
   },
   rateBox: {
-    [theme.breakpoints.up('lg')]: {
+    [Breakpoints.up('lg')]: {
       marginTop: '0.5rem',
     },
   },
   mobileSelectPlanButton: {
     width: '144px',
-    [theme.breakpoints.down('xl')]: {
+    [Breakpoints.down('xl')]: {
       marginTop: '0.5rem',
       width: '165px',
       height: '2rem',
@@ -267,7 +268,7 @@ const useStyles = makeStyles((theme) => ({
   checkBox: {
     marginLeft: '8px',
     fontSize: '1.2rem',
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       marginLeft: 0,
       fontSize: '1.2rem',
     },
@@ -276,7 +277,7 @@ const useStyles = makeStyles((theme) => ({
     width: '241px',
     height: '32px',
     marginTop: '0.5rem',
-    [theme.breakpoints.up('lg')]: {
+    [Breakpoints.up('lg')]: {
       padding: '8px',
       width: '208px',
     },

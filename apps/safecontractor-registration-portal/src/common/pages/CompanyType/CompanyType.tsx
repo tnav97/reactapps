@@ -5,8 +5,10 @@ import { Page, StyleVariables } from '@alcumus/components';
 import AboutSection from '../../components/AboutSection';
 import Card from '../../components/Card';
 import Stepper from '../../components/Stepper';
+import { createTheme} from '@mui/material';
 
 const STEPPER_DOTS = 2;
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   title: {
     color: StyleVariables.colors.text.default,
@@ -29,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     height: 'calc(100vh - 80px)',
     overflow: 'auto',
     scrollbarWidth: 'none',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       height: 'calc(100vh - 120px)',
     },
   },
@@ -40,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '0.5rem',
   },
   stepper: {
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       display: 'none',
     },
   },

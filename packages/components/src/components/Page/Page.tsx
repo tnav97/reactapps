@@ -1,13 +1,12 @@
 import React, { ReactChild, ReactFragment, ReactPortal } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import ThemeProvider from '@mui/styles/ThemeProvider';
-import { StyledEngineProvider, Theme } from '@mui/material';
+import { StyledEngineProvider, createTheme ,Theme } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import Container from '@mui/material/Container';
 import clsx from 'clsx';
 import AlcumusTheme from '../../styles/theme';
 import styleVariables from '../../styles/variables';
-
 interface PageProps {
   /** An optional className you can provide to override styles */
   className?: string;
@@ -16,6 +15,7 @@ interface PageProps {
   children: boolean | ReactChild | ReactFragment | ReactPortal;
 }
 
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme: Theme) => ({
   page: {
     margin: '0 auto',
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: styleVariables.fonts.size.regular,
     lineHeight: styleVariables.fonts.lineHeight.regular,
     minHeight: '100vh',
-    [theme.breakpoints.only('xs')]: {
+    [Breakpoints.only('xs')]: {
       padding: '1rem 0',
     },
   },

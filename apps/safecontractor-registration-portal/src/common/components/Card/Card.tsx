@@ -16,6 +16,7 @@ import {
   empolyeeCountSelection,
 } from '../constants';
 import { useHistory } from 'react-router-dom';
+import { createTheme} from '@mui/material';
 
 interface CardProps {
   height?: string;
@@ -35,6 +36,7 @@ interface CardProps {
   gridSizeDesktop?: number;
 }
 
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   cardContent: {
     height: '70px',
@@ -59,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: StyleVariables.fonts.lineHeight.h3,
     textAlign: 'left',
     marginTop: '26px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       paddingLeft: '0',
       paddingRight: '0',
     },
@@ -90,10 +92,10 @@ const useStyles = makeStyles((theme) => ({
 
     height: '114px',
     marginTop: '16px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       height: '56px',
     },
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       height: '114px',
       marginLeft: '10px',
     },
@@ -122,12 +124,12 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
   stepper: {
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       display: 'none',
     },
   },
   footerVisibility: {
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
   },
@@ -146,11 +148,11 @@ const useStyles = makeStyles((theme) => ({
   detailContainerAlign: {
     marginLeft: '5%',
     marginRight: '5%',
-    [theme.breakpoints.up('lg')]: {
+    [Breakpoints.up('lg')]: {
       marginLeft: 0,
       marginRight: 0,
     },
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       marginLeft: '15%',
       marginRight: '15%',
     },

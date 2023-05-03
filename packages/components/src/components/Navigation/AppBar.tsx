@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Theme } from '@mui/material/styles';
+import { createTheme,Theme } from '@mui/material/styles';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import MAppBar from '@mui/material/AppBar';
@@ -11,8 +11,8 @@ import { NavLink } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import { RegularIcon } from '../Icon';
 import { INavigationContext, Navigation } from './Navigation';
-
-const useStyles = makeStyles((theme: Theme) =>
+const Breakpoints = createTheme().breakpoints;
+const useStyles = makeStyles((theme:Theme) =>
   createStyles({
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     sideMenuButton: {
       display: 'none',
-      [theme.breakpoints.down('sm')]: {
+      [Breakpoints.down('sm')]: {
         display: 'flex',
       },
     },

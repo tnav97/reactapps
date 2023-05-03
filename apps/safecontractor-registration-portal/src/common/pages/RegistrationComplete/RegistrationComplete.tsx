@@ -7,7 +7,9 @@ import RightOrderComponent from '../../components/RightOrderComponentSection';
 import AboutSection from '../../components/AboutSection';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { liveChatContainer } from '../../constants';
+import { createTheme} from '@mui/material';
 
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   logo: {
     alignItems: 'center',
@@ -15,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '24px',
     maxWidth: '175px',
     maxHeight: '32px',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       display: 'none',
     },
   },
@@ -25,13 +27,13 @@ const useStyles = makeStyles((theme) => ({
     fontSize: StyleVariables.fonts.size.h3,
     lineHeight: StyleVariables.fonts.lineHeight.h3,
     fontWeight: StyleVariables.fonts.weight.semiBold,
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       fontWeight: StyleVariables.fonts.weight.semiBold,
       fontSize: StyleVariables.fonts.size.h3,
       lineHeight: StyleVariables.fonts.lineHeight.h3,
       marginTop: '24px',
     },
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       fontWeight: StyleVariables.fonts.weight.medium,
       marginTop: '24px',
     },
@@ -44,11 +46,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: StyleVariables.fonts.size.h5,
     lineHeight: StyleVariables.fonts.lineHeight.regular,
     fontWeight: StyleVariables.fonts.weight.semiBold,
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       fontWeight: StyleVariables.fonts.weight.semiBold,
       marginTop: '34px',
     },
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginTop: '32px',
     },
     marginTop: '32px',
@@ -59,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: StyleVariables.fonts.size.h5,
     lineHeight: StyleVariables.fonts.lineHeight.regular,
     fontWeight: StyleVariables.fonts.weight.semiBold,
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       fontWeight: StyleVariables.fonts.weight.semiBold,
       fontSize: StyleVariables.fonts.size.h5,
       lineHeight: StyleVariables.fonts.lineHeight.regular,
@@ -78,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: StyleVariables.fonts.lineHeight.regular,
     marginTop: '8px',
     marginBottom: '8px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginTop: '12px',
       marginBottom: '12px',
     },
@@ -106,7 +108,7 @@ const useStyles = makeStyles((theme) => ({
   paymentContainer: {
     marginTop: '1.5rem',
     marginBottom: '1.5rem',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginTop: '0.875rem',
       marginBottom: '0.875rem',
     },
@@ -135,7 +137,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '100px',
   },
   header: {
-    [theme.breakpoints.up('md')]: {
+    [Breakpoints.up('md')]: {
       display: 'none',
     },
   },

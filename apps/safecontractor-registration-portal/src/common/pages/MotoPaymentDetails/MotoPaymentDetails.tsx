@@ -26,6 +26,7 @@ import MotoMobileFooterSection from '../../components/MotoMobileFooterSection';
 import { REFERENCE } from '../../components/constants';
 import MotoStepper from '../../components/MotoStepper';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
+import { createTheme} from '@mui/material';
 
 interface PaymentDetailsPageProps {
   register: Function;
@@ -35,6 +36,7 @@ interface PaymentDetailsPageProps {
   messageFromApi?: string;
 }
 const STEPPER_DOTS = 5;
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: StyleVariables.fonts.weight.semiBold,
@@ -53,29 +55,29 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '1rem',
   },
   paymentDetailsContainer: {
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginLeft: '16px',
       marginRight: '16px',
     },
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       marginLeft: '117px',
       marginRight: '117px',
     },
-    [theme.breakpoints.up('md')]: {
+    [Breakpoints.up('md')]: {
       marginLeft: '14%',
       marginRight: '-43px',
     },
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       marginLeft: '23%',
       marginRight: '-104px',
     },
   },
   paymentContainerAlign: {
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       width: '100%',
       flexWrap: 'inherit',
     },
-    [theme.breakpoints.up('xs')]: {
+    [Breakpoints.up('xs')]: {
       width: '100%',
       flexWrap: 'inherit',
     },
@@ -86,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paymentDetailMargin: {
     marginTop: '10px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       width: '100%',
       flexWrap: 'inherit',
     },
@@ -117,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
     height: 'calc(100vh - 80px)',
     overflow: 'auto',
     scrollbarWidth: 'none',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       height: 'calc(100vh - 120px)',
     },
   },
@@ -142,7 +144,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 0,
   },
   stepper: {
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       display: 'none',
     },
   },
@@ -152,17 +154,17 @@ const useStyles = makeStyles((theme) => ({
     color: StyleVariables.colors.text.default,
   },
   footerVisibility: {
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
   },
   cardContainer: {
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       display: 'none',
     },
   },
   cardContainermd: {
-    [theme.breakpoints.up('md')]: {
+    [Breakpoints.up('md')]: {
       display: 'none',
     },
   },
@@ -174,17 +176,17 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '1.5rem',
     marginBottom: '1rem',
     marginLeft: '-6px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       width: '100%',
       flexWrap: 'inherit',
     },
-    [theme.breakpoints.up('md')]: {
+    [Breakpoints.up('md')]: {
       marginLeft: '-0.5rem',
     },
-    [theme.breakpoints.up('lg')]: {
+    [Breakpoints.up('lg')]: {
       marginLeft: '-0.4rem',
     },
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       marginLeft: '-0.4rem',
     },
   },
@@ -199,21 +201,21 @@ const useStyles = makeStyles((theme) => ({
   },
   paymentContainer: {
     marginTop: '1.5rem',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginTop: '0.875rem',
       marginBottom: '0.875rem',
     },
   },
   paymentText: {
     fontWeight: StyleVariables.fonts.weight.semiBold,
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       fontSize: StyleVariables.fonts.size.h6,
       lineHeight: StyleVariables.fonts.lineHeight.regular,
     },
   },
   marginLeft: {
     marginLeft: '4px',
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       fontSize: StyleVariables.fonts.size.h6,
       lineHeight: StyleVariables.fonts.lineHeight.regular,
     },
@@ -229,11 +231,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: StyleVariables.fonts.size.h6,
     lineHeight: StyleVariables.fonts.lineHeight.regular,
     marginTop: '1.5rem',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginTop: '12px',
       marginBottom: '12px',
     },
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       fontWeight: StyleVariables.fonts.weight.regular,
       fontSize: StyleVariables.fonts.size.h6,
       lineHeight: StyleVariables.fonts.lineHeight.regular,

@@ -19,7 +19,7 @@ import {
   Memberships,
   Discount,
 } from '../../../server/models/basketCode';
-
+import { createTheme} from '@mui/material';
 interface SidePanelProps {
   basketCode: Function;
   messageFromApi?: string;
@@ -27,6 +27,7 @@ interface SidePanelProps {
   error?: string;
 }
 
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   separator: {
     background: StyleVariables.colors.border.default,
@@ -35,10 +36,10 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '1px',
     marginRight: '1px',
     marginBottom: '1rem',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       marginTop: '3px',
     },
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       marginLeft: '0px',
       marginRight: '6px',
     },
@@ -50,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: StyleVariables.fonts.size.smaller,
     marginLeft: '1px',
     marginRight: '1px',
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       width: '100%',
       marginBottom: '1rem',
     },
@@ -82,10 +83,10 @@ const useStyles = makeStyles((theme) => ({
     top: '8px',
     float: 'right',
     left: '130%',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       left: '130%',
     },
-    [theme.breakpoints.up('md')]: {
+    [Breakpoints.up('md')]: {
       top: '8px',
       left: '86%',
       color: '#3F8627',
@@ -112,15 +113,15 @@ const useStyles = makeStyles((theme) => ({
     background: StyleVariables.colors.surface.neutral.selected,
     marginTop: '1rem',
     border: 'none',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginLeft: '16px',
       marginRight: '16px',
     },
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       marginLeft: '117px',
       marginRight: '117px',
     },
-    [theme.breakpoints.up('md')]: {
+    [Breakpoints.up('md')]: {
       marginLeft: '0px',
       marginRight: '0px',
     },
@@ -143,18 +144,18 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   inputTextAlign: {
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       width: '150%',
     },
   },
   cardContentContainer: {
     padding: '1px 1px',
     marginTop: '5px',
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       padding: '0rem',
       marginTop: '5px',
     },
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       paddingBottom: 0,
     },
   },
@@ -162,16 +163,16 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '1rem',
     marginLeft: '0px',
     borderRadius: '6.25rem',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       marginLeft: '1rem',
       marginTop: '0',
     },
   },
   applyButtonAlign: {
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       marginTop: '8px',
     },
-    [theme.breakpoints.up('md')]: {
+    [Breakpoints.up('md')]: {
       marginTop: '-5px',
     },
   },

@@ -18,7 +18,7 @@ import {
 import { Subsidiaries } from '../../types';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
-
+import { createTheme} from '@mui/material';
 interface ChoosePlanProps {
   choosePlan: Function;
   isFetching: boolean;
@@ -26,6 +26,7 @@ interface ChoosePlanProps {
 }
 
 const STEPPER_DOTS = 3;
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: StyleVariables.fonts.weight.semiBold,
@@ -33,10 +34,10 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: StyleVariables.fonts.lineHeight.h3,
     textAlign: 'center',
     marginTop: '1rem',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       marginTop: '1.5rem',
     },
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginTop: '1rem',
     },
   },
@@ -49,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '12px',
     color: StyleVariables.colors.text.default,
     marginBottom: '2rem',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginLeft: '1rem',
       marginRight: '1rem',
     },
@@ -70,27 +71,27 @@ const useStyles = makeStyles((theme) => ({
     height: 'calc(100vh - 80px)',
     overflow: 'auto',
     scrollbarWidth: 'none',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       height: 'calc(100vh - 120px)',
     },
   },
   stepper: {
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       display: 'none',
     },
   },
   cardsContainer: {
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       paddingLeft: '8px',
       paddingRight: '8px',
     },
   },
   boxContainer: {
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       marginLeft: '1rem',
       marginRight: '1rem',
     },
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginLeft: 0,
       marginRight: 0,
     },

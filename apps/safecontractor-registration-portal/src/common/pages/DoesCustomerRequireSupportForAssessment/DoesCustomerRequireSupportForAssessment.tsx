@@ -14,13 +14,14 @@ import { useSelector } from 'react-redux/es/hooks/useSelector';
 import ReadMore from '../../components/ReadMore';
 import { useHistory } from 'react-router-dom';
 import { Trans } from 'react-i18next';
-
+import { createTheme} from '@mui/material';
 export interface DoesCustomerRequireSupportForAssessmentProps {
   t: TFunction;
 }
 
 const STEPPER_DOTS = 2;
 
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: StyleVariables.fonts.weight.semiBold,
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   text: {
     textAlign: 'center',
     marginTop: '32px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginTop: '14px',
       fontWeight: StyleVariables.fonts.weight.medium,
       fontSize: StyleVariables.fonts.size.h5,
@@ -58,12 +59,12 @@ const useStyles = makeStyles((theme) => ({
     height: '208px',
     marginLeft: '8px',
     marginRight: '8px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       height: '56px',
       margin: 'auto',
       marginBottom: '8px',
     },
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       width: '200px',
     },
     borderRadius: '8px',
@@ -75,19 +76,19 @@ const useStyles = makeStyles((theme) => ({
     height: 'calc(100vh - 80px)',
     overflow: 'auto',
     scrollbarWidth: 'none',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       height: 'calc(100vh - 120px)',
     },
   },
   thumbsUp: {
     marginTop: '16px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
   },
   thumbsDown: {
     marginTop: '16px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
   },
@@ -97,7 +98,7 @@ const useStyles = makeStyles((theme) => ({
     borderColor: StyleVariables.colors.base.primary,
   },
   cardContainer: {
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'block',
       marginTop: 0,
       marginLeft: '20px',
@@ -110,18 +111,18 @@ const useStyles = makeStyles((theme) => ({
     margin: 'auto',
   },
   cssPage: {
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       padding: 0,
       margin: 0,
     },
   },
   stepper: {
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       display: 'none',
     },
   },
   footerVisibility: {
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
   },

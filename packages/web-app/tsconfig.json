@@ -4,6 +4,7 @@
     "rootDir": "./src",
     "baseUrl": "./",
     "outDir": "./build",
+    "noImplicitAny": false,
     "declaration": true,
     "typeRoots": ["node_modules/@types", "./typings/"],
     "paths": {

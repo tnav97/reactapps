@@ -15,17 +15,19 @@ import MotoRightHomeSection from '../../components/MotoRightHomeSection';
 import { REFERENCE } from '../../components/constants';
 import MotoStepper from '../../components/MotoStepper';
 import { liveChatContainer, mobileLiveChatContainerBox } from '../../constants';
+import { createTheme} from '@mui/material';
 
 const STEPPER_DOTS = 1;
 
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   image: {
     maxHeight: '768px',
     marginLeft: '44px',
-    [theme.breakpoints.only('sm')]: {
+    [Breakpoints.only('sm')]: {
       display: 'none',
     },
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       display: 'none',
     },
   },
@@ -45,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     alignContent: 'center',
 
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       marginLeft: '1rem',
       marginRight: '1rem',
     },
@@ -104,10 +106,10 @@ const useStyles = makeStyles((theme) => ({
     height: '2.5rem',
     justifyContent: 'center',
     borderRadius: '100px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       marginTop: '3rem',
     },
   },
@@ -134,7 +136,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: StyleVariables.fonts.weight.semiBold,
   },
   formAccountContainer: {
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       width: '100%',
     },
   },
@@ -147,7 +149,7 @@ const useStyles = makeStyles((theme) => ({
   accountContainer: {
     justifyContent: 'center',
     display: 'flex',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'inline',
     },
   },
@@ -166,7 +168,7 @@ const useStyles = makeStyles((theme) => ({
   checkboxContainer: {
     display: 'contents',
     width: '100%',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       marginLeft: '-2.5rem',
     },
   },
@@ -179,7 +181,7 @@ const useStyles = makeStyles((theme) => ({
     height: 'calc(100vh)',
     overflow: 'auto',
     scrollbarWidth: 'none',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       height: 'calc(100vh - 80px)',
     },
   },
@@ -189,12 +191,12 @@ const useStyles = makeStyles((theme) => ({
   },
   paddingRight: {
     paddingRight: '2rem',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       paddingLeft: '6rem',
     },
   },
   stepper: {
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       display: 'none',
     },
   },
@@ -203,7 +205,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: StyleVariables.colors.surface.neutral.disabled,
     marginTop: '1rem',
     width: '50rem',
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       marginLeft: '-18.5rem',
       marginTop: '11rem',
       position: 'relative',
@@ -211,7 +213,7 @@ const useStyles = makeStyles((theme) => ({
   },
   centerAlignment: {
     justifyContent: 'center',
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       marginLeft: 0,
     },
   },

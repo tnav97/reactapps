@@ -1,5 +1,5 @@
 import React, { createContext } from 'react';
-import { Theme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 import makeStyles from '@mui/styles/makeStyles';
 import MDrawer from '@mui/material/Drawer';
 import MToolbar from '@mui/material/Toolbar';
@@ -23,8 +23,8 @@ const DrawerWidth = {
     closed: '0px',
   },
 };
-
-const useStyles = makeStyles((theme: Theme) => ({
+const Breakpoints = createTheme().breakpoints;
+const useStyles = makeStyles((theme) => ({
   drawer: {
     flexShrink: 0,
     transition: 'width 500ms',
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       props.drawerOpen
         ? DrawerWidth.desktop.opened
         : DrawerWidth.desktop.closed,
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       width: (props: DrawerStyleProps) =>
         props.drawerOpen
           ? DrawerWidth.mobile.opened
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       props.drawerOpen
         ? DrawerWidth.desktop.opened
         : DrawerWidth.desktop.closed,
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       width: (props: DrawerStyleProps) =>
         props.drawerOpen
           ? DrawerWidth.mobile.opened
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   drawerMobileClose: {
     marginBottom: '24px',
     margin: '18px',
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       display: 'none',
     },
   },
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   drawerMenu: {
     display: 'flex',
     flexDirection: 'column',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
   },

@@ -3,9 +3,11 @@ import { StyleVariables } from '@alcumus/components';
 import makeStyles from '@mui/styles/makeStyles';
 import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
+import { createTheme} from '@mui/material';
 interface StepperSection {
   count?: number;
 }
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   stepper: {
     width: '8px',
@@ -23,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '30px',
     display: 'flex',
     justifyContent: 'center',
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       marginTop: '24px',
     },
   },

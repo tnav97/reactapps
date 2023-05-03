@@ -26,6 +26,7 @@ import {
 import { empolyeeCountSelection } from '../../components/constants';
 import serialize from 'serialize-javascript';
 import { useHistory } from 'react-router-dom';
+import { createTheme} from '@mui/material';
 interface ReferralProps {
   validateReferralCode: Function;
   messageFromApi?: string;
@@ -35,13 +36,14 @@ interface ReferralProps {
 
 const STEPPER_DOTS = 2;
 
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: StyleVariables.fonts.weight.semiBold,
     fontSize: StyleVariables.fonts.size.h3,
     lineHeight: StyleVariables.fonts.lineHeight.h3,
     marginTop: '24px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginTop: '16px',
       marginLeft: '1rem',
       marginRight: '1rem',
@@ -51,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   text: {
     textAlign: 'center',
     marginTop: '32px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginTop: '14px',
       fontWeight: StyleVariables.fonts.weight.medium,
       fontSize: StyleVariables.fonts.size.h5,
@@ -70,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     marginTop: '12px',
     marginBottom: '1rem',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginLeft: '16px',
       marginRight: '16px',
       paddingLeft: '4px',
@@ -91,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '1rem',
     marginRight: '1rem',
     marginTop: '32px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginLeft: '1.5rem',
       marginRight: '1.5rem',
     },
@@ -100,7 +102,7 @@ const useStyles = makeStyles((theme) => ({
     height: '208px',
     marginLeft: '8px',
     marginRight: '8px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       height: '56px',
       margin: 'auto',
       marginTop: '8px',
@@ -109,7 +111,7 @@ const useStyles = makeStyles((theme) => ({
     borderWidth: '2px',
     borderColor: StyleVariables.colors.border.default,
     cursor: 'pointer',
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       width: '200px',
     },
   },
@@ -117,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '8px',
     marginLeft: '1rem',
     marginRight: '1rem',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginBottom: '1rem',
       marginLeft: '1.3rem',
     },
@@ -136,13 +138,13 @@ const useStyles = makeStyles((theme) => ({
   },
   thumbsUp: {
     marginTop: '16px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
   },
   thumbsDown: {
     marginTop: '16px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
   },
@@ -171,7 +173,7 @@ const useStyles = makeStyles((theme) => ({
   },
   marginTop: {
     marginTop: '16px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'block',
       marginTop: '-3px',
       marginLeft: '20px',
@@ -183,17 +185,17 @@ const useStyles = makeStyles((theme) => ({
     height: 'calc(100vh - 80px)',
     overflow: 'auto',
     scrollbarWidth: 'none',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       height: 'calc(100vh - 80px)',
     },
   },
   stepper: {
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       display: 'none',
     },
   },
   footerVisibility: {
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
   },
@@ -205,16 +207,16 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   button: {
-    [theme.breakpoints.up('xl')]: {
+    [Breakpoints.up('xl')]: {
       paddingLeft: '82px',
     },
-    [theme.breakpoints.down('xl')]: {
+    [Breakpoints.down('xl')]: {
       paddingLeft: '-10px',
     },
   },
   cardContainer: {
     marginTop: '16px',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'block',
       marginTop: 0,
       marginLeft: '20px',

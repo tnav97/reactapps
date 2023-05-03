@@ -17,6 +17,8 @@ import { PlanDetail } from '../../../server/models/choosePlan';
 import MobileFooterSection from '../MobileFooterSection';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { createTheme} from '@mui/material';
+
 interface CardProps {
   contents?: PlanDetail[];
   text?: string;
@@ -28,6 +30,7 @@ interface CardProps {
   selectedPlan?: number;
   page?: string;
 }
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   separator: {
     background: StyleVariables.colors.border.default,
@@ -36,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '16px',
     marginRight: '16px',
     marginTop: '-11px',
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       display: 'none',
     },
   },
@@ -44,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     margin: 'auto',
     marginTop: '-6px',
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       display: 'none',
     },
   },
@@ -54,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: StyleVariables.fonts.lineHeight.h3,
     textAlign: 'center',
 
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       fontSize: StyleVariables.fonts.size.h4,
       lineHeight: StyleVariables.fonts.lineHeight.h4,
       marginTop: '0.5rem',
@@ -89,17 +92,17 @@ const useStyles = makeStyles((theme) => ({
   selectPlan: {
     display: 'block',
     margin: 'auto',
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       display: 'none',
     },
   },
   tabSelectPlan: {
     display: 'block',
     margin: 'auto',
-    [theme.breakpoints.up('lg')]: {
+    [Breakpoints.up('lg')]: {
       display: 'none',
     },
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       margin: 0,
     },
   },
@@ -107,7 +110,7 @@ const useStyles = makeStyles((theme) => ({
   displayFlex: {
     display: 'flex',
     justifyContent: 'center',
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       justifyContent: 'start',
     },
   },
@@ -117,21 +120,21 @@ const useStyles = makeStyles((theme) => ({
   displayPlanContainer: {
     display: 'flex',
     justifyContent: 'center',
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       justifyContent: 'end',
       marginLeft: '-8px',
     },
   },
   textAlign: {
     textAlign: 'center',
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       textAlign: 'left',
     },
   },
   textAlignSubtitle: {
     textAlign: 'center',
     paddingTop: '8px',
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       textAlign: 'left',
     },
   },
@@ -142,7 +145,7 @@ const useStyles = makeStyles((theme) => ({
   border: {
     border: `2px solid ${StyleVariables.colors.border.default}`,
     borderRadius: '8px',
-    [theme.breakpoints.up('lg')]: {
+    [Breakpoints.up('lg')]: {
       height: '490px',
     },
   },
@@ -163,58 +166,58 @@ const useStyles = makeStyles((theme) => ({
     borderColor: StyleVariables.colors.base.primary,
   },
   personContainer: {
-    [theme.breakpoints.up('lg')]: {
+    [Breakpoints.up('lg')]: {
       height: '40px',
     },
   },
   cardContentContainer: {
     padding: '16px 25px',
 
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       paddingBottom: 0,
     },
   },
   cardTopContentContainer: {
     marginTop: '8px',
-    [theme.breakpoints.up('lg')]: {
+    [Breakpoints.up('lg')]: {
       height: '214px',
     },
-    [theme.breakpoints.up('md')]: {
+    [Breakpoints.up('md')]: {
       paddingLeft: '1.4rem',
       paddingRight: '1.4rem',
       paddingTop: '1rem',
       paddingBottom: '1rem',
     },
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       paddingBottom: 0,
     },
   },
   cardMiddleContentContainer: {
-    [theme.breakpoints.up('md')]: {
+    [Breakpoints.up('md')]: {
       paddingLeft: '1.5rem',
       paddingRight: '1.5rem',
       paddingTop: '1rem',
       paddingBottom: '1rem',
     },
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       paddingBottom: 0,
     },
   },
   cardMobileMiddleContainer: {
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       display: 'none',
     },
   },
   cardDesktopMiddleContainer: {
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
   },
   cardRateContainer: {
-    [theme.breakpoints.up('md')]: {
+    [Breakpoints.up('md')]: {
       paddingBottom: '0.5rem',
     },
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       paddingTop: 0,
     },
   },
@@ -222,7 +225,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'end',
     marginTop: '5px',
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       display: 'none',
     },
   },
@@ -236,17 +239,17 @@ const useStyles = makeStyles((theme) => ({
     transform: 'rotate(180deg)',
   },
   stepper: {
-    [theme.breakpoints.up('sm')]: {
+    [Breakpoints.up('sm')]: {
       display: 'none',
     },
   },
   footerVisibility: {
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       display: 'none',
     },
   },
   rateBox: {
-    [theme.breakpoints.up('lg')]: {
+    [Breakpoints.up('lg')]: {
       marginTop: '0.5rem',
     },
   },
@@ -255,7 +258,7 @@ const useStyles = makeStyles((theme) => ({
   },
   mobileSelectPlanButton: {
     width: '144px',
-    [theme.breakpoints.down('xl')]: {
+    [Breakpoints.down('xl')]: {
       marginTop: '0.5rem',
       width: '165px',
       height: '2rem',
@@ -264,7 +267,7 @@ const useStyles = makeStyles((theme) => ({
   checkBox: {
     marginLeft: '8px',
     fontSize: '1.2rem',
-    [theme.breakpoints.down('lg')]: {
+    [Breakpoints.down('lg')]: {
       marginLeft: 0,
       fontSize: '1.2rem',
     },
@@ -273,7 +276,7 @@ const useStyles = makeStyles((theme) => ({
     width: '241px',
     height: '32px',
     marginTop: '0.5rem',
-    [theme.breakpoints.up('lg')]: {
+    [Breakpoints.up('lg')]: {
       padding: '8px',
       width: '208px',
     },

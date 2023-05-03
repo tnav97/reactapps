@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { Grid, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { StyleVariables } from '@alcumus/components';
+import { createTheme} from '@mui/material';
+
 interface ReadMoreProps {
   children: string;
 }
+const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme) => ({
   subtitle: {
     fontFamily: StyleVariables.fonts.family.body,
@@ -17,11 +20,11 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '1rem',
     marginLeft: '15rem',
     marginRight: '15rem',
-    [theme.breakpoints.only('md')]: {
+    [Breakpoints.only('md')]: {
       marginLeft: '6rem',
       marginRight: '6rem',
     },
-    [theme.breakpoints.down('md')]: {
+    [Breakpoints.down('md')]: {
       marginLeft: '1.5rem',
       marginRight: '1.5rem',
       display: 'none',
@@ -38,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '2rem',
     paddingLeft: '1rem',
     paddingRight: '1rem',
-    [theme.breakpoints.up('md')]: {
+    [Breakpoints.up('md')]: {
       display: 'none',
     },
   },

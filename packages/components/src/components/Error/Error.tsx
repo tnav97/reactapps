@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Theme } from '@mui/material';
+import { Grid, createTheme } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import Page from '../Page';
 import Text from '../Text';
@@ -14,7 +14,8 @@ export interface ErrorProps {
   children?: React.ReactNode;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const Breakpoints = createTheme().breakpoints;
+const useStyles = makeStyles((theme) => ({
   page: {
     backgroundColor: StyleVariables.colors.white,
     padding: 0,
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 600,
     color: StyleVariables.colors.grey5,
     marginTop: '2rem',
-    [theme.breakpoints.down('sm')]: {
+    [Breakpoints.down('sm')]: {
       marginTop: '3rem',
     },
   },
