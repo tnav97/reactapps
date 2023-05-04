@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
-import { createTheme,Theme } from '@mui/material/styles';
+import MAppBar from '@mui/material/AppBar';
+import IconButton from '@mui/material/IconButton';
+import { createTheme, Theme } from '@mui/material/styles';
+import MToolbar from '@mui/material/Toolbar';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import MAppBar from '@mui/material/AppBar';
-import MToolbar from '@mui/material/Toolbar';
 import clsx from 'clsx';
-import Image from '../Image';
-import StyleVariables from '../../styles/variables';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import IconButton from '@mui/material/IconButton';
+import StyleVariables from '../../styles/variables';
 import { RegularIcon } from '../Icon';
+import Image from '../Image';
 import { INavigationContext, Navigation } from './Navigation';
 const Breakpoints = createTheme().breakpoints;
 const useStyles = makeStyles((theme:Theme) =>
